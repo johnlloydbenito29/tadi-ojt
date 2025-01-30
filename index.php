@@ -1,5 +1,5 @@
 
-<?php
+<!-- <?php
 
     session_start();
 
@@ -12,7 +12,7 @@
 
     3
 
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
