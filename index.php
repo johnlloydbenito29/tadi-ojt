@@ -32,14 +32,14 @@
             <div class="row justify-content-center align-items-center g-3">
             <div class="col-md">
                     <select class="form-select" id="academicyearlevel" name="academicyearlevel">
-                        <option selected>Select Level</option>
+                        <option selected>Status Level</option>
                         <option value="1">Elementary</option>
                         <option value="2">High School</option>
                         <option value="3">Tertiary</option>
                     </select>
                 </div>
                 <div class="col-md">
-                    <select class="form-select" id="academicyearlevel" name="academicyearlevel">
+                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
                         <option selected>Year Level</option>
                         <!-- <option value="1">1st Year</option>
                         <option value="2">2nd Year</option>
@@ -49,14 +49,8 @@
                         
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
-                        <option selected>School Year</option>
-                        <!-- <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option> -->
-                    </select>
-                </div>
-                <div class="col-md-3">
+                
+                <div class="col-md">
                     <select class="form-select">
                         <option selected disabled>Period</option>
                         <option value="1">1st Sem</option>
