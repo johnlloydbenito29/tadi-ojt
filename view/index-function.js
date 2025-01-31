@@ -60,3 +60,34 @@ function GET_ACADEMICPERIOD(){
     });
 
 }
+
+function GET_YEARLEVEL(){
+    $.ajax({
+        type: 'GET',
+        url: 'controller/index-info.php',
+        data:
+        {
+            'type' : 'GET_YEAR_LEVEL',
+        }, 
+        dataType: 'json',
+        success: function(result){
+
+            var optYrLvl = '';
+
+            if(result.length){
+
+                $.each(result, function(key, value){
+
+                    optYrLvl += "<option value='"+ value.Yrlvl_ID +"'>" + value.Yrlvl_Name + "</option>";
+                })
+
+            } else {
+                optYrLvl = "<option></option>";
+            }
+
+            $('#academicYearLevel option').remove();
+            $('#academicYearLevel').append(optYrLvl);
+        }
+    });
+
+}
