@@ -112,7 +112,7 @@
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                         <div class="subject-info">
-                            <h5 class="modal-title" id="tadiModalLabel1">John Adonis</h5>
+                            <h5 class="modal-title" id="tadiModalLabel1">John Adonis Ibrahim</h5>
                             <p class="subject-details mb-0">Subject: Filipino</p>
                         </div>
                     </div>
