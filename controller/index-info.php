@@ -55,6 +55,24 @@
 
     }
 
+    if($_GET['type'] == 'GET_ACADEMIC_LEVEL'){
+
+        $qry = " SELECT  `SchlAcadLvl_NAME` `AcadLvl_Name`,
+                         `SchlAcadLvl_DESC` `AcadLvl_Desc`,
+                         `SchlAcadLvlSms_ID` `AcadLvl_ID`
+            
+                 FROM    `schoolacademiclevel`
+
+                 WHERE   `SchlAcadLvlSms_ID` = 2 AND
+                         `SchlAcadLvl_STATUS`= 1 AND
+                         `SchlAcadLvl_ISACTIVE` = 1";
+
+      $rreg = $dbPortal->query($qry);
+      $fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
+      $dbPortal->close();
+
+ }
+
 
 
 

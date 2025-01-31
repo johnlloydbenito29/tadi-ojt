@@ -91,3 +91,35 @@ function GET_YEARLEVEL(){
     });
 
 }
+
+
+function GET_ACADEMICLEVEL(){
+    $.ajax({
+        type: 'GET',
+        url: 'controller/index-info.php',
+        data:
+        {
+            'type' : 'GET_ACADEMIC_LEVEL',
+        }, 
+        dataType: 'json',
+        success: function(result){
+
+            var optAcadLvl = '';
+
+            if(result.length){
+
+                $.each(result, function(key, value){
+
+                    optAcadLvl += "<option value='"+ value.AcadLvl_ID +"'>" + value.AcadLvl_Name + "</option>";
+                })
+
+            } else {
+                optAcadLvl = "<option></option>";
+            }
+
+            $('#academicLevel option').remove();
+            $('#academicLevel').append(optAcadLvl);
+        }
+    });
+
+}
