@@ -31,7 +31,7 @@
             <h2 class="mb-4 text-center">Student Academic Tadi</h2>
             <div class="row justify-content-center align-items-center g-3">
             <div class="col-md">
-                    <select class="form-select" id="academicyearlevel" name="academicyearlevel">
+                    <select class="form-select" id="academicLevel" name="academicLevel">
                         <option selected>Status Level</option>
                         <option value="1">Elementary</option>
                         <option value="2">High School</option>
@@ -39,7 +39,7 @@
                     </select>
                 </div>
                 <div class="col-md">
-                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
+                    <select class="form-select" id="academicYearLevel" name="academicYearLevel">
                         <option selected>Year Level</option>
                         <!-- <option value="1">1st Year</option>
                         <option value="2">2nd Year</option>
@@ -59,7 +59,7 @@
                     </select>
                 </div>
                 <div class="col-md">
-                    <select class="form-select">
+                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
                         <option selected disabled>School Year</option>
                         <option value="1">2023-2024</option>
                         <option value="2">2024-2025</option>
