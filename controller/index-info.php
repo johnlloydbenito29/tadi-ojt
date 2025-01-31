@@ -19,6 +19,25 @@
 
     }
 
+    if($_GET['type'] == 'GET_ACADEMIC_PRD'){
+
+            $qry = " SELECT  `SchlAcadPrd_NAME` `Period_Name`,
+		                     `SchlAcadPrd_DESC` `Period_Desc`,
+		                     `SchlAcadPrdSms_ID` `Period_ID`
+                    
+                     FROM   	`schoolacademicperiod`
+
+                     WHERE   `SchlAcadPrdSms_ID` = 5 AND
+                             `SchlAcadPrd_STATUS`= 1 AND
+                             `SchlAcadPrd_ISACTIVE` = 1;";
+
+        $rreg = $dbPortal->query($qry);
+        $fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
+        $dbPortal->close();
+
+    }
+
+
     echo json_encode($fetch);
 
 ?>

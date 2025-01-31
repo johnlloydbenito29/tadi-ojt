@@ -51,8 +51,8 @@
                 </div>
                 
                 <div class="col-md">
-                    <select class="form-select">
-                        <option selected disabled>Period</option>
+                    <select class="form-select" id="period" name="period">
+                        <option selected>Period</option>
                         <option value="1">1st Sem</option>
                         <option value="2">2nd Sem</option>
                         <option value="3">Mid Year <U></U></option>
@@ -60,9 +60,9 @@
                 </div>
                 <div class="col-md">
                     <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
-                        <option selected disabled>School Year</option>
-                        <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option>
+                        <option selected >School Year</option>
+                        <!-- <option value="1">2023-2024</option>
+                        <option value="2">2024-2025</option> -->
                     </select>
                 </div>
 
