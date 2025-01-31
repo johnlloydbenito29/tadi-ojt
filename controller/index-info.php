@@ -19,6 +19,7 @@
         $dbPortal->close();
 
     }
+    
 
     echo json_encode($fetch);
 
