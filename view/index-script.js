@@ -3,6 +3,6 @@
 
 $(document).ready(function(){
 
-    GET_YEARLEVEL();
+    GET_SCHOOLYEAR();
 
 })

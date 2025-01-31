@@ -1,7 +1,7 @@
 <?php 
     include('../configuration/connection-config.php');
 
-    if($_GET['type'] == 'GET_YEAR_LEVEL'){
+    if($_GET['type'] == 'GET_SCHOOL_YEAR'){
 
         $qry = "SELECT  `SchlAcadYr_NAME` `AcadYr_Name`,
                         `SchlAcadYr_DESC` `AcadYr_Desc`,
@@ -15,7 +15,6 @@
 
         $rreg = $dbPortal->query($qry);
         $fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
-
         $dbPortal->close();
 
     }

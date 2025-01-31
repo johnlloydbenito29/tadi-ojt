@@ -1,11 +1,11 @@
 
-function GET_YEARLEVEL(){
+function GET_SCHOOLYEAR(){
     $.ajax({
         type: 'GET',
         url: 'controller/index-info.php',
         data:
         {
-            'type' : 'GET_YEAR_LEVEL',
+            'type' : 'GET_SCHOOL_YEAR',
         }, 
         dataType: 'json',
         success: function(result){
