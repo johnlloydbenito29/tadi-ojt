@@ -123,3 +123,28 @@ function GET_ACADEMICLEVEL(){
     });
 
 }
+
+function GET_SUBJECTLIST(){
+    $.ajax({
+        type: 'GET',
+        url: 'controller/index-info.php',
+        data:
+        {
+            'type' : 'GET_SUBJECT_LIST',
+        }, 
+        dataType: 'json',
+        success: function (result) {
+            const tableRows = result.length ? result.map(value => `
+                <tr>
+                    <td>${value.subj_code}</td>
+                    <td>${value.subj_desc}</td>
+                    <td>${value.prof_name ? value.prof_name : 'No instructor'}</td>
+                    <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal1">TADI</button></td>
+                </tr>
+            `).join('') : '';
+
+            $('tbody').html(tableRows);
+            console.log(result);
+        }
+    });
+}

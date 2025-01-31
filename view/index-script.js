@@ -7,5 +7,5 @@ $(document).ready(function(){
     GET_ACADEMICPERIOD();
     GET_YEARLEVEL();
     GET_ACADEMICLEVEL();
-
+    GET_SUBJECTLIST();
 })

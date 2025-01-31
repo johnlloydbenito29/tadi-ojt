@@ -73,10 +73,45 @@
 
  }
 
+ if($_GET['type'] == 'GET_SUBJECT_LIST'){
 
+    $qry = "SELECT `enr_reg_asmt`.`SchlAcadSubj_ID` `subj_offered` 
+            FROM `schoolstudent` `schl_stud`
+            LEFT JOIN `schoolenrollmentregistration` `schl_enr_reg`
+                ON `schl_stud`.`SchlEnrollRegColl_ID` = `schl_enr_reg`.`SchlEnrollRegSms_ID`
+            LEFT JOIN `schoolenrollmentadmission` `schl_enr_adm` 
+                ON `schl_enr_reg`.`SchlEnrollRegSms_ID` = `schl_enr_adm`.`SchlEnrollReg_ID`
+            LEFT JOIN `schoolenrollmentassessment` `enr_reg_asmt`
+                ON `schl_enr_adm`.`SchlEnrollAdmSms_ID` = `enr_reg_asmt`.`SchlEnrollAdm_ID`
+            WHERE `schl_stud`.`SchlEnrollRegColl_ID` = 58623";
 
+    $rreg = $dbPortal->query($qry);
+    $subj_list = $rreg->fetch_assoc();
+    
+    $int_subj_list = $subj_list['subj_offered'];
 
+    $qry2 = "SELECT 	`schl_enr_subj_off`.`SchlAcadSubj_ID` `subj_id`,
+                        `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
+                        `schl_acad_subj`.`SchlAcadSubj_DESC` `subj_desc`,
+                        `schl_acad_subj`.`SchlAcadSubj_NAME` `subj_name`,
 
+                        CONCAT (`schl_emp`.`SchlEmp_LNAME` , ', ', `schl_emp`.`SchlEmp_FNAME` )`prof_name`
+
+            FROM 	`schoolenrollmentsubjectoffered` `schl_enr_subj_off`
+
+                LEFT JOIN `schoolacademicsubject` `schl_acad_subj`
+                    ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
+                    
+                LEFT JOIN `schoolemployee` `schl_emp`
+                    ON `schl_enr_subj_off`.`SchlEmp_ID` = `schl_emp`.`SchlEmpSms_ID`
+                
+            WHERE 	 `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID` IN ($int_subj_list)
+        ";
+    $rreg = $dbPortal->query($qry2);
+    $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+    $dbPortal->close();
+
+}
 
     echo json_encode($fetch);
 
