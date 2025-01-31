@@ -112,13 +112,25 @@
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                         <div class="subject-info">
-                            <h5 class="modal-title" id="tadiModalLabel1">John Adonis Ibrahim</h5>
-                            <p class="subject-details mb-0">Subject: Filipino</p>
+                            <h5 class="modal-title" id="tadiModalLabel1">Self Defense</h5>
+                            <p class="subject-details mb-0">Course Code: PE 2</p>
+                        </div>
+                        <div class="subject-info">
+                            <p class="subject-details mb-0">1234-abcd</p>
                         </div>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="row my-4">
+                            <div class="col">
+                                    <label for="modeOfClass" class="form-label">Professor</label>
+                                    <select class="form-select" id="modeOfClass" required>
+                                        <option value="" selected disabled>Select Professor</option>
+                                        <option value="Synchronous">Synchronous</option>
+                                        <option value="Asynchronous">Asynchronous</option>
+                                    </select>
+                                </div>
+
                                 <div class="col">
                                     <label for="modeOfClass" class="form-label">Mode Of Class</label>
                                     <select class="form-select" id="modeOfClass" required>
