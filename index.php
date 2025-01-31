@@ -49,13 +49,6 @@
                         
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option selected disabled>School Year</option>
-                        <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option>
-                    </select>
-                </div>
                 <div class="col-md">
                     <select class="form-select">
                         <option selected disabled>Period</option>
@@ -65,7 +58,16 @@
                     </select>
                 </div>
                 <div class="col-md">
+                    <select class="form-select">
+                        <option selected disabled>School Year</option>
+                        <option value="1">2023-2024</option>
+                        <option value="2">2024-2025</option>
+                    </select>
+                </div>
+
+                <div class="col-md">
                     <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
+                </div>
                 </div>
             </div>
         </div>
