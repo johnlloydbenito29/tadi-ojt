@@ -42,10 +42,10 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select">
-                        <option selected disabled>School Year</option>
-                        <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option>
+                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
+                        <option selected>School Year</option>
+                        <!-- <option value="1">2023-2024</option>
+                        <option value="2">2024-2025</option> -->
                     </select>
                 </div>
                 <div class="col-md-3">

@@ -23,8 +23,8 @@ function GET_YEARLEVEL(){
                     optYEAR = "<option></option>";
             }
 
-            $('#academicyearlevel option').remove();
-            $('#academicyearlevel').append(optYEAR);
+            $('#academicSchoolYear option').remove();
+            $('#academicSchoolYear').append(optYEAR);
         }
     });
 
