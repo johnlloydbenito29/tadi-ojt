@@ -75,15 +75,16 @@
 
  if($_GET['type'] == 'GET_SUBJECT_LIST'){
 
-    $qry = "SELECT `enr_reg_asmt`.`SchlAcadSubj_ID` `subj_offered` 
-            FROM `schoolstudent` `schl_stud`
-            LEFT JOIN `schoolenrollmentregistration` `schl_enr_reg`
-                ON `schl_stud`.`SchlEnrollRegColl_ID` = `schl_enr_reg`.`SchlEnrollRegSms_ID`
-            LEFT JOIN `schoolenrollmentadmission` `schl_enr_adm` 
-                ON `schl_enr_reg`.`SchlEnrollRegSms_ID` = `schl_enr_adm`.`SchlEnrollReg_ID`
-            LEFT JOIN `schoolenrollmentassessment` `enr_reg_asmt`
-                ON `schl_enr_adm`.`SchlEnrollAdmSms_ID` = `enr_reg_asmt`.`SchlEnrollAdm_ID`
-            WHERE `schl_stud`.`SchlEnrollRegColl_ID` = 58623";
+    $qry = "    SELECT `enr_reg_asmt`.`SchlAcadSubj_ID` `subj_offered` 
+ 
+                FROM `schoolenrollmentregistration` `schl_enr_reg`
+            
+                    LEFT JOIN `schoolenrollmentadmission` `schl_enr_adm` 
+                                ON `schl_enr_reg`.`SchlEnrollRegSms_ID` = `schl_enr_adm`.`SchlEnrollReg_ID`
+                        LEFT JOIN `schoolenrollmentassessment` `enr_reg_asmt`
+                                ON `schl_enr_adm`.`SchlEnrollAdmSms_ID` = `enr_reg_asmt`.`SchlEnrollAdm_ID`
+            
+                WHERE `schl_enr_reg`.`SchlEnrollRegSms_ID` = 335";
 
     $rreg = $dbPortal->query($qry);
     $subj_list = $rreg->fetch_assoc();
@@ -103,7 +104,7 @@
                     ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
                     
                 LEFT JOIN `schoolemployee` `schl_emp`
-                    ON `schl_enr_subj_off`.`SchlEmp_ID` = `schl_emp`.`SchlEmpSms_ID`
+                    ON `schl_enr_subj_off`.`SchlProf_ID` = `schl_emp`.`SchlEmpSms_ID`
                 
             WHERE 	 `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID` IN ($int_subj_list)
         ";
