@@ -1,18 +1,3 @@
-<?php
-// Basic professor index page
-session_start();
-
-// Check if user is logged in and is a professor
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'professor') {
-    header("Location: ../login.php");
-    exit();
-}
-
-// Include database connection
-require_once '../includes/db_connect.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +19,7 @@ require_once '../includes/db_connect.php';
         </nav>
         
         <div class="welcome-message">
-            <h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></h2>
+            <h2>Welcome, Professor</h2>
             <p>Select an option from the menu above to get started.</p>
         </div>
     </div>
