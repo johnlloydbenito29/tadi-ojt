@@ -137,9 +137,7 @@ function GET_SUBJECTLIST() {
                     <td>${
                       value.prof_name ? value.prof_name : "No instructor"
                     }</td>
-                    <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${
-                      value.subj_id
-                    }">TADI</button></td>
+                    <td><button class="btn btn-sm w-100" ${value.prof_name ? value.prof_name : "disabled"} style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${value.subj_id}">TADI</button></td>
                 </tr>
             `
             )
@@ -156,7 +154,7 @@ function GET_SUBJECTLIST() {
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                         <div class="subject-info">
-                            <h5 class="modal-title" id="tadiModalLabel1">${value.subj_name}</h5>
+                            <h5 class="modal-title" id="tadiModalLabel1">${value.prof_name ? value.prof_name : "No instructor"}</h5>
                             <p class="subject-details mb-0">Course Code: ${value.subj_code}</p>
                         </div>
                     </div>
