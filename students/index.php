@@ -28,7 +28,7 @@ echo var_dump($_SESSION);
 
 <body>
     <section>
-        <div class="container mt-4">
+        <div class="container-fluid mt-4">
             <h2 class="mb-4 text-center">Student Academic Tadi</h2>
             <div class="row justify-content-center align-items-center g-3">
                 <div class="col-md">
@@ -71,39 +71,39 @@ echo var_dump($_SESSION);
                     <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
                 </div>
             </div>
-        </div>
-        </div>
 
-        <div class="container mt-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">Quarterly Performance Report</h4>
-                    <div class="table-responsive">
-                        <table class="table table-hover" style="line-height: 2.5;">
-                            <thead style="background-color: #181a46; color: white;">
-                                <tr>
-                                    <th scope="col">Subject Code</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Instructor</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="4" class="text-center">No subjects available</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">Quarterly Performance Report</h4>
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="line-height: 2.5;">
+                                <thead style="background-color: #181a46; color: white;">
+                                    <tr>
+                                        <th scope="col">Subject Code</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Instructor</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-center">No subjects available</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- TADI Modals -->
-
         <div class="modal-container">
+
+
         </div>
-        
+
         <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">

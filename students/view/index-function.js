@@ -159,9 +159,6 @@ function GET_SUBJECTLIST() {
                             <h5 class="modal-title" id="tadiModalLabel1">${value.subj_name}</h5>
                             <p class="subject-details mb-0">Course Code: ${value.subj_code}</p>
                         </div>
-                        <div class="subject-info">
-                            <p class="subject-details mb-0">${value.subj_id}</p>
-                        </div>
                     </div>
                     <div class="modal-body">
                         <form>
