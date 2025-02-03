@@ -122,7 +122,7 @@ echo var_dump($_SESSION);
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn" style="background-color:rgb(0, 0, 0); color: white;" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Not Approve</button>
                                 <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Approve</button>
                             </div>

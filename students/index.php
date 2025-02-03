@@ -3,8 +3,6 @@
 session_start();
 
 $_SESSION['LVLID'] = 2;
-$_SESSION['PRDID'] = 5;
-$_SESSION['YRID'] = 14;
 
 echo var_dump($_SESSION);
 
@@ -30,47 +28,6 @@ echo var_dump($_SESSION);
     <section>
         <div class="container-fluid mt-4">
             <h2 class="mb-4 text-center">Student Academic Tadi</h2>
-            <div class="row justify-content-center align-items-center g-3">
-                <div class="col-md">
-                    <select class="form-select" id="academicLevel" name="academicLevel">
-                        <option selected>Status Level</option>
-                        <option value="1">Elementary</option>
-                        <option value="2">High School</option>
-                        <option value="3">Tertiary</option>
-                    </select>
-                </div>
-                <div class="col-md">
-                    <select class="form-select" id="academicYearLevel" name="academicYearLevel">
-                        <option selected>Year Level</option>
-                        <!-- <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option> -->
-
-
-                    </select>
-                </div>
-
-                <div class="col-md">
-                    <select class="form-select" id="period" name="period">
-                        <option selected>Period</option>
-                        <option value="1">1st Sem</option>
-                        <option value="2">2nd Sem</option>
-                        <option value="3">Mid Year <U></U></option>
-                    </select>
-                </div>
-                <div class="col-md">
-                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
-                        <option selected>School Year</option>
-                        <!-- <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option> -->
-                    </select>
-                </div>
-
-                <div class="col-md">
-                    <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
-                </div>
-            </div>
 
             <div class="mt-4">
                 <div class="card shadow-sm">
