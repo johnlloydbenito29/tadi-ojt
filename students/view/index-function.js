@@ -179,11 +179,11 @@ function GET_SUBJECTLIST() {
                                 </div>
 
                                 <div class="col">
-                                    <label for="typeOfClass" class="form-label">Type Of Class</label>
-                                    <select class="form-select" id="typeOfClass" required>
+                                    <label for="typeOfClass" class="form-label">Session Type</label>
+                                    <select class="form-select" id="SessionType" required>
                                         <option value="" selected disabled>Select Type</option>
                                         <option value="regular">Regular Class</option>
-                                        <option value="makeup">Make up Class</option>
+                                        <option value="makeup">Make-Up Class</option>
                                     </select>
                                 </div>
                             </div>
