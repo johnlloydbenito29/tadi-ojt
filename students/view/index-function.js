@@ -147,9 +147,9 @@ function GET_SUBJECTLIST() {
         let isValid = true;
 
         const requiredFields = [
-          "professor",
-          "modeOfClass",
-          "typeOfClass",
+          "instructor",
+          "learning_delivery_modalities",
+          "session_type",
           "classStartDateTime",
           "classEndDateTime",
           "comments",
@@ -163,22 +163,11 @@ function GET_SUBJECTLIST() {
         });
 
         if (isValid) {
-          const formData = {
-            professor: currentModal.find("#professor").val(),
-            mode_of_class: currentModal.find("#modeOfClass").val(),
-            type_of_class: currentModal.find("#typeOfClass").val(),
-            class_start_date_time: currentModal
-              .find("#classStartDateTime")
-              .val(),
-            class_end_date_time: currentModal.find("#classEndDateTime").val(),
-            comments: currentModal.find("#comments").val(),
-            subject_id: subjectId.toString(),
-            stud_2_id: "13507",
-          };
+          const formId = currentModal.find("form").attr("id");
+          const myform = document.getElementById(formId);
+          const tadi_form = new FormData(myform);
+          const formData = Object.fromEntries(tadi_form);
 
-          console.log("Form Data:", formData);
-
-          // Call POST_TADI with the form data
           POST_TADI(formData);
         }
       });
@@ -228,7 +217,7 @@ function displayTadiModals(result) {
                         <div class="row my-4">
                         <div class="col">
                                 <label for="instructor" class="form-label">Instructor</label>
-                                <select class="form-select" id="instructor" required>
+                                <select class="form-select" name="instructor" id="instructor" required>
                                     <option value="" selected disabled>Select Instructor</option>
                                     ${value.prof_name
           ? `<option value="${value.prof_name}" selected>${value.prof_name}</option>`
@@ -239,7 +228,7 @@ function displayTadiModals(result) {
 
                             <div class="col">
                                 <label for="learning_delivery_modalities" class="form-label">Learning Delivery Modalities</label>
-                                <select class="form-select" id="learning_delivery_modalities" required>
+                                <select class="form-select" name="learning_delivery_modalities" id="learning_delivery_modalities" required>
                                     <option value="" selected disabled>Select Mode</option>
                                     <option value="online_learning">Online Learning</option>
                                     <option value="onsite_learning">OnSite Learning</option>
@@ -248,7 +237,7 @@ function displayTadiModals(result) {
 
                             <div class="col">
                                 <label for="session_type" class="form-label">Session Type</label>
-                                  <select class="form-select" id="session_type" required>
+                                  <select class="form-select" name="session_type" id="session_type" required>
                                     <option value="" selected disabled>Select Type</option>
                                     <option value="regular">Regular Class</option>
                                      <option value="makeup">Make-Up Class</option>
@@ -259,18 +248,18 @@ function displayTadiModals(result) {
                         <div class="row mb-4">
                             <div class="col">
                                 <label for="classStartDateTime" class="form-label">Class Start Schedule</label>
-                                <input type="datetime-local" class="form-control" id="classStartDateTime" required>
+                                <input type="datetime-local" class="form-control" name="classStartDateTime" id="classStartDateTime" required>
                             </div>
 
                             <div class="col">
                                 <label for="classEndDateTime" class="form-label">Class End Schedule</label>
-                                <input type="datetime-local" class="form-control" id="classEndDateTime" required>
+                                <input type="datetime-local" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
                             </div>
                         </div>
      
                         <div class="mb-4">
                             <label for="comments" class="form-label">Report</label>
-                            <textarea class="form-control" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
+                            <textarea class="form-control" name="comments" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
                         </div>
                     </form>
                 </div>
@@ -293,4 +282,24 @@ function displayTadiModals(result) {
 
 function POST_TADI(formData) {
   console.log(formData);
+  // $.ajax({
+  //   url: "../controller/tadi.php",
+  //   type: "POST",
+  //   data: formData,
+  //   processData: false,
+  //   contentType: false,
+  //   success: function(response) {
+  //     console.log(response);
+  //     if(response.success) {
+  //       alert("TADI submitted successfully");
+  //       location.reload();
+  //     } else {
+  //       alert("Error submitting TADI");
+  //     }
+  //   },
+  //   error: function(xhr, status, error) {
+  //     console.error(error);
+  //     alert("Error submitting TADI");
+  //   }
+  // });
 }
