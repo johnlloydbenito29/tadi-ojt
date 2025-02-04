@@ -303,3 +303,34 @@ function POST_TADI(formData) {
   //   }
   // });
 }
+
+
+$(document).ready(function() {
+  $(".submitTadi").click(function() {
+      // Gather form data
+      var professor_id = $("#instructor").val();
+      var mode_of_class = $("#learning_delivery_modalities").val();
+      var type_of_class = $("#session_type").val();
+      var comments = $("#comments").val();
+      var subject_id = $("#subject_id").val();
+
+      // Send data via AJAX
+      $.ajax({
+          type: "POST",
+          url: "index-post.php", // PHP file to handle the insertion
+          data: {
+              professor_id: professor_id,
+              mode_of_class: mode_of_class,
+              type_of_class: type_of_class,
+              comments: comments,
+              subject_id: subject_id
+          },
+          success: function(response) {
+              console.log("Data inserted successfully.");
+          },
+          error: function() {
+              console.error("An error occurred while inserting data.");
+          }
+      });
+  });
+});
