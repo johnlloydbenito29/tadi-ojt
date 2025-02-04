@@ -158,7 +158,7 @@ function GET_SUBJECTLIST() {
                         </div>
                     </div>
                     <div class="modal-body">
-                        <form id="tadiForm">
+                        <form id="tadiForm${value.subj_id}">
                             <div class="row my-4">
                             <div class="col">
                                     <label for="professor" class="form-label">Professor</label>
@@ -207,7 +207,7 @@ function GET_SUBJECTLIST() {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="submitTadi" class="btn" style="background-color: #181a46; color: white;">Submit</button>
+                        <button type="submit" class="btn submitTadi" data-subject-id="${value.subj_id}" style="background-color: #181a46; color: white;">Submit</button>
                     </div>
                 </div>
             </div>
@@ -219,61 +219,45 @@ function GET_SUBJECTLIST() {
       $(".modal-container").html(tadiModal);
 
       console.log(result);
+
+
+      // Handle form submission
+      $(document).on("click", ".submitTadi", function (e) {
+        e.preventDefault();
+
+        const subjectId = $(this).data('subject-id');
+        const currentModal = $(`#modal${subjectId}`);
+
+         // Remove any existing error styles
+         currentModal.find('.form-select, .form-control').removeClass('is-invalid');
+
+         // Check each required field within the current modal
+         let isValid = true;
+         const requiredFields = ['professor', 'modeOfClass', 'typeOfClass', 
+           'classStartDateTime', 'classEndDateTime', 'comments'];
+        
+        requiredFields.forEach(field => {
+          if (!currentModal.find(`#${field}`).val()) {
+            currentModal.find(`#${field}`).addClass('is-invalid');
+            isValid = false;
+          }
+        });
+
+        if (isValid) {
+          const formData = {
+            professor: currentModal.find('#professor').val(),
+            modeOfClass: currentModal.find('#modeOfClass').val(),
+            typeOfClass: currentModal.find('#typeOfClass').val(),
+            classStartDateTime: currentModal.find('#classStartDateTime').val(),
+            classEndDateTime: currentModal.find('#classEndDateTime').val(),
+            comments: currentModal.find('#comments').val(),
+            subjectId: subjectId
+          };
+
+          console.log("Form Data:", formData);
+        }
+      });
+
     },
   });
-}
-
-// Handle form submission
-$(document).on("click", "#submitTadi", function(e) {
-  e.preventDefault();
-  
-  // Remove any existing error styles
-  $('.form-select, .form-control').removeClass('is-invalid');
-  
-  // Check each required field
-  let isValid = true;
-  
-  if (!$("#professor").val()) {
-    $("#professor").addClass('is-invalid');
-    isValid = false;
-  }
-  
-  if (!$("#modeOfClass").val()) {
-    $("#modeOfClass").addClass('is-invalid');
-    isValid = false;
-  }
-  
-  if (!$("#typeOfClass").val()) {
-    $("#typeOfClass").addClass('is-invalid');
-    isValid = false;
-  }
-  
-  if (!$("#classStartDateTime").val()) {
-    $("#classStartDateTime").addClass('is-invalid');
-    isValid = false;
-  }
-  
-  if (!$("#classEndDateTime").val()) {
-    $("#classEndDateTime").addClass('is-invalid');
-    isValid = false;
-  }
-  
-  if (!$("#comments").val()) {
-    $("#comments").addClass('is-invalid');
-    isValid = false;
-  }
-
-  // Only proceed if all fields are valid
-  if (isValid) {
-    const formData = {
-      professor: $("#professor").val(),
-      modeOfClass: $("#modeOfClass").val(),
-      typeOfClass: $("#typeOfClass").val(),
-      classStartDateTime: $("#classStartDateTime").val(),
-      classEndDateTime: $("#classEndDateTime").val(),
-      comments: $("#comments").val()
-    };
-
-    console.log("Form Data:", formData);
-  }
-});
+} 
