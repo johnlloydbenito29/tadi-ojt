@@ -170,11 +170,11 @@ function GET_SUBJECTLIST() {
                                 </div>
 
                                 <div class="col">
-                                    <label for="modeOfClass" class="form-label">Mode Of Class</label>
+                                    <label for="modeOfClass" class="form-label">Learning Delivery Modalities</label>
                                     <select class="form-select" id="modeOfClass" required>
                                         <option value="" selected disabled>Select Mode</option>
-                                        <option value="Synchronous">Synchronous</option>
-                                        <option value="Asynchronous">Asynchronous</option>
+                                        <option value="Online Class">Online Class</option>
+                                        <option value="Onsite Class">Onsite Class</option>
                                     </select>
                                 </div>
 

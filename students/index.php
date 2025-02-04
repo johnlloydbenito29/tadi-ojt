@@ -90,11 +90,11 @@
                                 </div>
 
                                 <div class="col">
-                                    <label for="modeOfClass" class="form-label">Learning Delivery Modalities</label>
+                                    <label for="modeOfClass" class="form-label">Mode of Class</label>
                                     <select class="form-select" id="modeOfClass" required>
                                         <option value="" selected disabled>Select Mode</option>
-                                        <option value="Synchronous">Online Class</option>
-                                        <option value="Asynchronous">On Site Class</option>
+                                        <option value="Synchronous">Synchronous</option>
+                                        <option value="Asynchronous">Asynchronous</option>
                                     </select>
                                 </div>
 
