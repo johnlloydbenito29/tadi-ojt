@@ -162,7 +162,7 @@ function GET_SUBJECTLIST() {
                         <form>
                             <div class="row my-4">
                             <div class="col">
-                                    <label for="professor" class="form-label">Professor</label>
+                                    <label for="professor" class="form-label">Instructor</label>
                                     <select class="form-select" id="professor" required>
                                         <option value="" selected disabled>Select Professor</option>
                                         ${value.prof_name ? `<option value="${value.prof_name}" selected>${value.prof_name}</option>` : '<option value="" selected disabled>No instructor assigned</option>'}
@@ -173,8 +173,8 @@ function GET_SUBJECTLIST() {
                                     <label for="modeOfClass" class="form-label">Learning Delivery Modalities</label>
                                     <select class="form-select" id="modeOfClass" required>
                                         <option value="" selected disabled>Select Mode</option>
-                                        <option value="Online Class">Online Class</option>
-                                        <option value="Onsite Class">Onsite Class</option>
+                                        <option value="Online Class">Online Learning</option>
+                                        <option value="Onsite Class">Onsite Learning</option>
                                     </select>
                                 </div>
 
