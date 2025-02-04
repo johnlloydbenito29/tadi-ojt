@@ -129,19 +129,18 @@ function GET_SUBJECTLIST() {
     success: function (result) {
       const tableRows = result.length
         ? result
-            .map(
-              (value) => `
+          .map(
+            (value) => `
                 <tr>
                     <td>${value.subj_code}</td>
                     <td>${value.subj_desc}</td>
-                    <td>${
-                      value.prof_name ? value.prof_name : "No instructor"
-                    }</td>
+                    <td>${value.prof_name ? value.prof_name : "No instructor"
+              }</td>
                     <td><button class="btn btn-sm w-100" ${value.prof_name ? value.prof_name : "disabled"} style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${value.subj_id}">TADI</button></td>
                 </tr>
             `
-            )
-            .join("")
+          )
+          .join("")
         : "";
 
       $("tbody").html(tableRows);
@@ -159,7 +158,7 @@ function GET_SUBJECTLIST() {
                         </div>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="tadiForm">
                             <div class="row my-4">
                             <div class="col">
                                     <label for="professor" class="form-label">Professor</label>
@@ -202,19 +201,17 @@ function GET_SUBJECTLIST() {
          
                             <div class="mb-4">
                                 <label for="comments" class="form-label">Report</label>
-                                <textarea class="form-control" id="comments" rows="5" placeholder="Enter any additional comments or notes here..."></textarea>
+                                <textarea class="form-control" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn" style="background-color: #181a46; color: white;">Submit</button>
+                        <button type="submit" id="submitTadi" class="btn" style="background-color: #181a46; color: white;">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
-
-            
             `
         )
         .join("");
@@ -225,3 +222,58 @@ function GET_SUBJECTLIST() {
     },
   });
 }
+
+// Handle form submission
+$(document).on("click", "#submitTadi", function(e) {
+  e.preventDefault();
+  
+  // Remove any existing error styles
+  $('.form-select, .form-control').removeClass('is-invalid');
+  
+  // Check each required field
+  let isValid = true;
+  
+  if (!$("#professor").val()) {
+    $("#professor").addClass('is-invalid');
+    isValid = false;
+  }
+  
+  if (!$("#modeOfClass").val()) {
+    $("#modeOfClass").addClass('is-invalid');
+    isValid = false;
+  }
+  
+  if (!$("#typeOfClass").val()) {
+    $("#typeOfClass").addClass('is-invalid');
+    isValid = false;
+  }
+  
+  if (!$("#classStartDateTime").val()) {
+    $("#classStartDateTime").addClass('is-invalid');
+    isValid = false;
+  }
+  
+  if (!$("#classEndDateTime").val()) {
+    $("#classEndDateTime").addClass('is-invalid');
+    isValid = false;
+  }
+  
+  if (!$("#comments").val()) {
+    $("#comments").addClass('is-invalid');
+    isValid = false;
+  }
+
+  // Only proceed if all fields are valid
+  if (isValid) {
+    const formData = {
+      professor: $("#professor").val(),
+      modeOfClass: $("#modeOfClass").val(),
+      typeOfClass: $("#typeOfClass").val(),
+      classStartDateTime: $("#classStartDateTime").val(),
+      classEndDateTime: $("#classEndDateTime").val(),
+      comments: $("#comments").val()
+    };
+
+    console.log("Form Data:", formData);
+  }
+});
