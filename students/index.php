@@ -8,6 +8,7 @@
     $_SESSION['PRDID'] = "5";
     $_SESSION['YRLVLID'] = "9";
     $_SESSION['CRSEID'] = "19";
+    
 
     echo var_dump($_SESSION);
 
