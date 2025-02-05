@@ -89,7 +89,7 @@
                         `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
                         `schl_acad_subj`.`SchlAcadSubj_desc` `subj_desc`,
                         `schl_enr_subj_off`.`SchlEnrollSubjOff_UNIT` `schl_subj_unit`,
-                        `schl_enr_subj_off`.`SchlProf_ID` `prof_ID`,
+                        `schl_enr_subj_off`.`SchlProf_ID` `prof_id`,
                         (
                         SELECT 
                             REPLACE (GROUP_CONCAT(`schl_emp`.`SchlEmp_FNAME`,' ',`schl_emp`.`SchlEmp_LNAME` ), ',', ' / ')
