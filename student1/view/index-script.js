@@ -8,5 +8,4 @@ $(document).ready(function(){
     GET_YEARLEVEL();
     GET_ACADEMICLEVEL();
     GET_SUBJECTLIST();
-    
 })

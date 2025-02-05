@@ -130,52 +130,58 @@ function GET_SUBJECTLIST() {
       displaySubjectTable(result);
       displayTadiModals(result);
       console.log(result);
-
-      // Handle form submission
-      $(document).on("click", ".submitTadi", function (e) {
-        e.preventDefault();
-
-        const subjectId = $(this).data("subject-id");
-        const currentModal = $(`#modal${subjectId}`);
-
-        // Remove any existing error styles
-        currentModal
-          .find(".form-select, .form-control")
-          .removeClass("is-invalid");
-
-        // Check each required field within the current modal
-        let isValid = true;
-
-        const requiredFields = [
-          "instructor",
-          "learning_delivery_modalities",
-          "session_type",
-          "classStartDateTime",
-          "classEndDateTime",
-          "comments",
-        ];
-
-        requiredFields.forEach((field) => {
-          if (!currentModal.find(`#${field}`).val()) {
-            currentModal.find(`#${field}`).addClass("is-invalid");
-            isValid = false;
-          }
-        });
-
-        if (isValid) {
-          const formId = currentModal.find("form").attr("id");
-          const myform = document.getElementById(formId);
-          const tadi_form = new FormData(myform);
-          const formData = Object.fromEntries(tadi_form);
-
-          console.log("formData =>", formData);
-
-          POST_TADI(formData);
-        }
-      });
+      handleTadiSubmission();
     },
   });
 }
+
+// Handle Submission
+
+function handleTadiSubmission() {
+  $(document).on("click", ".submitTadi", function (e) {
+    e.preventDefault();
+
+    const subjectId = $(this).data("subject-id");
+    const currentModal = $(`#modal${subjectId}`);
+
+    // Remove any existing error styles
+    currentModal
+      .find(".form-select, .form-control")
+      .removeClass("is-invalid");
+
+    // Check each required field within the current modal
+    let isValid = true;
+
+    const requiredFields = [
+      "instructor",
+      "learning_delivery_modalities", 
+      "session_type",
+      "classStartDateTime",
+      "classEndDateTime",
+      "comments",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!currentModal.find(`#${field}`).val()) {
+        currentModal.find(`#${field}`).addClass("is-invalid");
+        isValid = false;
+      }
+    });
+
+    if (isValid) {
+      const formId = currentModal.find("form").attr("id");
+      const myform = document.getElementById(formId);
+      const tadi_form = new FormData(myform);
+      const formData = Object.fromEntries(tadi_form);
+
+      console.log("formData =>", formData);
+
+      POST_TADI(formData);
+    }
+  });
+}
+
+// Display
 
 function displaySubjectTable(result) {
   const tableRows = result.length
