@@ -317,7 +317,7 @@ $(document).ready(function() {
       // Send data via AJAX
       $.ajax({
           type: "POST",
-          url: "index-post.php", // PHP file to handle the insertion
+          url: "controller/index-post.php", // PHP file to handle the insertion
           data: {
               professor_id: professor_id,
               mode_of_class: mode_of_class,
@@ -325,7 +325,7 @@ $(document).ready(function() {
               comments: comments,
               subject_id: subject_id
           },
-          success: function(response) {
+          success: function(result) {
               console.log("Data inserted successfully.");
           },
           error: function() {
@@ -334,3 +334,6 @@ $(document).ready(function() {
       });
   });
 });
+
+
+
