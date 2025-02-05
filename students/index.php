@@ -1,16 +1,16 @@
 <?php
 
-    session_start();
+session_start();
 
-    $_SESSION['USERID'] = "13506";
-    $_SESSION['LVLID'] = "2";
-    $_SESSION['YRID'] = "16";
-    $_SESSION['PRDID'] = "5";
-    $_SESSION['YRLVLID'] = "9";
-    $_SESSION['CRSEID'] = "19";
-    
+$_SESSION['USERID'] = "13506";
+$_SESSION['LVLID'] = "2";
+$_SESSION['YRID'] = "16";
+$_SESSION['PRDID'] = "5";
+$_SESSION['YRLVLID'] = "9";
+$_SESSION['CRSEID'] = "19";
 
-    echo var_dump($_SESSION);
+
+echo var_dump($_SESSION);
 
 ?>
 
