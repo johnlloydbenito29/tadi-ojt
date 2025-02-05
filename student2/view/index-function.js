@@ -275,3 +275,22 @@ function displayTadiModals(result) {
 function POST_TADI(formData) {
   console.log(formData);
 }
+
+
+
+function GET_TADILIST() {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: 'GET_TADI_LIST_STUDENT_2',
+    },
+    dataType: "json",
+    success: function (result) {
+      
+      console.log(result);
+     
+    },
+  });
+}
+
