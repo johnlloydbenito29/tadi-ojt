@@ -180,13 +180,12 @@ function displaySubjectTable(result) {
     ? result
       .map(
         (value) => `
-            <tr>
+            <tr key="${value.subj_id}">
                 <td>${value.subj_code}</td>
                 <td>${value.subj_desc}</td>
                 <td>${value.prof_name ? value.prof_name : "No instructor"}</td>
                 <td><button class="btn btn-sm w-100" ${value.prof_name ? value.prof_name : "disabled"
-          } style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${value.subj_id
-          }">TADI</button></td>
+          } style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${value.subj_id}">TADI</button></td>
             </tr>
         `
       )
@@ -197,22 +196,34 @@ function displaySubjectTable(result) {
 }
 
 function displayTadiModals(result) {
+
+  const subjectId = $(this).data("subject-id");
+  const currentModal = $(`#modal${subjectId}`);
+
+  console.log(currentModal);
+
+  // Get all modals and update their titles
+  result.forEach((value, index) => {
+    const currentModal = $(`#modal${value.subj_id}`);
+    currentModal.find('.modal-header .subject-info .modal-title').text(value.prof_name ? value.prof_name : "No instructor");
+    currentModal.find('.modal-header .subject-info .subject-details').text(`Course Code: ${value.subj_code}`);
+  });
+
+
   const tadiModal = result
     .map(
       (value) => `
-                   <div class="modal fade" id="modal${value.subj_id
-        }" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
+                   <div class="modal fade" id="modal${value.subj_id}" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                     <div class="subject-info">
-                        <h5 class="modal-title" id="tadiModalLabel1">${value.prof_name ? value.prof_name : "No instructor"
-        }</h5>
-                        <p class="subject-details mb-0">Course Code: ${value.subj_code
-        }</p>
+                        <h5 class="modal-title" id="tadiModalLabel1">${value.prof_name ? value.prof_name : "No instructor"}</h5>
+                        <p class="subject-details mb-0">Course Code: ${value.subj_code}</p>
                     </div>
                 </div>
                 <div class="modal-body">
+
                     <form id="tadiForm${value.subj_id}">
                         <div class="row my-4">
                         <div class="col">
@@ -282,24 +293,42 @@ function displayTadiModals(result) {
 
 function POST_TADI(formData) {
   console.log(formData);
-  // $.ajax({
-  //   url: "../controller/tadi.php",
-  //   type: "POST",
-  //   data: formData,
-  //   processData: false,
-  //   contentType: false,
-  //   success: function(response) {
-  //     console.log(response);
-  //     if(response.success) {
-  //       alert("TADI submitted successfully");
-  //       location.reload();
-  //     } else {
-  //       alert("Error submitting TADI");
-  //     }
-  //   },
-  //   error: function(xhr, status, error) {
-  //     console.error(error);
-  //     alert("Error submitting TADI");
-  //   }
-  // });
+
+  const { instructor, learning_delivery_modalities, session_type, classStartDateTime, classEndDateTime, comments } = formData;
+
+  const payload = {
+    prof_id: 23121,
+    schltadi_mode: learning_delivery_modalities,
+    schltadi_type: session_type,
+    schltadi_date: new Date().toISOString().slice(0, 10),
+    schltadi_timein: new Date(classStartDateTime).toLocaleTimeString('en-PH', { hour12: false }),
+    schltadi_timeout: new Date(classEndDateTime).toLocaleTimeString('en-PH', { hour12: false }),
+    schltadi_activity: comments,
+    schlenrollsubjoff_id: 1
+  }
+
+  console.log('payload =>', payload);
+  $.ajax({
+    url: "controller/index-post.php",
+    type: "POST", 
+    data: {
+      type: 'SUBMIT_TADI',
+      form_data : formData,
+
+    },
+    success: function(response) {
+      const result = JSON.parse(response);
+      console.log(result);
+      if (result.success) {
+        alert("TADI submitted successfully");
+        location.reload();
+      } else {
+        alert("Error submitting TADI");
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+      alert("Error submitting TADI"); 
+    }
+  });
 }
