@@ -178,38 +178,59 @@ function GET_SUBJECTLIST() {
 function displaySubjectTable(result) {
   const tableRows = result.length
     ? result
-      .map(
-        (value) => `
+        .map(
+          (value) => `
             <tr>
                 <td>${value.subj_code}</td>
                 <td>${value.subj_desc}</td>
                 <td>${value.prof_name ? value.prof_name : "No instructor"}</td>
-                <td><button class="btn btn-sm w-100" ${value.prof_name ? value.prof_name : "disabled"
-          } style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${value.subj_id
+                <td><button class="btn btn-sm w-100" ${
+                  value.prof_name ? value.prof_name : "disabled"
+                } style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#modal${
+            value.subj_id
           }">TADI</button></td>
             </tr>
         `
-      )
-      .join("")
+        )
+        .join("")
     : "";
 
   $("tbody").html(tableRows);
 }
 
 function displayTadiModals(result) {
+  let formattedDate = new Date().toLocaleDateString("en-PH", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+});
+
   const tadiModal = result
     .map(
-      (value) => `
-                   <div class="modal fade" id="modal${value.subj_id
-        }" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
+      (value) =>
+        ` 
+                   <div class="modal fade" id="modal${
+                     value.subj_id
+                   }" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
-                    <div class="subject-info">
-                        <h5 class="modal-title" id="tadiModalLabel1">${value.prof_name ? value.prof_name : "No instructor"
-        }</h5>
-                        <p class="subject-details mb-0">Course Code: ${value.subj_code
-        }</p>
+                     <div class="col">
+                     <h5 class="modal-title" id="tadiModalLabel1">${
+                          value.prof_name ? value.prof_name : "No instructor"
+                        }</h5>
+                        <p class="subject-details mb-0">Course Code: ${
+                          value.subj_code
+                        }</p>  
+                            </div>
+                <div class="subject-info">
+                <div class="col">
+                            <label>Current Date</label>
+                             <p>${formattedDate}</p>
+                            </div>
+                        
+                        <div class="subject-details mb-0  style="margin-right: 0;">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -219,10 +240,14 @@ function displayTadiModals(result) {
                                 <label for="instructor" class="form-label">Instructor</label>
                                 <select class="form-select" name="instructor" id="instructor" required>
                                     <option value="" selected disabled>Select Instructor</option>
-                                    ${value.prof_name
-          ? `<option value="${value.prof_name}" selected>${value.prof_name}</option>`
-          : '<option value="" selected disabled>No instructor assigned</option>'
-        }
+      
+                                    ${
+                                      value.prof_name
+                                        ? `<option value="${value.prof_name}" selected>${value.prof_name}</option>`
+                                        : '<option value="" selected disabled>No instructor assigned</option>'
+                                        
+                                    }
+                                    
                                 </select>
                             </div>
 
@@ -245,16 +270,17 @@ function displayTadiModals(result) {
                             </div>
                         </div>
                         
-                        <div class="row mb-4">
-                            <div class="col">
-                                <label for="classStartDateTime" class="form-label">Class Start Schedule</label>
-                                <input type="datetime-local" class="form-control" name="classStartDateTime" id="classStartDateTime" required>
+                        <div class="row my-4">
+                            <div class="col-4">    
+                                <label for="classEndDateTime" class="form-label">Class Start Schedule</label>
+                                <input type="time" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
                             </div>
-
-                            <div class="col">
+                             <div class="col-4">
                                 <label for="classEndDateTime" class="form-label">Class End Schedule</label>
-                                <input type="datetime-local" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
+                                <input type="time" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
                             </div>
+                          
+
                         </div>
      
                         <div class="mb-4">
@@ -265,8 +291,9 @@ function displayTadiModals(result) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn submitTadi" data-subject-id="${value.subj_id
-        }" style="background-color: #181a46; color: white;">Submit</button>
+                    <button type="submit" class="btn submitTadi" data-subject-id="${
+                      value.subj_id
+                    }" style="background-color: #181a46; color: white;">Submit</button>
                 </div>
             </div>
         </div>
