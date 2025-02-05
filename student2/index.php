@@ -42,8 +42,8 @@ echo var_dump($_SESSION);
                                     <tr>
                                         <th scope="col">Subject Code</th>
                                         <th scope="col">Description</th>
-                                        <th scope="col">Section</th>
-                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Professor</th>
+                                        <th scope="col">Date</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -58,8 +58,8 @@ echo var_dump($_SESSION);
                                     <tr>
                                         <td>DSC_2</td>
                                         <td>Discrete 2</td>
-                                        <td>BSIT-CS 4A</td>
                                         <td>Louise Mae Lopez</td>
+                                        <td>August 5,2025</td>
                                         <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW</button></td>
                                     </tr>
                                 </tbody>
@@ -79,6 +79,61 @@ echo var_dump($_SESSION);
                                 <p class="subject-details mb-0">Course Code: PE_02</p>
                             </div>
                         </div>
+                        <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        <div class="modal-body">
+                            <div class="row mt-4">
+                                <div class="col flex">
+                                    <h6>Professor Name:</h6>
+                                    <p>John Artemson De Guzman</p>
+                                </div>
+
+                                <div class="col flex">
+                                    <h6>Mode of Class:</h6>
+                                    <p>Asynchronous</p>
+                                </div>
+
+                                <div class="col flex">
+                                    <h6>Type of Class:</h6>
+                                    <p>Regular Class</p>
+                                </div>
+
+    </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+</div>
                         <div class="modal-body">
                             <div class="row mt-4">
                                 <div class="col flex">
