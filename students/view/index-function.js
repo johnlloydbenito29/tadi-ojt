@@ -168,6 +168,8 @@ function GET_SUBJECTLIST() {
           const tadi_form = new FormData(myform);
           const formData = Object.fromEntries(tadi_form);
 
+          console.log('formData =>', formData);
+
           POST_TADI(formData);
         }
       });
@@ -219,21 +221,22 @@ function displayTadiModals(result) {
                 <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                     <div class="subject-info">
                         <h5 class="modal-title" id="tadiModalLabel1">${value.prof_name ? value.prof_name : "No instructor"}</h5>
-                        <p class="subject-details mb-0">Course Code: ${value.subj_code}</p>
+                        <p class="subject-details mb-0">Course Code: ${value.subj_code}</p>                
                     </div>
                 </div>
                 <div class="modal-body">
 
                     <form id="tadiForm${value.subj_id}">
+                         <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">
                         <div class="row my-4">
                         <div class="col">
                                 <label for="instructor" class="form-label">Instructor</label>
                                 <select class="form-select" name="instructor" id="instructor" required>
                                     <option value="" selected disabled>Select Instructor</option>
                                     ${value.prof_name
-          ? `<option value="${value.prof_name}" selected>${value.prof_name}</option>`
-          : '<option value="" selected disabled>No instructor assigned</option>'
-        }
+                                      ? `<option value="${value.prof_id}" selected>${value.prof_name}</option>`
+                                      : '<option value="" selected disabled>No instructor assigned</option>'
+                                    }
                                 </select>
                             </div>
 
@@ -292,43 +295,31 @@ function displayTadiModals(result) {
 // POST
 
 function POST_TADI(formData) {
-  console.log(formData);
-
-  const { instructor, learning_delivery_modalities, session_type, classStartDateTime, classEndDateTime, comments } = formData;
-
-  const payload = {
-    prof_id: 23121,
-    schltadi_mode: learning_delivery_modalities,
-    schltadi_type: session_type,
-    schltadi_date: new Date().toISOString().slice(0, 10),
-    schltadi_timein: new Date(classStartDateTime).toLocaleTimeString('en-PH', { hour12: false }),
-    schltadi_timeout: new Date(classEndDateTime).toLocaleTimeString('en-PH', { hour12: false }),
-    schltadi_activity: comments,
-    schlenrollsubjoff_id: 1
-  }
-
-  console.log('payload =>', payload);
   $.ajax({
     url: "controller/index-post.php",
     type: "POST", 
     data: {
       type: 'SUBMIT_TADI',
       form_data : formData,
-
     },
     success: function(response) {
-      const result = JSON.parse(response);
-      console.log(result);
-      if (result.success) {
-        alert("TADI submitted successfully");
-        location.reload();
-      } else {
-        alert("Error submitting TADI");
+      try {
+        const result = JSON.parse(response);
+        if (result.success) {
+          alert("TADI submitted successfully");
+          location.reload();
+        } else {
+          alert("Error submitting TADI: " + (result.message || "Unknown error"));
+        }
+      } catch (e) {
+        console.error("Invalid JSON response:", response);
+        alert("Error processing server response");
       }
     },
     error: function(xhr, status, error) {
-      console.error(error);
-      alert("Error submitting TADI"); 
+      console.error("AJAX Error:", error);
+      console.error("Response Text:", xhr.responseText);
+      alert("Error submitting TADI: " + error); 
     }
   });
 }
