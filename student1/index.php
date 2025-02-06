@@ -69,9 +69,8 @@ echo var_dump($_SESSION);
                         <div class="subject-info">
                             <h5 class="modal-title" id="tadi_modal_label"></h5>
                             <p id="subject_details" class="subject-details mb-0"></p>
+                            <p id="date_now" class="mb-0"></p>
                         </div>
-
-                        <p id="date_now"></p>
                     </div>
                     <div class="modal-body">
 
