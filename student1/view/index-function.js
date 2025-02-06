@@ -243,10 +243,11 @@ function displayTadiModals(result) {
                         }</h5>
                         <p class="subject-details mb-0">Course Code: ${
                           value.subj_code
-                        }</p>                
+                        }</p> 
+                        <p class="mb-0">${formattedDate}</p>
                     </div>
 
-                             <p>${formattedDate}</p>
+          
                 </div>
                 <div class="modal-body">
 
