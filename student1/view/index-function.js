@@ -138,7 +138,7 @@ function handleTadiSubmission() {
     e.preventDefault();
 
     const subjectId = $(this).data("subject-id");
-    const currentModal = $(`#modal`);
+    const currentModal = $(`#modal$`);
 
     // Remove any existing error styles
     currentModal
@@ -335,17 +335,13 @@ function updateModal(value) {
   $("#subject_details").text(`Course Code: ${value.subj_code}`);
   $("#date_now").text(formattedDate);
 
-  let optInstructor = "";
+  $("#subjoff_id").val(`${value.subj_id}`);
 
   if (value.prof_name) {
-    optInstructor += `<option value='${value.prof_id}' selected>${value.prof_name}</option>`;
+    $("#instructor option").empty().append(`<option value="${value.prof_id}" selected>${value.prof_name}</option>`);
   } else {
-    optInstructor += `<option value='' selected disabled>No instructor assigned</option>`;
+    $("#instructor option").empty().append("<option value='' selected disabled>No instructor assigned</option>");
   }
-
-  $("#instructor option").remove();
-  $("#instructor").append(optInstructor);
-
 }
 
 // POST
