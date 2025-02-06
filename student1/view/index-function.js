@@ -138,7 +138,7 @@ function handleTadiSubmission() {
     e.preventDefault();
 
     const subjectId = $(this).data("subject-id");
-    const currentModal = $(`#modal$`);
+    const currentModal = $(`#modal`);
 
     // Remove any existing error styles
     currentModal
@@ -166,7 +166,7 @@ function handleTadiSubmission() {
 
     if (isValid) {
       const formId = currentModal.find("form").attr("id");
-      const myform = document.getElementById(formId);
+      const myform = document.getElementById('tadiForm');
       const tadi_form = new FormData(myform);
       const formData = Object.fromEntries(tadi_form);
 
@@ -208,11 +208,6 @@ function displaySubjectTable(result) {
   });
 }
 
-function handleTadiModal(value, index) {
-  $(document).on('click', `#tadiModalHandler${index}`, function () {
-    console.log("value =>", value, index);
-  });
-}
 
 function displayTadiModals(result) {
   const subjectId = $(this).data("subject-id");
@@ -331,14 +326,14 @@ function updateModal(value) {
     year: "numeric",
   });
 
+  $("#subjoff_id").val(`${value.subj_id}`);
   $("#tadi_modal_label").text(value.subj_desc);
   $("#subject_details").text(`Course Code: ${value.subj_code}`);
   $("#date_now").text(formattedDate);
 
-  $("#subjoff_id").val(`${value.subj_id}`);
 
   if (value.prof_name) {
-    $("#instructor option").empty().append(`<option value="${value.prof_id}" selected>${value.prof_name}</option>`);
+    $("#instructor option").empty().append(`<option value="${value.prof_id}">${value.prof_name}</option>`);
   } else {
     $("#instructor option").empty().append("<option value='' selected disabled>No instructor assigned</option>");
   }
