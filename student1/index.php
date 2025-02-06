@@ -76,7 +76,7 @@ echo var_dump($_SESSION);
                 <div class="modal-body">
 
                     <form id="tadiForm">
-                         <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="">
+                         <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id">
                         <div class="row my-4">
                         <div class="col">
                                 <label for="instructor" class="form-label">Instructor</label>
