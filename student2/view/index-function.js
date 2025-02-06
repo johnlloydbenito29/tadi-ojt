@@ -43,6 +43,7 @@ function GET_TADILIST() {
                         "<td>" + value.subj_desc + "</td>" + 
                         "<td>" + value.prof_name + "</td>" + 
                         "<td>" + value.tadi_date + "</td>" + 
+                        "<td><button class=\"btn btn-sm w-100\" style=\"background-color: #181a46; color: white;\" data-bs-toggle=\"modal\" data-bs-target=\"#tadiModal1\">VIEW</button></td>" +
                       "</tr>";
     
     
