@@ -48,9 +48,7 @@ echo var_dump($_SESSION);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td colspan="4" class="text-center">No tadiform available</td>
-                                    </tr>
+        
                                 </tbody>
                             </table>
                         </div>
