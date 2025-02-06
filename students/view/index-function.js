@@ -171,6 +171,7 @@ function GET_SUBJECTLIST() {
           console.log("formData =>", formData);
 
           POST_TADI(formData);
+          displayTadiTable(result);
         }
       });
     },
@@ -190,7 +191,8 @@ function displaySubjectTable(result) {
                     "<td>" + value.subj_desc + "</td>" + 
                     "<td>" + (value.prof_name ? value.prof_name : "NO INSTRUCTOR") + "</td>" + 
                     "<td>" +
-                            "<button class='btn btn-sm w-100' " + (value.prof_name ? "" : "disabled") + " style='background-color: #181a46; color: white;' data-bs-toggle='modal' data-bs-target='#modal" + value.subj_id + "'>TADI</button>"+ 
+                            "<button class='btn btn-sm w-100' " + (value.prof_name ? "" : "disabled") + 
+                            " style='background-color: #181a46; color: white;' data-bs-toggle='modal' data-bs-target='#modal" + value.subj_id + "'>TADI</button>"+ 
                             
                     "</td>"+ 
                   "</tr>";

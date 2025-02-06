@@ -36,7 +36,8 @@ include('../configuration/connection-config.php');
                     $rreg = $dbPortal->query($qry);
                     $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
                     $dbPortal->close();
-                    }
-                  echo json_encode($fetch);
+    }
+    
+    echo json_encode($fetch);
 
 ?>
