@@ -32,6 +32,7 @@ function GET_TADILIST() {
     },
     dataType: "json",
     success: function (result) {
+      console.log("result ajax", result)
 
       
       var displaytable = "";
@@ -58,4 +59,19 @@ function GET_TADILIST() {
 }
 
 
+function viewTadi(value) {
 
+  console.log(value);
+  let formattedDate = new Date().toLocaleDateString("en-PH", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  $("#").text(value.subj_desc);
+  $("#subject_details").text(`Course Code: ${value.subj_code}`);
+  $("#date_now").text(formattedDate);
+  $("#subjoff_id").val(`${value.subj_id}`);
+
+ 
+}
