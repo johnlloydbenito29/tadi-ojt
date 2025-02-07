@@ -40,6 +40,7 @@ echo var_dump($_SESSION);
                             <table class="table table-hover" style="line-height: 2.5;">
                                 <thead style="background-color: #181a46; color: white;">
                                     <tr>
+                                        <th scope="col">#</th>
                                         <th scope="col">Subject Code</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Instructor</th>

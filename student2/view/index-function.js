@@ -16,13 +16,15 @@ function GET_TADILIST() {
 function displayTadiTable(result) {
   console.log('result =>', result);
 
-
+  var count = 1;
   const tableRows = result.length
     ? result
       .reduce((acc, value, index) => {
         $.each([value], function (key, item) {
           acc += `
+
                   <tr key="${item.subj_code}">
+                      <td>${count}</td>
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
                       <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
@@ -31,6 +33,8 @@ function displayTadiTable(result) {
             } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
                   </tr>
                 `;
+
+                count++;
         });
         return acc;     
       }, "")
