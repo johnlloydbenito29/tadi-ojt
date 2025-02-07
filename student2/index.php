@@ -53,7 +53,7 @@ echo var_dump($_SESSION);
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,17 +73,17 @@ echo var_dump($_SESSION);
                             <div class="row mt-4">
                                 <div class="col flex">
                                     <h6>Professor Name:</h6>
-                                    <p>John Artemson De Guzman</p>
+                                    <p id="prof_name"></p>
                                 </div>
 
                                 <div class="col flex">
-                                    <h6>Mode of Class:</h6>
-                                    <p>Asynchronous</p>
+                                    <h6>Learning Delivery Modalities:</h6>
+                                    <p id="modalities"></p>
                                 </div>
 
                                 <div class="col flex">
-                                    <h6>Type of Class:</h6>
-                                    <p>Regular Class</p>
+                                    <h6>Session Type:</h6>
+                                    <p id="session_type"></p>
                                 </div>
 
 
@@ -92,20 +92,20 @@ echo var_dump($_SESSION);
 
                             <div class="row my-4">
                                 <div class="col-4 flex">
-                                    <h6>Class Start Schedule:</h6>
-                                    <p>1:00 PM</p>
+                                    <h6>Class Start Time:</h6>
+                                    <p id="time_in"></p>
                                 </div>
 
                                 <div class="col flex">
-                                    <h6>Class End Schedule:</h6>
-                                    <p>4:00 PM</p>
+                                    <h6>Class End Time:</h6>
+                                    <p id="time_out"></p>
                                 </div>
                                 <div class="col-12 mt-4">
                                     <div class="flex">
                                         <h6 class="mb-4">Report:</h6>
 
                                         <div class="border border-secondary-subtle p-3 border-1 rounded">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <p id="report"> </p>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,6 @@ echo var_dump($_SESSION);
                     </div>
                 </div>
             </div>
-            
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
