@@ -34,9 +34,9 @@ echo var_dump($_SESSION);
                 <div class="col-md">
                     <select class="form-select" id="academicLevel" name="academicLevel">
                         <option selected>Status Level</option>
-                        <option value="1">Elementary</option>
-                        <option value="2">High School</option>
-                        <option value="3">Tertiary</option>
+                        <option value="1">Basic Education</option>
+                        <option value="2">Tertiary</option>
+                        <option value="3">Graduate School</option>
                     </select>
                 </div>
                 <div class="col-md">
@@ -56,7 +56,7 @@ echo var_dump($_SESSION);
                         <option selected>Period</option>
                         <option value="1">1st Sem</option>
                         <option value="2">2nd Sem</option>
-                        <option value="3">Mid Year <U></U></option>
+                        <option value="3">Mid Year </option>
                     </select>
                 </div>
                 <div class="col-md">
@@ -67,7 +67,7 @@ echo var_dump($_SESSION);
                     </select>
                 </div>
                 <div class="col-md">
-                    <input type="text" class="form-control" id="studentName" name="studentName" placeholder="Student Name">
+                    <input type="text" class="form-control" id="subj_code" name="subjectCode" placeholder="Subject Code">
                 </div>
                 <div class="col-md">
                     <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
@@ -124,9 +124,9 @@ echo var_dump($_SESSION);
                             <div class="col-md">
                                 <select class="form-select" id="academicLevel" name="academicLevel">
                                 <option selected>Section</option>
-                                <option value="1">Elementary</option>
-                                <option value="2">High School</option>
-                                <option value="3">Tertiary</option>
+                                <option value="1">#</option>
+                                <option value="2">#</option>
+                                <option value="3">#</option>
                                 </select>
                             </div>
 
@@ -147,7 +147,7 @@ echo var_dump($_SESSION);
                                 <option selected>Period</option>
                                 <option value="1">1st Sem</option>
                                 <option value="2">2nd Sem</option>
-                                <option value="3">Mid Year <U></U></option>
+                                <option value="3">Mid Year</option>
                                 </select>
                             </div>
                                 <div class="col-md">
