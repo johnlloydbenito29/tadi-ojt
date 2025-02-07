@@ -149,7 +149,7 @@
                     `schl_tadi`.`schltadi_status` = 1 AND 
                     `schl_tadi`.`schltadi_isconfirm` = 0
 
-                "
+                ";
     }
 
     echo json_encode($fetch);
