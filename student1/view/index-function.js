@@ -201,126 +201,12 @@ function displaySubjectTable(result) {
   result.filter((value, index) => {
     const tadiHandler = `#tadiModalHandler${index}`;
     $(document).on('click', tadiHandler, function () {
-      updateModal(value, index);
+      displayTadi(value, index);
     });
   });
 }
 
-function handleTadiModal(value, index) {
-  $(document).on('click', `#tadiModalHandler${index}`, function () {
-    console.log("value =>", value, index);
-  });
-}
-
-function displayTadiModals(result) {
-  const subjectId = $(this).data("subject-id");
-  const currentModal = $(`#modal${subjectId}`);
-  let formattedDate = new Date().toLocaleDateString("en-PH", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  console.log(currentModal);
-
-  // Get all modals and update their titles
-  result.forEach((value) => {
-    const currentModal = $(`#modal${value.subj_id}`);
-    currentModal
-      .find(".modal-header .subject-info .modal-title")
-      .text(value.prof_name ? value.prof_name : "No instructor");
-    currentModal
-      .find(".modal-header .subject-info .subject-details")
-      .text(`Course Code: ${value.subj_code}`);
-  });
-
-  const tadiModal = result
-    .map(
-      (value) => `
-                   <div class="modal fade" id="modal${value.subj_id
-        }" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
-                    <div class="subject-info">
-                        <h5 class="modal-title" id="tadiModalLabel1">${value.prof_name ? value.prof_name : "No instructor"
-        }</h5>
-                        <p class="subject-details mb-0">Course Code: ${value.subj_code
-        }</p>                
-                    </div>
-
-                             <p>${formattedDate}</p>
-                </div>
-                <div class="modal-body">
-
-                    <form id="tadiForm${value.subj_id}">
-                         <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id
-        }">
-                        <div class="row my-4">
-                        <div class="col">
-                                <label for="instructor" class="form-label">Instructor</label>
-                                <select class="form-select" name="instructor" id="instructor" required>
-                                    <option value="" selected disabled>Select Instructor</option>
-                                    ${value.prof_name
-          ? `<option class="profOpt" value="${value.prof_id}" selected>${value.prof_name}</option>`
-          : '<option value="" selected disabled>No instructor assigned</option>'
-        }
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <label for="learning_delivery_modalities" class="form-label">Learning Delivery Modalities</label>
-                                <select class="form-select" name="learning_delivery_modalities" id="learning_delivery_modalities" required>
-                                    <option value="" selected disabled>Select Mode</option>
-                                    <option value="online_learning">Online Learning</option>
-                                    <option value="onsite_learning">OnSite Learning</option>
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <label for="session_type" class="form-label">Session Type</label>
-                                  <select class="form-select" name="session_type" id="session_type" required>
-                                    <option value="" selected disabled>Select Type</option>
-                                    <option value="regular">Regular Class</option>
-                                     <option value="makeup">Make-Up Class</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-4">
-                            <div class="col-4">
-                                <label for="classStartDateTime" class="form-label">Class Start Schedule</label>
-                                <input type="time" class="form-control" name="classStartDateTime" id="classStartDateTime" required>
-                            </div>
-
-                            <div class="col-4">
-                                <label for="classEndDateTime" class="form-label">Class End Schedule</label>
-                                <input type="time" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
-                            </div>
-                        </div>
-     
-                        <div class="mb-4">
-                            <label for="comments" class="form-label">Report</label>
-                            <textarea class="form-control" name="comments" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn submitTadi" data-subject-id="${value.subj_id
-        }" style="background-color: #181a46; color: white;">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        `
-    )
-    .join("");
-
-  $(".modal-container").html(tadiModal);
-}
-
-function updateModal(value) {
+function displayTadi(value) {
 
   console.log(value);
   let formattedDate = new Date().toLocaleDateString("en-PH", {

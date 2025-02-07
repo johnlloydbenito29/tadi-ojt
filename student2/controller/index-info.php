@@ -43,9 +43,9 @@ include('../configuration/connection-config.php');
                         ON `schl_tadi`.`schlprof_id` = `schl_emp`.`SchlEmpSms_ID`
                         
                 WHERE 	
-                    `schl_tadi`.`schltadi_isactive` = 1 AND 
+                    `schl_tadi`.`schltadi_isactive` = 1 AND             
                     `schl_tadi`.`schltadi_status` = 1 AND 
-                    `schl_tadi`.`schltadi_isconfirm` = 1" ;
+                    `schl_tadi`.`schltadi_isconfirm` = 0";
 
                     $rreg = $dbPortal->query($qry);
                     $fetch = $rreg->fetch_all(MYSQLI_ASSOC);

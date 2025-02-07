@@ -40,6 +40,7 @@ echo var_dump($_SESSION);
                             <table class="table table-hover" style="line-height: 2.5;">
                                 <thead style="background-color: #181a46; color: white;">
                                     <tr>
+                                        <th scope="col">#</th>
                                         <th scope="col">Subject Code</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Instructor</th>
@@ -57,13 +58,14 @@ echo var_dump($_SESSION);
             </div>
 
             <!-- TADI Modals -->
-            <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal fade" id="tadiModal" tabindex="-1" aria-labelledby="tadiModalLabel" aria-hidden="true" data-bs-backdrop="static">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                             <div class="subject-info">
-                                <h5 class="modal-title" id="tadiModalLabel1">Physical Education</h5>
-                                <p class="subject-details mb-0">Course Code: PE_02</p>
+                                <h5 class="modal-title" id="tadi_modal_label"></h5>
+                                <p id="subject_code" class="subject-details mb-0"></p>
+                                <p id="tadi_date" class="mb-0"></p>
                             </div>
                         </div>
                         <div class="modal-body">
@@ -80,7 +82,7 @@ echo var_dump($_SESSION);
 
                                 <div class="col flex">
                                     <h6>Session Type:</h6>
-                                    <p id="sessionType"></p>
+                                    <p id="session_type"></p>
                                 </div>
 
 
@@ -90,19 +92,19 @@ echo var_dump($_SESSION);
                             <div class="row my-4">
                                 <div class="col-4 flex">
                                     <h6>Class Start Time:</h6>
-                                    <p id="timeIn"></p>
+                                    <p id="time_in"></p>
                                 </div>
 
                                 <div class="col flex">
                                     <h6>Class End Time:</h6>
-                                    <p id="timeOut"></p>
+                                    <p id="time_out"></p>
                                 </div>
                                 <div class="col-12 mt-4">
                                     <div class="flex">
-                                        <h6 class="mb-4">Report:</h6>
+                                        <h6 class="mb-4">Remarks:</h6>
 
                                         <div class="border border-secondary-subtle p-3 border-1 rounded">
-                                            <p id="report"></p>
+                                            <p id="report"> </p>
                                         </div>
                                     </div>
                                 </div>
