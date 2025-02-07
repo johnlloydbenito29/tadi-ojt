@@ -1,28 +1,3 @@
-function displayTadiTable(result) {
-
-  
-  var displaytable = "";
-
-  $.each(result, function(key, value){
-
-    displaytable += "<tr>";
-
-    displaytable += "<td>" + value.subj_code + "</td>" + 
-                    "<td>" + value.subj_desc + "</td>" + 
-                    "<td>" + (value.prof_name ? value.prof_name : "NO INSTRUCTOR") + "</td>" + 
-                    "<td>" + value.tadi_date + "</td>" + 
-                           
-                   "</tr>";
-
-
-
-  })
-  $("tbody tr").remove();
-  $("tbody").append(displaytable);
-}
-
-
-
 function GET_TADILIST() {
   $.ajax({
     type: "GET",
@@ -32,34 +7,50 @@ function GET_TADILIST() {
     },
     dataType: "json",
     success: function (result) {
-      console.log("result ajax", result)
 
-      
-      var displaytable = "";
-
-      $.each(result, function(key, value){
-    
-        displaytable += "<tr>";
-    
-        displaytable += "<td>" + value.subj_code + "</td>" + 
-                        "<td>" + value.subj_desc + "</td>" + 
-                        "<td>" + value.prof_name + "</td>" + 
-                        "<td>" + value.tadi_date + "</td>" + 
-                        "<td><button class=\"btn btn-sm w-100\" style=\"background-color: #181a46; color: white;\" data-bs-toggle=\"modal\" data-bs-target=\"#tadiModal1\">VIEW</button></td>" +
-                      "</tr>";
-    
-    
-    
-      })
-
-      $("tbody tr").remove();
-      $("tbody").append(displaytable);
+      displayTadiTable(result);
     },
   });
 }
 
+function displayTadiTable(result) {
+  console.log('result =>', result);
 
-function viewTadi(value) {
+
+  const tableRows = result.length
+    ? result
+      .reduce((acc, value, index) => {
+        $.each([value], function (key, item) {
+          acc += `
+                  <tr key="${item.subj_code}">
+                      <td>${item.subj_code}</td>
+                      <td>${item.subj_desc}</td>
+                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
+                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="    #tadiModal1">VIEW</button></td>
+                  </tr>
+                `;
+        });
+        return acc;
+      }, "")
+    : `<tr>
+          <td colspan="5" class="text-center">No tadi forms available</td>
+       </tr>`;
+
+  $("tbody").html(tableRows);
+
+  result.filter((value, index) => {
+    const tadiHandler = `#tadiModalHandler${index}`;  
+    $(document).on('click', tadiHandler, function () {
+      displayModal(value, index);
+    });
+  });
+}
+
+
+
+function displayModal(value) {
 
   console.log(value);
   let formattedDate = new Date().toLocaleDateString("en-PH", {
@@ -68,10 +59,77 @@ function viewTadi(value) {
     year: "numeric",
   });
 
-  $("#").text(value.subj_desc);
+  $("#subjoff_id").val(`${value.subj_id}`);
+  $("#tadi_modal_label").text(value.subj_desc);
   $("#subject_details").text(`Course Code: ${value.subj_code}`);
   $("#date_now").text(formattedDate);
-  $("#subjoff_id").val(`${value.subj_id}`);
 
- 
+  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>"; 
+  const subjoff_id = value.subj_id ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">` : "";
+  
+  $("#instructor").html(instructor);
+  $("#subjoff_id").html(subjoff_id);
+
 }
+
+function displayTadiTable(result) {
+  console.log('result =>', result);
+
+
+  const tableRows = result.length
+    ? result
+      .reduce((acc, value, index) => {
+        $.each([value], function (key, item) {
+          acc += `
+                  <tr key="${item.subj_code}">
+                      <td>${item.subj_code}</td>
+                      <td>${item.subj_desc}</td>
+                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
+                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="    #tadiModal1">VIEW</button></td>
+                  </tr>
+                `;
+        });
+        return acc;
+      }, "")
+    : `<tr>
+          <td colspan="5" class="text-center">No tadi forms available</td>
+       </tr>`;
+
+  $("tbody").html(tableRows);
+
+  result.filter((value, index) => {
+    const tadiHandler = `#tadiModalHandler${index}`;  
+    $(document).on('click', tadiHandler, function () {
+      displayModal(value, index);
+    });
+  });
+}
+
+
+
+function displayModal(value) {
+
+  console.log(value);
+  let formattedDate = new Date().toLocaleDateString("en-PH", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  $("#subjoff_id").val(`${value.subj_id}`);
+  $("#tadi_modal_label").text(value.subj_desc);
+  $("#subject_details").text(`Course Code: ${value.subj_code}`);
+  $("#date_now").text(formattedDate);
+
+  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>"; 
+  const subjoff_id = value.subj_id ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">` : "";
+  
+  $("#instructor").html(instructor);
+  $("#subjoff_id").html(subjoff_id);
+
+}
+
+
+
