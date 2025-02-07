@@ -1,28 +1,3 @@
-function displayTadiTable(result) {
-
-  
-  var displaytable = "";
-
-  $.each(result, function(key, value){
-
-    displaytable += "<tr>";
-
-    displaytable += "<td>" + value.subj_code + "</td>" + 
-                    "<td>" + value.subj_desc + "</td>" + 
-                    "<td>" + (value.prof_name ? value.prof_name : "NO INSTRUCTOR") + "</td>" + 
-                    "<td>" + value.tadi_date + "</td>" + 
-                           
-                   "</tr>";
-
-
-
-  })
-  $("tbody tr").remove();
-  $("tbody").append(displaytable);
-}
-
-
-
 function GET_TADILIST() {
   $.ajax({
     type: "GET",
@@ -33,26 +8,43 @@ function GET_TADILIST() {
     dataType: "json",
     success: function (result) {
 
-      var displaytable = "";
-
-      $.each(result, function(key, value){
-    
-        displaytable += "<tr>";
-    
-        displaytable += "<td>" + value.subj_code + "</td>" + 
-                        "<td>" + value.subj_desc + "</td>" + 
-                        "<td>" + value.prof_name + "</td>" + 
-                        "<td>" + value.tadi_date + "</td>" + 
-                        "<td><button class=\"btn btn-sm w-100\" style=\"background-color: #181a46; color: white;\" data-bs-toggle=\"modal\" data-bs-target=\"#tadiModal1\">VIEW</button></td>" +
-                      "</tr>";
-    
-    
-    
-      })
-
-      $("tbody tr").remove();
-      $("tbody").append(displaytable);
+      displayTadiTable(result);
     },
+  });
+}
+
+function displayTadiTable(result) {
+  console.log('result =>', result);
+
+
+  const tableRows = result.length
+    ? result
+      .reduce((acc, value, index) => {
+        $.each([value], function (key, item) {
+          acc += `
+                  <tr key="${item.subj_code}">
+                      <td>${item.subj_code}</td>
+                      <td>${item.subj_desc}</td>
+                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
+                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="    #tadiModal1">VIEW</button></td>
+                  </tr>
+                `;
+        });
+        return acc;
+      }, "")
+    : `<tr>
+          <td colspan="5" class="text-center">No tadi forms available</td>
+       </tr>`;
+
+  $("tbody").html(tableRows);
+
+  result.filter((value, index) => {
+    const tadiHandler = `#tadiModalHandler${index}`;
+    $(document).on('click', tadiHandler, function () {
+      updateModal(value, index);
+    });
   });
 }
 
