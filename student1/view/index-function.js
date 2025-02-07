@@ -110,6 +110,17 @@ function GET_ACADEMICLEVEL() {
 
       $("#academicLevel option").remove();
       $("#academicLevel").append(optAcadLvl);
+
+      // Add time validation
+      $("#classEndDateTime").on("change", function() {
+        const startTime = $("#classStartDateTime").val();
+        const endTime = $(this).val();
+        
+        if (startTime && endTime && endTime <= startTime) {
+          alert("Class end time must be later than start time");
+          $(this).val("");
+        }
+      });
     },
   });
 }
@@ -215,17 +226,17 @@ function displayTadi(value) {
     year: "numeric",
   });
 
+  $("#subjoff_id").val(`${value.subj_id}`);
   $("#tadi_modal_label").text(value.subj_desc);
   $("#subject_details").text(`Course Code: ${value.subj_code}`);
   $("#date_now").text(formattedDate);
 
-  $("#subjoff_id").val(`${value.subj_id}`);
+  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>"; 
+  const subjoff_id = value.subj_id ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">` : "";
+  
+  $("#instructor").html(instructor);
+  $("#subjoff_id").html(subjoff_id);
 
-  if (value.prof_name) {
-    $("#instructor option").empty().append(`<option value="${value.prof_id}" selected>${value.prof_name}</option>`);
-  } else {
-    $("#instructor option").empty().append("<option value='' selected disabled>No instructor assigned</option>");
-  }
 }
 
 // POST
@@ -258,36 +269,6 @@ function POST_TADI(formData) {
       console.error("AJAX Error:", error);
       console.error("Response Text:", xhr.responseText);
       alert("Error submitting TADI: " + error);
-    },
-  });
-}
-
-function GET_INSTRUCTOR() {
-  $.ajax({
-    type: "GET",
-    url: "controller/index-info.php",
-    data: {
-      type: "GET_DESIG_INSTRUCTOR",
-    },
-    dataType: "json",
-    success: function (result) {
-      var optProf = "";
-
-      if (result.length) {
-        $.each(result, function (key, value) {
-          optProf +=
-            "<option value='" +
-            value.AcadYr_ID +
-            "'>" +
-            value.AcadYr_Name +
-            "</option>";
-        });
-      } else {
-        optYEAR = "<option></option>";
-      }
-
-      $("#academicSchoolYear option").remove();
-      $("#academicSchoolYear").append(optYEAR);
     },
   });
 }
