@@ -53,19 +53,20 @@ echo var_dump($_SESSION);
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>
 
             <!-- TADI Modals -->
-            <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal fade" id="tadiModal" tabindex="-1" aria-labelledby="tadiModalLabel" aria-hidden="true" data-bs-backdrop="static">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                             <div class="subject-info">
-                                <h5 class="modal-title" id="tadiModalLabel1">Physical Education</h5>
-                                <p class="subject-details mb-0">Course Code: PE_02</p>
+                                <h5 class="modal-title" id="tadi_modal_label"></h5>
+                                <p id="subject_code" class="subject-details mb-0"></p>
+                                <p id="tadi_date" class="mb-0"></p>
                             </div>
                         </div>
                         <div class="modal-body">
@@ -119,6 +120,7 @@ echo var_dump($_SESSION);
                     </div>
                 </div>
             </div>
+            
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
