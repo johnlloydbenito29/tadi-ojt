@@ -30,7 +30,6 @@ include('../configuration/connection-config.php');
                     `schl_tadi`.`schlprof_id` `prof_id`
                     
  
-                    
 
                 FROM 	`schooltadi` `schl_tadi`
 
@@ -52,6 +51,22 @@ include('../configuration/connection-config.php');
                     $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
                     $dbPortal->close();
     }
+
+    if($_GET['type'] == 'CHECK_SUBMISSION'){
+
+        $qry = "SELECT COUNT(*) `count`
+		    
+		    WHERE `schltadi_date` = '2025-02-07' AND
+                  `schlprof_id` = 255 AND
+                  `schlenrollsubjoff_id` = 21573
+                 ";
+
+        $rreg = $dbPortal->query($qry);
+        $fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
+        $dbPortal->close();
+
+    }
+    
     
     echo json_encode($fetch);
 
