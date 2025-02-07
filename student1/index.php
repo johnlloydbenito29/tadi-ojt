@@ -78,14 +78,14 @@ echo var_dump($_SESSION);
                             <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id">
                             <div class="row my-4">
                                 <div class="col">
-                                    <label for="instructor" class="form-label">Instructor</label>
+                                    <label for="instructor" class="form-label">Instructor:</label>
                                     <select class="form-select" name="instructor" id="instructor" required>
                                         <option>Select Instructor</option>
                                     </select>
                                 </div>
 
                                 <div class="col">
-                                    <label for="learning_delivery_modalities" class="form-label">Learning Delivery Modalities</label>
+                                    <label for="learning_delivery_modalities" class="form-label">Learning Delivery Modalities:</label>
                                     <select class="form-select" name="learning_delivery_modalities" id="learning_delivery_modalities" required>
                                         <option value="" selected disabled>Select Mode</option>
                                         <option value="online_learning">Online Learning</option>
@@ -94,7 +94,7 @@ echo var_dump($_SESSION);
                                 </div>
 
                                 <div class="col">
-                                    <label for="session_type" class="form-label">Session Type</label>
+                                    <label for="session_type" class="form-label">Session Type:</label>
                                     <select class="form-select" name="session_type" id="session_type" required>
                                         <option value="" selected disabled>Select Type</option>
                                         <option value="regular">Regular Class</option>
@@ -105,18 +105,18 @@ echo var_dump($_SESSION);
 
                             <div class="row mb-4">
                                 <div class="col-4">
-                                    <label for="classStartDateTime" class="form-label">Class Start Schedule</label>
+                                    <label for="classStartDateTime" class="form-label">Class Start Time:</label>
                                     <input type="time" class="form-control" name="classStartDateTime" id="classStartDateTime" required>
                                 </div>
 
                                 <div class="col-4">
-                                    <label for="classEndDateTime" class="form-label">Class End Schedule</label>
+                                    <label for="classEndDateTime" class="form-label">Class End Time:</label>
                                     <input type="time" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label for="comments" class="form-label">Report</label>
+                                <label for="comments" class="form-label">Remarks:</label>
                                 <textarea class="form-control" name="comments" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
                             </div>
                         </form>

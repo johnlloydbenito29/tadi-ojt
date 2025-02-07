@@ -9,8 +9,8 @@ include('../configuration/connection-config.php');
         $is_confirm = $_POST['is_confirm'];
 
         $qry = "UPDATE `schooltadi` 
-                SET `schltadi_isconfirm` = ?
-                WHERE `schltadi_id` = ?";
+                SET `schltadi_isconfirm` = 1, `schltadi_status` = 1
+                WHERE `schltadi_id` = $tadi_id";
 
         $stmt = $dbPortal->prepare($qry);
         $stmt->bind_param("ii", $is_confirm, $tadi_id);

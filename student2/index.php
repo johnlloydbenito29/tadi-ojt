@@ -102,7 +102,7 @@ echo var_dump($_SESSION);
                                 </div>
                                 <div class="col-12 mt-4">
                                     <div class="flex">
-                                        <h6 class="mb-4">Report:</h6>
+                                        <h6 class="mb-4">Remarks:</h6>
 
                                         <div class="border border-secondary-subtle p-3 border-1 rounded">
                                             <p id="report"> </p>
