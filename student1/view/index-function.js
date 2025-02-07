@@ -201,12 +201,12 @@ function displaySubjectTable(result) {
   result.filter((value, index) => {
     const tadiHandler = `#tadiModalHandler${index}`;
     $(document).on('click', tadiHandler, function () {
-      updateModal(value, index);
+      displayTadi(value, index);
     });
   });
 }
 
-function updateModal(value) {
+function displayTadi(value) {
 
   console.log(value);
   let formattedDate = new Date().toLocaleDateString("en-PH", {
