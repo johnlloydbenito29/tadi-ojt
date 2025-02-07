@@ -87,5 +87,44 @@ function displayModal(value) {
   $("#time_in").text(convert12HourFormat(value.time_in));
   $("#time_out").text(convert12HourFormat(value.time_out));
   $("#report").text(value.tadi_activity);
+
+  $("#status_disapprove").attr('name',value.tadi_id);
+  $("#status_approve").attr('name',value.tadi_id);
 }
 
+function UPDATE_TADI_STATUS(status, id){
+
+  $.ajax({
+    type: "POST",
+    url: "controller/index-update.php",
+    data: {
+      type: "UPDATE_TADI_STATUS",
+      status: status,
+      id: id,
+    },
+    dataType: "json",
+    success: function (result) {
+
+      if(result.status == 1){
+        alert(result.message);
+        $.ajax({
+          type: "GET",
+          url: "controller/index-info.php",
+          data: {
+            type: "GET_TADI_LIST_STUDENT_2",
+          },
+          dataType: "json",
+          success: function (result) {
+            
+            displayTadiTable(result);
+          },
+        });
+      } else {
+
+        alert(result.message);
+      }
+
+    },
+  });
+
+}

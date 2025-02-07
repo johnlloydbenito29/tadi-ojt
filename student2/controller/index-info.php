@@ -6,7 +6,8 @@ include('../configuration/connection-config.php');
 
     if($_GET['type'] == 'GET_TADI_LIST_STUDENT_2'){
 
-        $qry = "SELECT 	
+        $qry = "SELECT 
+                    `schl_tadi`.`schltadi_id` `tadi_id`,
                     `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
                     `schl_acad_subj`.`SchlAcadSubj_NAME` `subj_name`,
                     `schl_acad_subj`.`SchlAcadSubj_DESC` `subj_desc`,
