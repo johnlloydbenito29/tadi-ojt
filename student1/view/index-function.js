@@ -159,7 +159,7 @@ function handleTadiSubmission() {
 
     const requiredFields = [
       "instructor",
-      "learning_delivery_modalities",
+      "learning_delivery_modalities", 
       "session_type",
       "classStartDateTime",
       "classEndDateTime",
@@ -172,6 +172,16 @@ function handleTadiSubmission() {
         isValid = false;
       }
     });
+
+    // Validate class times
+    const startTime = currentModal.find("#classStartDateTime").val();
+    const endTime = currentModal.find("#classEndDateTime").val();
+    
+    if (startTime && endTime && endTime <= startTime) {
+      currentModal.find("#classEndDateTime").addClass("is-invalid");
+      alert("Class end time must be later than start time");
+      isValid = false;
+    }
 
     if (isValid) {
       const formId = currentModal.find("form").attr("id");
