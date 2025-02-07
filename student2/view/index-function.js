@@ -41,11 +41,35 @@ function displayTadiTable(result) {
   $("tbody").html(tableRows);
 
   result.filter((value, index) => {
-    const tadiHandler = `#tadiModalHandler${index}`;
+    const tadiHandler = `#tadiModalHandler${index}`;  
     $(document).on('click', tadiHandler, function () {
-      updateModal(value, index);
+      displayModal(value, index);
     });
   });
+}
+
+
+
+function displayModal(value) {
+
+  console.log(value);
+  let formattedDate = new Date().toLocaleDateString("en-PH", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  $("#subjoff_id").val(`${value.subj_id}`);
+  $("#tadi_modal_label").text(value.subj_desc);
+  $("#subject_details").text(`Course Code: ${value.subj_code}`);
+  $("#date_now").text(formattedDate);
+
+  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>"; 
+  const subjoff_id = value.subj_id ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">` : "";
+  
+  $("#instructor").html(instructor);
+  $("#subjoff_id").html(subjoff_id);
+
 }
 
 
