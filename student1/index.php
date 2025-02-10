@@ -72,65 +72,65 @@ echo var_dump($_SESSION);
                             <p id="subject_details" class="subject-details mb-0"></p>
                             <p id="date_now" class="mb-0"></p>
                         </div>
+                        <form id="tadiForm" novalidate>
                     </div>
                     <div class="modal-body">
-                        <form id="tadiForm" novalidate>
-                            <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id">
-                            <div class="row my-4">
-                                <div class="col">
-                                    <label for="instructor" class="form-label">Instructor <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="instructor" id="instructor" required>
-                                        <option>Select Instructor</option>
-                                    </select>
-                                    <div class="invalid-feedback">Please select an instructor</div>
-                                </div>
-
-                                <div class="col">
-                                    <label for="learning_delivery_modalities" class="form-label">Learning Delivery Modalities <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="learning_delivery_modalities" id="learning_delivery_modalities" required>
-                                        <option value="" selected disabled>Select Mode</option>
-                                        <option value="online_learning">Online Learning</option>
-                                        <option value="onsite_learning">Onsite Learning</option>
-                                    </select>
-                                    <div class="invalid-feedback">Please select a learning delivery mode</div>
-                                </div>
-
-                                <div class="col">
-                                    <label for="session_type" class="form-label">Session Type <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="session_type" id="session_type" required>
-                                        <option value="" selected disabled>Select Type</option>
-                                        <option value="regular">Regular Class</option>
-                                        <option value="makeup">Make-Up Class</option>
-                                    </select>
-                                    <div class="invalid-feedback">Please select a session type</div>
-                                </div>
+                        <input type="text" style="display: none;" id="subjoff_id" name="subjoff_id">
+                        <div class="row my-4">
+                            <div class="col">
+                                <label for="instructor" class="form-label">Instructor <span class="text-danger">*</span></label>
+                                <select class="form-select" name="instructor" id="instructor" required>
+                                    <option>Select Instructor</option>
+                                </select>
+                                <div class="invalid-feedback">Please select an instructor</div>
                             </div>
 
-                            <div class="row mb-4">
-                                <div class="col-4">
-                                    <label for="classStartDateTime" class="form-label">Class Start Time <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control" name="classStartDateTime" id="classStartDateTime" required>
-                                    <div class="invalid-feedback">Please enter a start time</div>
-                                </div>
-
-                                <div class="col-4">
-                                    <label for="classEndDateTime" class="form-label">Class End Time <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
-                                    <div class="invalid-feedback">Please enter an end time</div>
-                                </div>
+                            <div class="col">
+                                <label for="learning_delivery_modalities" class="form-label">Learning Delivery Modalities <span class="text-danger">*</span></label>
+                                <select class="form-select" name="learning_delivery_modalities" id="learning_delivery_modalities" required>
+                                    <option value="" selected disabled>Select Mode</option>
+                                    <option value="online_learning">Online Learning</option>
+                                    <option value="onsite_learning">Onsite Learning</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a learning delivery mode</div>
                             </div>
 
-                            <div class="mb-4">
-                                <label for="comments" class="form-label">Remarks <span class="text-danger">*</span></label>
-                                <textarea class="form-control" name="comments" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
-                                <div class="invalid-feedback">Please enter remarks</div>
+                            <div class="col">
+                                <label for="session_type" class="form-label">Session Type <span class="text-danger">*</span></label>
+                                <select class="form-select" name="session_type" id="session_type" required>
+                                    <option value="" selected disabled>Select Type</option>
+                                    <option value="regular">Regular Class</option>
+                                    <option value="makeup">Make-Up Class</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a session type</div>
                             </div>
-                        </form>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-4">
+                                <label for="classStartDateTime" class="form-label">Class Start Time <span class="text-danger">*</span></label>
+                                <input type="time" class="form-control" name="classStartDateTime" id="classStartDateTime" required>
+                                <div class="invalid-feedback">Please enter a start time</div>
+                            </div>
+
+                            <div class="col-4">
+                                <label for="classEndDateTime" class="form-label">Class End Time <span class="text-danger">*</span></label>
+                                <input type="time" class="form-control" name="classEndDateTime" id="classEndDateTime" required>
+                                <div class="invalid-feedback">Please enter an end time</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="comments" class="form-label">Remarks <span class="text-danger">*</span></label>
+                            <textarea class="form-control" name="comments" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
+                            <div class="invalid-feedback">Please enter remarks</div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn submitTadi" style="background-color: #181a46; color: white;">Submit</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

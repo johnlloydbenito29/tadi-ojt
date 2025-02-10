@@ -102,7 +102,12 @@ function GET_ACADEMICLEVEL() {
 
       if (result.length) {
         $.each(result, function (key, value) {
-          optAcadLvl += "<option value='" + value.AcadLvl_ID + "'>" + value.AcadLvl_Name + "</option>";
+          optAcadLvl +=
+            "<option value='" +
+            value.AcadLvl_ID +
+            "'>" +
+            value.AcadLvl_Name +
+            "</option>";
         });
       } else {
         optAcadLvl = "<option></option>";
@@ -150,9 +155,7 @@ function handleTadiSubmission() {
     const currentModal = $(`#modal`);
 
     // Remove any existing error styles
-    currentModal
-      .find(".form-select, .form-control")
-      .removeClass("is-invalid");
+    currentModal.find(".form-select, .form-control").removeClass("is-invalid");
 
     // Check each required field within the current modal
     let isValid = true;
@@ -185,7 +188,7 @@ function handleTadiSubmission() {
 
     if (isValid) {
       const formId = currentModal.find("form").attr("id");
-      const myform = document.getElementById('tadiForm');
+      const myform = document.getElementById("tadiForm");
       const tadi_form = new FormData(myform);
       const formData = Object.fromEntries(tadi_form);
 
@@ -200,17 +203,23 @@ function handleTadiSubmission() {
 
 function displaySubjectTable(result) {
   const tableRows = result.length
-    ? result
-      .reduce((acc, value, index) => {
+    ? result.reduce((acc, value, index) => {
         $.each([value], function (key, item) {
           acc += `
                   <tr key="${item.subj_id}">
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
-                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
-                      <td>${item.schltadi_isconfirm ? item.schltadi_isconfirm : "Pending"}</td>
-                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
-            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
+                      <td>${
+                        item.prof_name ? item.prof_name : "No instructor"
+                      }</td>
+                      <td>${
+                        item.schltadi_isconfirm
+                          ? item.schltadi_isconfirm
+                          : "Pending"
+                      }</td>
+                      <td><button class="btn btn-sm w-100" ${
+                        item.prof_name ? item.prof_name : "disabled"
+                      } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
                   </tr>
                 `;
         });
@@ -224,14 +233,13 @@ function displaySubjectTable(result) {
 
   result.filter((value, index) => {
     const tadiHandler = `#tadiModalHandler${index}`;
-    $(document).on('click', tadiHandler, function () {
+    $(document).on("click", tadiHandler, function () {
       displayTadi(value, index);
     });
   });
 }
 
 function displayTadi(value) {
-
   console.log(value);
   let formattedDate = new Date().toLocaleDateString("en-PH", {
     month: "long",
@@ -244,12 +252,15 @@ function displayTadi(value) {
   $("#subject_details").text(`Course Code: ${value.subj_code}`);
   $("#date_now").text(formattedDate);
 
-  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>";
-  const subjoff_id = value.subj_id ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">` : "";
+  const instructor = value.prof_name
+    ? `<option value="${value.prof_id}">${value.prof_name}</option>`
+    : "<option value='' selected disabled>No instructor assigned</option>";
+  const subjoff_id = value.subj_id
+    ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">`
+    : "";
 
   $("#instructor").html(instructor);
   $("#subjoff_id").html(subjoff_id);
-
 }
 
 // POST
@@ -267,10 +278,8 @@ function POST_TADI(formData) {
         const result = JSON.parse(response);
         if (result.success) {
           alert("TADI submitted successfully");
-          GET_SUBJECTLIST();
 
           console.log("result =>", result);
-          
         } else {
           alert(
             "Error submitting TADI: " + (result.message || "Unknown error")
