@@ -208,6 +208,7 @@ function displaySubjectTable(result) {
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
                       <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td>${item.schltadi_isconfirm ? item.schltadi_isconfirm : "Pending"}</td>
                       <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
             } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
                   </tr>
