@@ -2,16 +2,22 @@
 
 session_start();
 
-$_SESSION['LVLID'] = 2;
-$_SESSION['PRDID'] = 5;
-$_SESSION['YRID'] = 14;
+// $_SESSION['USERID'] = "13506";
+// $_SESSION['LVLID'] = "2";
+// $_SESSION['YRID'] = "16";
+// $_SESSION['PRDID'] = "5";
+// $_SESSION['YRLVLID'] = "9";
+// $_SESSION['CRSEID'] = "19";
+
+
+$_SESSION['USERID'] = "255";
+$_SESSION['LVLID'] = "2";
+$_SESSION['YRID'] = "16";
+$_SESSION['PRDID'] = "5";
 
 echo var_dump($_SESSION);
-
-
-3
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +90,7 @@ echo var_dump($_SESSION);
                                     <tr>
                                         <th scope="col">Subject Code</th>
                                         <th scope="col">Description</th>
-                                        <th scope="col">Period</th>
+                                        <th scope="col">Section</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -92,12 +98,14 @@ echo var_dump($_SESSION);
                                     <tr>
                                         <td>OOP_1</td>
                                         <td>Object Oriented Programming</td>
-                                        <td>1st Sem</td>
+                                        <td></td>
+                                        <td></td>
                                         <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal1">VIEW</button></td>
                                     </tr>
                                     <tr>
                                         <td>DSC_2</td>
                                         <td>Discrete 2</td>
+                                        <td></td>
                                         <td></td>
                                         <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW</button></td>
                                     </tr>
