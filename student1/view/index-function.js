@@ -112,10 +112,10 @@ function GET_ACADEMICLEVEL() {
       $("#academicLevel").append(optAcadLvl);
 
       // Add time validation
-      $("#classEndDateTime").on("change", function() {
+      $("#classEndDateTime").on("change", function () {
         const startTime = $("#classStartDateTime").val();
         const endTime = $(this).val();
-        
+
         if (startTime && endTime && endTime <= startTime) {
           alert("Class end time must be later than start time");
           $(this).val("");
@@ -159,7 +159,7 @@ function handleTadiSubmission() {
 
     const requiredFields = [
       "instructor",
-      "learning_delivery_modalities", 
+      "learning_delivery_modalities",
       "session_type",
       "classStartDateTime",
       "classEndDateTime",
@@ -176,7 +176,7 @@ function handleTadiSubmission() {
     // Validate class times
     const startTime = currentModal.find("#classStartDateTime").val();
     const endTime = currentModal.find("#classEndDateTime").val();
-    
+
     if (startTime && endTime && endTime <= startTime) {
       currentModal.find("#classEndDateTime").addClass("is-invalid");
       alert("Class end time must be later than start time");
@@ -218,6 +218,8 @@ function displaySubjectTable(result) {
       }, "")
     : "";
 
+  console.log("result =>", result);
+
   $("tbody").html(tableRows);
 
   result.filter((value, index) => {
@@ -242,9 +244,9 @@ function displayTadi(value) {
   $("#subject_details").text(`Course Code: ${value.subj_code}`);
   $("#date_now").text(formattedDate);
 
-  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>"; 
+  const instructor = value.prof_name ? `<option value="${value.prof_id}">${value.prof_name}</option>` : "<option value='' selected disabled>No instructor assigned</option>";
   const subjoff_id = value.subj_id ? `<input type="text" style="display: none;" id="subjoff_id" name="subjoff_id" value="${value.subj_id}">` : "";
-  
+
   $("#instructor").html(instructor);
   $("#subjoff_id").html(subjoff_id);
 
@@ -265,7 +267,10 @@ function POST_TADI(formData) {
         const result = JSON.parse(response);
         if (result.success) {
           alert("TADI submitted successfully");
-          location.reload();
+          GET_SUBJECTLIST();
+
+          console.log("result =>", result);
+          
         } else {
           alert(
             "Error submitting TADI: " + (result.message || "Unknown error")
