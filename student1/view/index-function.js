@@ -204,27 +204,24 @@ function handleTadiSubmission() {
 function displaySubjectTable(result) {
   const tableRows = result.length
     ? result.reduce((acc, value, index) => {
-        $.each([value], function (key, item) {
-          acc += `
+      $.each([value], function (key, item) {
+        acc += `
                   <tr key="${item.subj_id}">
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
-                      <td>${
-                        item.prof_name ? item.prof_name : "No instructor"
-                      }</td>
-                      <td>${
-                        item.schltadi_isconfirm
-                          ? item.schltadi_isconfirm
-                          : "Pending"
-                      }</td>
-                      <td><button class="btn btn-sm w-100" ${
-                        item.prof_name ? item.prof_name : "disabled"
-                      } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
+                      <td>${item.prof_name ? item.prof_name : "No instructor"
+          }</td>
+                      <td>${item.schltadi_isconfirm
+            ? item.schltadi_isconfirm
+            : "Pending"
+          }</td>
+                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+          } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
                   </tr>
                 `;
-        });
-        return acc;
-      }, "")
+      });
+      return acc;
+    }, "")
     : "";
 
   console.log("result =>", result);
@@ -270,24 +267,45 @@ function POST_TADI(formData) {
     url: "controller/index-post.php",
     type: "POST",
     data: {
-      type: "SUBMIT_TADI",
+      type: "SUBMIT_TADI", 
       form_data: formData,
     },
     success: function (response) {
       try {
         const result = JSON.parse(response);
         if (result.success) {
-          alert("TADI submitted successfully");
+          const toast = new bootstrap.Toast($("#successToast")[0]);
+          $("#toastMessage").text(result.message);
+          toast.show();
 
-          console.log("result =>", result);
+          setTimeout(() => {
+            toast.hide();
+          }, 3000);
+
+          // If count is less than 3, ask if they want to add more
+          if (result.count <= 3 && result.count > 0) {
+            if (confirm(`Would you like to submit another TADI? (${result.count}/3 submitted today)`)) {
+              // Reset form fields
+              $('#tadiForm')[0].reset();
+              $('#modal').modal('hide');
+            } else {
+              // Reset form and close modal
+              $('#tadiForm')[0].reset();
+              $('#modal').modal('hide');
+            }
+          }
+
         } else {
-          alert(
-            "Error submitting TADI: " + (result.message || "Unknown error")
-          );
+          // Show error toast
+          const errorModal = new bootstrap.Modal($("#errorModal")[0]);
+          $("#errorModalMessage").text(result.message);
+          errorModal.show();
         }
       } catch (e) {
-        console.error("Invalid JSON response:", response);
-        alert("Error processing server response");
+        console.log(e);
+        const toast = new bootstrap.Toast($("#errorToast")[0]);
+        $("#errorToastMessage").text("An error occurred while processing the response");
+        toast.show();
       }
     },
     error: function (xhr, status, error) {
