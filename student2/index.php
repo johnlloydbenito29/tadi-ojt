@@ -2,9 +2,13 @@
 
 session_start();
 
-$_SESSION['LVLID'] = 2;
-$_SESSION['PRDID'] = 5;
-$_SESSION['YRID'] = 14;
+$_SESSION['USERID'] = "13506";
+$_SESSION['LVLID'] = "2";
+$_SESSION['YRID'] = "16";
+$_SESSION['PRDID'] = "5";
+$_SESSION['YRLVLID'] = "9";
+$_SESSION['CRSEID'] = "19";
+
 
 echo var_dump($_SESSION);
 
@@ -45,6 +49,7 @@ echo var_dump($_SESSION);
                                         <th scope="col">Description</th>
                                         <th scope="col">Instructor</th>
                                         <th scope="col">Date</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>

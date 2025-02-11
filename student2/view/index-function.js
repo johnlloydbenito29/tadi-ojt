@@ -21,16 +21,26 @@ function displayTadiTable(result) {
     ? result
       .reduce((acc, value, index) => {
         $.each([value], function (key, item) {
+         
+
+          // Set the confirmation status based on the value of is_confirm
+          var confirmationStatus =
+          item.is_confirm == 1
+            ? `<span class="badge bg-success">Approved</span>`
+            : item.is_confirm == 2
+            ? `<span class="badge bg-danger">Disapproved</span>`
+            : `<span class="badge bg-primary">Pending</span>`;
+
           acc += `
 
                   <tr key="${item.subj_code}">
                       <td>${count}</td>
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
-                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td>${item.prof_name }</td>
                       <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
-                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
-            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
+                      <td>${confirmationStatus}</td>
+                      <td><button class="btn btn-sm w-100"  } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
                   </tr>
                 `;
 
@@ -90,10 +100,15 @@ function displayModal(value) {
 
   $("#status_disapprove").attr('name',value.tadi_id);
   $("#status_approve").attr('name',value.tadi_id);
+
+  if (value.is_confirm == 1 || value.is_confirm == 2) {
+    $("#status_approve, #status_disapprove").hide();
+  } else {
+    $("#status_approve, #status_disapprove").show();
+  }
 }
 
 function UPDATE_TADI_STATUS(status, id){
-
   $.ajax({
     type: "POST",
     url: "controller/index-update.php",
@@ -104,7 +119,6 @@ function UPDATE_TADI_STATUS(status, id){
     },
     dataType: "json",
     success: function (result) {
-
       if(result.status == 1){
         alert(result.message);
         $.ajax({
@@ -115,7 +129,6 @@ function UPDATE_TADI_STATUS(status, id){
           },
           dataType: "json",
           success: function (result) {
-            
             displayTadiTable(result);
           },
         });
@@ -128,3 +141,4 @@ function UPDATE_TADI_STATUS(status, id){
   });
 
 }
+
