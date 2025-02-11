@@ -56,8 +56,8 @@ include('../configuration/connection-config.php');
 
         $qry = "SELECT COUNT(*) `count`
 		    
-		    WHERE `schltadi_date` = '2025-02-07' AND
-                  `schlprof_id` = 255 AND
+		    WHERE `schltadi_date` = '2025-02-07' AND  --current
+                  `schlprof_id` = 255 AND           
                   `schlenrollsubjoff_id` = 21573
                  ";
 

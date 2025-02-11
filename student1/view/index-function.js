@@ -219,7 +219,7 @@ function displaySubjectTable(result) {
                       }</td>
                       <td><button class="btn btn-sm w-100" ${
                         item.prof_name ? item.prof_name : "disabled"
-                      } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
+            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
                   </tr>
                 `;
         });
