@@ -100,6 +100,12 @@ function displayModal(value) {
 
   $("#status_disapprove").attr('name',value.tadi_id);
   $("#status_approve").attr('name',value.tadi_id);
+
+  if (value.is_confirm == 1 || value.is_confirm == 2) {
+    $("#status_approve, #status_disapprove").hide();
+  } else {
+    $("#status_approve, #status_disapprove").show();
+  }
 }
 
 function UPDATE_TADI_STATUS(status, id){
