@@ -1,57 +1,66 @@
-// function GET_TADILIST() {
-//   $.ajax({
-//     type: "GET",
-//     url: "controller/index-info.php",
-//     data: {
-//       type: "GET_TADI_LIST_STUDENT_2",
-//     },
-//     dataType: "json",
-//     success: function (result) {
+function GET_TADILIST() {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "GET_TADI_LIST_STUDENT_2",
+    },
+    dataType: "json",
+    success: function (result) {
 
-//       displayTadiTable(result);
-//     },
-//   });
-// }
+      displayTadiTable(result);
+    },
+  });
+}
 
-// function displayTadiTable(result) {
-//   console.log('result =>', result);
+function displayTadiTable(result) {
+  console.log('result =>', result);
 
-//   var count = 1;
-//   const tableRows = result.length
-//     ? result
-//       .reduce((acc, value, index) => {
-//         $.each([value], function (key, item) {
-//           acc += `
+  var count = 1;
+  const tableRows = result.length
+    ? result
+      .reduce((acc, value, index) => {
+        $.each([value], function (key, item) {
+         
 
-//                   <tr key="${item.subj_code}">
-//                       <td>${count}</td>
-//                       <td>${item.subj_code}</td>
-//                       <td>${item.subj_desc}</td>
-//                       <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
-//                       <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
-//                       <td>Pending</td>
-//                       <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
-//             } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
-//                   </tr>
-//                 `;
+          // Set the confirmation status based on the value of is_confirm
+          var confirmationStatus =
+          item.is_confirm == 1
+            ? `<span class="badge bg-success">Approved</span>`
+            : item.is_confirm == 2
+            ? `<span class="badge bg-danger">Disapproved</span>`
+            : `<span class="badge bg-primary">Pending</span>`;
 
-//                 count++;
-//         });
-//         return acc;     
-//       }, "")
-//     : `<tr>
-//           <td colspan="5" class="text-center">No tadi forms available</td>
-//        </tr>`;
+          acc += `
 
-//   $("tbody").html(tableRows);
+                  <tr key="${item.subj_code}">
+                      <td>${count}</td>
+                      <td>${item.subj_code}</td>
+                      <td>${item.subj_desc}</td>
+                      <td>${item.prof_name }</td>
+                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
+                      <td>${confirmationStatus}</td>
+                      <td><button class="btn btn-sm w-100"  } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
+                  </tr>
+                `;
 
-//   result.filter((value, index) => {
-//     const tadiHandler = `#tadiModalHandler${index}`;  
-//     $(document).on('click', tadiHandler, function () {
-//       displayModal(value, index);
-//     });
-//   });
-// }
+                count++;
+        });
+        return acc;     
+      }, "")
+    : `<tr>
+          <td colspan="5" class="text-center">No tadi forms available</td>
+       </tr>`;
+
+  $("tbody").html(tableRows);
+
+  result.filter((value, index) => {
+    const tadiHandler = `#tadiModalHandler${index}`;  
+    $(document).on('click', tadiHandler, function () {
+      displayModal(value, index);
+    });
+  });
+}
 
 
 function convert12HourFormat(time) {
@@ -94,8 +103,6 @@ function displayModal(value) {
 }
 
 function UPDATE_TADI_STATUS(status, id){
-  
-
   $.ajax({
     type: "POST",
     url: "controller/index-update.php",
@@ -106,7 +113,6 @@ function UPDATE_TADI_STATUS(status, id){
     },
     dataType: "json",
     success: function (result) {
-
       if(result.status == 1){
         alert(result.message);
         $.ajax({
@@ -117,7 +123,6 @@ function UPDATE_TADI_STATUS(status, id){
           },
           dataType: "json",
           success: function (result) {
-            
             displayTadiTable(result);
           },
         });
@@ -131,61 +136,3 @@ function UPDATE_TADI_STATUS(status, id){
 
 }
 
-function displaySubjectTable(result) {
-  var count = 1;
-  const tableRows = result.length
-    ? result.reduce((acc, value, index) => {
-        $.each([value], function (key, item) {
-          
-          acc += `
-          
-                  <tr key="${item.subj_id}">
-                      <td>${count}</td>
-                      <td>${item.subj_code}</td>
-                      <td>${item.subj_desc}</td>
-                      <td>${
-                        item.prof_name ? item.prof_name : "No instructor"
-                      }</td>
-                      <td> ${item.tadi_date ? new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) : "Date Not Available"}</td>
-
-                      <td>${
-                        item.schltadi_isconfirm
-                          ? item.schltadi_isconfirm
-                          : "Pending"
-                      }</td>
-                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
-                     } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
-                  </tr>
-                `;
-                count++;
-        });
-        return acc;
-      }, "")
-    : "";
-
-  console.log("result =>", result);
-
-  $("tbody").html(tableRows);
-
-  result.filter((value, index) => {
-    const tadiHandler = `#tadiModalHandler${index}`;
-    $(document).on("click", tadiHandler, function () {
-      displayTadi(value, index);
-    });
-  });
-}
-function GET_SUBJECTLIST() {
-  $.ajax({
-    type: "GET",
-    url: "controller/index-info.php",
-    data: {
-      type: "GET_SUBJECT_LIST",
-    },
-    dataType: "json",
-    success: function (result) {
-      displaySubjectTable(result);
-     
-    },
-  });
-}
-s

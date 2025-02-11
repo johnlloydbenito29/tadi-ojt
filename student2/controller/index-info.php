@@ -44,8 +44,7 @@ include('../configuration/connection-config.php');
                         
                 WHERE 	
                     `schl_tadi`.`schltadi_isactive` = 1 AND             
-                    `schl_tadi`.`schltadi_status` = 1 AND 
-                    `schl_tadi`.`schltadi_isconfirm` = 0";
+                    `schl_tadi`.`schltadi_status` = 1";
 
                     $rreg = $dbPortal->query($qry);
                     $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
