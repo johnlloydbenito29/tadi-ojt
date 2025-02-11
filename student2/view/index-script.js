@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    GET_TADILIST();
+   // GET_TADILIST();
 
 
     $('#status_disapprove').click(function(e){
@@ -16,4 +16,6 @@ $(document).ready(function(){
 
         UPDATE_TADI_STATUS(1, tadi_id);  
     })
+
+    GET_SUBJECTLIST();    
 })
