@@ -84,26 +84,47 @@ if($_GET['type'] == 'GET_SUBJECT_LIST'){
     $PRDID = $_SESSION['PRDID'];
     $SUBACT = $_SESSION['SUBACT'];
 
-    $qry = "   SELECT 	
-                            `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID` `subj_id`,
-                            `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
-                            `schl_acad_subj`.`SchlAcadSubj_desc` `subj_desc`,
-                            `schl_enr_subj_off`.`SchlAcadSec_ID` `subj_sec_id`,
-                            `schl_acad_sec`.`SchlAcadSec_NAME` `subj_sec_name`,
-                            `schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` `subj_act`
-                            
-                    FROM 	`schoolenrollmentsubjectoffered` `schl_enr_subj_off`
-                    LEFT JOIN `schoolacademicsubject` `schl_acad_subj`
-                            ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
-
-                    LEFT JOIN `schoolacademicsection` `schl_acad_sec` 
-                ON `schl_enr_subj_off`.`SchlAcadSec_ID` = `schl_acad_sec`.`SchlAcadSecSms_ID`
-
-                    WHERE 	`schl_enr_subj_off`.`SchlAcadLvl_ID` =  $LVLID AND 
-                            `schl_enr_subj_off`.`SchlAcadYr_ID`  = $YRID AND 
-                            `schl_enr_subj_off`.`SchlAcadPrd_ID` =  $PRDID AND 
-                            `schl_enr_subj_off`.`SchlProf_ID` LIKE '%$USERID%' AND
-                            `schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1
+    $qry = "   SELECT 
+    
+    `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID` `subj_id`,
+    `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
+    `schl_acad_subj`.`SchlAcadSubj_desc` `subj_desc`,
+    `schl_enr_subj_off`.`SchlAcadSec_ID` `subj_sec_id`,
+    `schl_acad_sec`.`SchlAcadSec_NAME`  `subj_sec_name`,
+    `schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` `subj_act`,
+    (
+        SELECT 
+            CONCAT(
+                `SchlEnrollRegStudInfo_FIRST_NAME`,' ',
+                `SchlEnrollRegStudInfo_MIDDLE_NAME`,' ',
+                `SchlEnrollRegStudInfo_LAST_NAME`
+            )
+        FROM
+            `schooltadi` AS schl_td
+        JOIN
+            `schoolstudent` AS schl_stud ON schl_td.`schlstud_id` = schl_stud.`SchlStudSms_ID`
+        JOIN
+            `schoolenrollmentregistration` AS schl_enr_reg ON schl_stud.`SchlEnrollRegColl_ID` = schl_enr_reg .`SchlEnrollRegSms_ID`
+        JOIN
+            `schoolenrollmentregistrationstudentinformation` AS schl_reg_stud ON schl_enr_reg .`SchlEnrollRegSms_ID` = schl_reg_stud.`SchlEnrollReg_ID`
+        WHERE
+            schl_td.`schlenrollsubjoff_id` = `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID`
+        ORDER BY
+            schl_stud.`SchlStudSms_ID`  
+        LIMIT 1
+    ) AS stud_name
+FROM
+    `schoolenrollmentsubjectoffered` AS `schl_enr_subj_off`
+LEFT JOIN
+    `schoolacademicsubject` AS `schl_acad_subj` ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
+LEFT JOIN
+    `schoolacademicsection` AS `schl_acad_sec` ON `schl_enr_subj_off`.`SchlAcadSec_ID` = `schl_acad_sec`.`SchlAcadSecSms_ID`
+WHERE
+    `schl_enr_subj_off`.`SchlAcadLvl_ID` = 2
+    AND `schl_enr_subj_off`.`SchlAcadYr_ID` = 16
+    AND `schl_enr_subj_off`.`SchlAcadPrd_ID` = 5
+    AND `schl_enr_subj_off`.`SchlProf_ID` = 96
+    AND `schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1    
                 
                         
 

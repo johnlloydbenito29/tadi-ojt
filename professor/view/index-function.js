@@ -130,19 +130,21 @@ function GET_ACADEMICLEVEL() {
   });
 }
 
-function GET_SUBJECTLIST(result) {
-  $.ajax({
-    type: "GET",
-    url: "controller/index-info.php",
-    data: {
-      type: "GET_STUDENT_LIST",
-    },
-    dataType: "json",
-    success: function (result) {
+// function GET_SUBJECTLIST(result) {
+//   $.ajax({
+//     type: "GET",
+//     url: "controller/index-info.php",
+//     data: {
+//       type: "GET_STUDENT_LIST",
+//     },
+//     dataType: "json",
+//     success: function (result) {
+   
+//       console.log("student",result); 
     
-    },
-  });
-}
+//     },
+//   });
+// }
 
 function GET_STUDENTLIST() {
   $.ajax({
@@ -154,7 +156,7 @@ function GET_STUDENTLIST() {
     dataType: "json",
     success: function (result) {
       DISPLAY_PROFESSOR_SUBJECT(result);
-      GET_SUBJECTLIST();
+      // GET_SUBJECTLIST();
 
     },
   });
@@ -236,7 +238,7 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
       }, "")
     : "";
 
-  console.log("result =>", result);
+    console.log(result); 
 
   $("tbody").html(tableRows);
 
@@ -246,6 +248,8 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
     console.log("tadiHandler =>", tadiHandler);
     $(document).on("click", tadiHandler, function () {
       displayModal(value, index);
+      // GET_SUBJECTLIST();
+
     });
   });
 }
@@ -359,6 +363,7 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
 function displayModal(value) {
 
   console.log('value=> ', value);
+
   let formattedDate = new Date(value.tadi_date).toLocaleDateString("en-PH", {
     month: "long",
     day: "numeric",
@@ -367,8 +372,9 @@ function displayModal(value) {
   
 
   $("#tadi_subj_name").text(value.subj_desc);
-  $("#courseCode").text(value.subj_sec_name);
+  $("#courseCode").text(value.subj_code);
   $("#student_name").text(value.stud_name);
+  // $("#student_name").text(value.stud_name);
   // $("#tadi_date").text(formattedDate);
   // $("#prof_name").text(value.prof_name);
   // $("#prof_name").text(value.prof_name);
