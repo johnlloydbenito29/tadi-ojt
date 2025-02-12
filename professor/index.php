@@ -117,7 +117,7 @@ echo var_dump($_SESSION);
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                             <div class="subject-info">
-                                <h5 class="modal-title" id="tadiModalLabel1">Physical Education</h5>
+                                <h5 class="modal-title" id="tadi_subj_name">Physical-Education</h5>
                                 <p class="subject-details mb-0" id="courseCode">Course Code: PE_02</p>
                             </div>
                         </div>
@@ -144,18 +144,6 @@ echo var_dump($_SESSION);
                                 <option value="4">4th Year</option> -->
                                 </select>
                             </div>
-
-                            <div class="col-md">
-                                <select class="form-select" id="period" name="period">
-                                <option selected>Period</option>
-                                <option value="1">1st Sem</option>
-                                <option value="2">2nd Sem</option>
-                                <option value="3">Mid Year</option>
-                                </select>
-                            </div>
-                                <div class="col-md">
-                                <input type="text" class="form-control" id="studentName" name="studentName" placeholder="Student Name">
-                            </div>
                             <div class="col-md">
                                 <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
                                 </div>
@@ -166,9 +154,8 @@ echo var_dump($_SESSION);
                                 <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 <div class="d-flex justify-content-between w-100">
-                                <div id = "studentName">Louise Mae Lopez</div>
+                                <div id = "student_name">Louise Mae Lopez</div>
                                     <div class="text-end">
-                                    <span class="badge bg-primary me-2" id="studentSection">BSIT 4A</span>
                                     <span class="badge me-2" style="color: black;">Approved by: Jane Doe</span>
                                     <span class="badge me-2" style="color: black;">Feb 2 2025</span>
 
