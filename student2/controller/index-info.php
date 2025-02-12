@@ -44,7 +44,10 @@ include('../configuration/connection-config.php');
                         
                 WHERE 	
                     `schl_tadi`.`schltadi_isactive` = 1 AND             
-                    `schl_tadi`.`schltadi_status` = 1";
+                    `schl_tadi`.`schltadi_status` = 1 AND
+                    `schl_tadi`.`schltadi_isconfirm` = 0
+                    
+                order by  `schl_tadi`.`schltadi_date` desc";
 
                     $rreg = $dbPortal->query($qry);
                     $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
@@ -102,6 +105,7 @@ include('../configuration/connection-config.php');
                             `schl_enr_subj_off`.`SchlAcadPrd_ID` =  $PRDID AND 
                             `schl_enr_subj_off`.`SchlAcadYrLvl_ID` = $YRLVLID  AND 
                             `schl_enr_subj_off`.`SchlAcadCrses_ID` = $CRSEID
+
     
             
     

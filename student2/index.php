@@ -49,7 +49,6 @@ echo var_dump($_SESSION);
                                         <th scope="col">Description</th>
                                         <th scope="col">Instructor</th>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
