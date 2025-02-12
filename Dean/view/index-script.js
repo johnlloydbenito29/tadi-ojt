@@ -176,6 +176,51 @@ $(document).ready(function () {
 
     })
 
+    $("#search_button").on('click', function () { 
+
+        var lvlid = $('#academiclevel').val();
+        var prdid = $('#academicperiod').val();
+        var yrid = $('#acadyear').val();
+
+        $.ajax({ // FOR GETTING ACADEMIC YEAR
+            type: "GET",
+            url: "controller/index-info.php",
+            data: {
+                type: "GET_SUBJ",
+                lvl_id: lvlid,
+                prd_id: prdid,
+                yr_id: yrid,
+            },
+            dataType: "json",
+            success: function (result) {
+    
+
+                const tableRows = result.length
+                ? result
+                  .reduce((acc, value, index) => {
+                    $.each([value], function (key, item) {
+                      acc += `
+                              <tr key="${item.subj_id}">
+                                  <td>${item.subj_code}</td>
+                                  <td>${item.subj_desc}</td>
+                                  <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                                  <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+                        } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
+                              </tr>
+                            `;
+                    });
+                    return acc;
+                  }, "")
+                : "";
+            
+              $("tbody").html(tableRows);
+        
+            },
+        });
+
+    })
+
+
     
     // //GET ACADEMIC YEAR LEVEL
     // $.ajax({

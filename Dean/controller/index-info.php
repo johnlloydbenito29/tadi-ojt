@@ -91,7 +91,7 @@ if ($_GET['type'] == 'GET_ACADEMIC_YEAR_LEVEL') {
 						`SchlAcadLvl_ID` = $lvlid ";
 
 	$rreg = $dbPortal->query($qry);
-	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC); 
+	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
 	$dbPortal->close();
 }
 
@@ -101,7 +101,7 @@ if ($_GET['type'] == 'GET_ACADEMIC_PERIOD') {
 
 	$lvlid = $_GET['lvl_id'];
 
-						$qry = "    SELECT 	`schl_acad_prd`.`SchlAcadPrdSms_ID` `acad_prd_id`,
+	$qry = "    SELECT 	`schl_acad_prd`.`SchlAcadPrdSms_ID` `acad_prd_id`,
 											`schl_acad_prd`.`SchlAcadPrd_NAME` `acad_prd_name`
 
 					                FROM 	`schoolacademicyearperiod` `schl_acad_yr_prd`
@@ -144,46 +144,98 @@ if ($_GET['type'] == 'GET_ACAD_YEAR') {
 
 
 
+//////GET SUB LIST
 
 
+if ($_GET['type'] == 'GET_SUBJ') {
 
 
-if($_GET['type'] == 'GET_SUBJECT_LIST'){
+	$lvlid = $_GET['lvl_id'];
+	$prdid = $_GET['prd_id'];
+	$yrid = $_GET['yr_id'];
 
-    $USERID = $_SESSION['USERID'];
-    $LVLID = $_SESSION['LVLID'];
-    $YRID = $_SESSION['YRID'];
-    $PRDID = $_SESSION['PRDID'];
+	$qry = "  SELECT
+					schl_enr_subj_off.`SchlEnrollSubjOffSms_ID` subj_id,
+					schl_acad_subj.`SchlAcadSubj_CODE` subj_code,
+					schl_acad_subj.`SchlAcadSubj_desc` subj_desc,
+					schl_enr_subj_off.`SchlEnrollSubjOff_ISACTIVE` subj_act,
+					(
+						SELECT
+							CONCAT(SchlEmp_FNAME,' ',SchlEmp_LNAME)
+													FROM
+														schooltadi AS schl_td
+													JOIN
+														schoolemployee AS schl_emp ON schl_td.`schlprof_id` = schl_emp.`SchlEmpSms_ID`
+													WHERE
+														schl_td.`schlenrollsubjoff_id` = schl_enr_subj_off.`SchlEnrollSubjOffSms_ID`
+													ORDER BY
+														schl_emp.`SchlEmpSms_ID`  
+													LIMIT 1
+												) AS schl_emp
+				FROM	schoolenrollmentsubjectoffered AS schl_enr_subj_off
+					LEFT JOIN schoolacademicsubject AS schl_acad_subj ON schl_enr_subj_off.`SchlAcadSubj_ID` = schl_acad_subj.`SchlAcadSubjSms_ID`
 
-    $qry = "   SELECT 	
-                        schl_enr_subj_off.`SchlEnrollSubjOffSms_ID` subj_id,
-                        schl_acad_subj.`SchlAcadSubj_CODE` subj_code,
-                        schl_acad_subj.`SchlAcadSubj_desc` subj_desc,
-                        schl_enr_subj_off.`SchlAcadSec_ID` subj_sec_id,
-                        schl_acad_sec.`SchlAcadSec_NAME` subj_sec_name
-                        
-                FROM 	schoolenrollmentsubjectoffered
-           schl_enr_subj_off
-                LEFT JOIN schoolacademicsubject
-schl_acad_subj
-                        ON schl_enr_subj_off.`SchlAcadSubj_ID` = schl_acad_subj.`SchlAcadSubjSms_ID`
-                 
-                 LEFT JOIN schoolacademicsection
-schl_acad_sec 
-                        
-                   
-                WHERE 	schl_enr_subj_off.`SchlAcadLvl_ID` =  $LVLID AND 
-                        schl_enr_subj_off.`SchlAcadYr_ID`  = $YRID AND 
-                        schl_enr_subj_off.`SchlAcadPrd_ID` =  $PRDID AND 
-                        schl_enr_subj_off.`SchlProf_ID` LIKE '%$USERID%' 
-
-
-                    
-";
+				WHERE
+						schl_enr_subj_off.`SchlAcadLvl_ID` = $lvlid AND 
+						schl_enr_subj_off.`SchlAcadYr_ID` = $yrid AND 
+						schl_enr_subj_off.`SchlAcadPrd_ID` = $prdid AND 
+						schl_enr_subj_off.`SchlEnrollSubjOff_ISACTIVE` = 1";
 
 	$rreg = $dbPortal->query($qry);
-	$fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
 	$dbPortal->close();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if($_GET['type'] == 'GET__SUBJECT'){
+
+//     $USERID = $_SESSION['USERID'];
+//     $LVLID = $_SESSION['LVLID'];
+//     $YRID = $_SESSION['YRID'];
+//     $PRDID = $_SESSION['PRDID'];
+
+//     $qry = "   SELECT 	
+//                         schl_enr_subj_off.`SchlEnrollSubjOffSms_ID` subj_id,
+//                         schl_acad_subj.`SchlAcadSubj_CODE` subj_code,
+//                         schl_acad_subj.`SchlAcadSubj_desc` subj_desc,
+//                         schl_enr_subj_off.`SchlAcadSec_ID` subj_sec_id,
+//                         schl_acad_sec.`SchlAcadSec_NAME` subj_sec_name
+
+//                 FROM 	schoolenrollmentsubjectoffered
+//                         schl_enr_subj_off
+//                 LEFT JOIN schoolacademicsubject
+//                           schl_acad_subj
+//                         ON schl_enr_subj_off.`SchlAcadSubj_ID` = schl_acad_subj.`SchlAcadSubjSms_ID`
+
+//                  LEFT JOIN schoolacademicsection
+//                            schl_acad_sec 
+
+
+//                 WHERE 	schl_enr_subj_off.`SchlAcadLvl_ID` =  $LVLID AND 
+//                         schl_enr_subj_off.`SchlAcadYr_ID`  = $YRID AND 
+//                         schl_enr_subj_off.`SchlAcadPrd_ID` =  $PRDID AND 
+//                         schl_enr_subj_off.`SchlProf_ID` LIKE '%$USERID%' 
+
+
+
+// ";
+
+// 	$rreg = $dbPortal->query($qry);
+// 	$fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+// 	$dbPortal->close();
+// }
 
 echo json_encode($fetch);
