@@ -274,6 +274,9 @@ function POST_TADI(formData) {
       try {
         const result = JSON.parse(response);
         if (result.success) {
+
+          console.log("result =>", result.data);
+
           const toast = new bootstrap.Toast($("#successToast")[0]);
           $("#toastMessage").text(result.message);
           toast.show();

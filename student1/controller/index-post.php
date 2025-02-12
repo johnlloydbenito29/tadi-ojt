@@ -89,6 +89,7 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
             $fetch['count'] = $count;
 
             $fetch['data'] = array(
+                'schltadi_id' => $dbPortal->insert_id,
                 'schltadi_mode' => $schltadi_mode,
                 'schltadi_type' => $schltadi_type,
                 'schltadi_date' => $schltadi_date,
@@ -113,3 +114,5 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
 }
 
 echo json_encode($fetch);
+
+
