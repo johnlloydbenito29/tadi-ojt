@@ -51,13 +51,13 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
 
         $sql = "INSERT INTO schooltadi 
                 (   `schltadi_mode`,
-                    `schltadi_type`,
+                    `schltadi_type`, 
                     `schltadi_date`,
                     `schltadi_timein`,
                     `schltadi_timeout`,
                     `schltadi_activity`,
                     `schltadi_isactive`,
-                    `schltadi_status`,
+                    `schltadi_status`, 
                     `schltadi_isconfirm`,
                     `schlstud_id`,
                     `schlacadlvl_id`,
@@ -65,23 +65,24 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
                     `schlprof_id`,
                     `schlenrollsubjoff_id`,
                     `schlacadprd_id`)
-                    VALUES 
-                    (
-                    '$schltadi_mode', 
-                    '$schltadi_type', 
-                    '$schltadi_date',
-                    '$schltadi_timein',
-                    '$schltadi_timeout',
-                    '$schltadi_activity',
-                    1, 
-                    1, 
-                    0, 
-                    $STUDID,
-                    $LVLID, 
-                    $YRID, 
-                    $prof_id,
-                    $subj_id,
-                    $PRDID)";
+                VALUES (?, ?, ?, ?, ?, ?, 1, 1, 0, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $dbPortal->prepare($sql);
+        $stmt->bind_param(
+            "ssssssiiiiiii",
+            $schltadi_mode,
+            $schltadi_type,
+            $schltadi_date,
+            $schltadi_timein,
+            $schltadi_timeout,
+            $schltadi_activity,
+            $STUDID,
+            $LVLID,
+            $YRID,
+            $prof_id,
+            $subj_id,
+            $PRDID
+        );
 
         if ($dbPortal->query($sql) === TRUE) {
             $fetch['success'] = true;
@@ -114,5 +115,3 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
 }
 
 echo json_encode($fetch);
-
-

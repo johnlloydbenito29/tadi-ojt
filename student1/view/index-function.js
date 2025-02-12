@@ -122,8 +122,11 @@ function GET_ACADEMICLEVEL() {
         const endTime = $(this).val();
 
         if (startTime && endTime && endTime <= startTime) {
-          alert("Class end time must be later than start time");
+          $(this).addClass("is-invalid");
+          $(this).next(".invalid-feedback").text("Class end time must be later than start time");
           $(this).val("");
+        } else {
+          $(this).removeClass("is-invalid");
         }
       });
     },
@@ -182,7 +185,24 @@ function handleTadiSubmission() {
 
     if (startTime && endTime && endTime <= startTime) {
       currentModal.find("#classEndDateTime").addClass("is-invalid");
-      alert("Class end time must be later than start time");
+      currentModal.find("#classEndDateTime").siblings(".invalid-feedback").text("Class end time must be later than start time");
+      isValid = false;
+    }
+
+    // Validate comments field for special characters and length
+    const comments = currentModal.find("#comments").val();
+    const specialCharsRegex = /[<>{}[\]\\\/;()&$#@!%^*+=|`]/; // Regex for restricted special characters
+
+    if (specialCharsRegex.test(comments)) {
+      currentModal.find("#comments").addClass("is-invalid");
+      currentModal.find("#comments").siblings(".invalid-feedback").text("Comments cannot contain special characters like < > { } [ ] \\ /");
+      isValid = false;
+    }
+
+    // Check minimum comment length 
+    if (comments.length < 50) {
+      currentModal.find("#comments").addClass("is-invalid");
+      currentModal.find("#comments").siblings(".invalid-feedback").text("Comments must be at least 50 characters long");
       isValid = false;
     }
 
@@ -267,7 +287,7 @@ function POST_TADI(formData) {
     url: "controller/index-post.php",
     type: "POST",
     data: {
-      type: "SUBMIT_TADI", 
+      type: "SUBMIT_TADI",
       form_data: formData,
     },
     success: function (response) {
@@ -299,10 +319,9 @@ function POST_TADI(formData) {
           }
 
         } else {
-          // Show error toast
-          const errorModal = new bootstrap.Modal($("#errorModal")[0]);
-          $("#errorModalMessage").text(result.message);
-          errorModal.show();
+          const errorAlert = $("#errorAlert");
+          $("#errorAlertMessage").text(result.message);
+          errorAlert.removeClass("d-none");
         }
       } catch (e) {
         console.log(e);

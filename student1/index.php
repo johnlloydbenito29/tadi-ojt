@@ -125,31 +125,22 @@ echo var_dump($_SESSION);
                             <textarea class="form-control" name="comments" id="comments" rows="5" placeholder="Enter any additional comments or notes here..." required></textarea>
                             <div class="invalid-feedback">Please enter remarks</div>
                         </div>
+
+                        <div class="alert alert-danger alert-dismissible fade show d-none" id="errorAlert" role="alert">
+                            <strong>Error!</strong> <span id="errorAlertMessage"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     </div>
+
+                    <!-- Error Alert -->
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn submitTadi" id="confirmBtn" style="background-color: #181a46; color: white;">Submit</button>
                     </div>
                     </form>
                 </div>
-
-            <!-- Error Modal -->
-            <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-danger text-white">
-                            <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p id="errorModalMessage"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
 
@@ -158,7 +149,7 @@ echo var_dump($_SESSION);
             <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
                 <div class="toast-header bg-success text-white">
                     <strong class="me-auto">Success</strong>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>    
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
                     <span id="toastMessage"></span>
