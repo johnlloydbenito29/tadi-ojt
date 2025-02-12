@@ -48,34 +48,28 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
             exit;
         }
 
+        $stmt = $dbPortal->prepare("INSERT INTO schooltadi 
+                (schltadi_mode, schltadi_type, schltadi_date, schltadi_timein, 
+                schltadi_timeout, schltadi_activity, schltadi_isactive, schltadi_status,
+                schltadi_isconfirm, schlstud_id, schlacadlvl_id, schlacadyr_id,
+                schlprof_id, schlenrollsubjoff_id, schlacadprd_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $sql = "INSERT INTO schooltadi 
-                (   `schltadi_mode`,
-                    `schltadi_type`, 
-                    `schltadi_date`,
-                    `schltadi_timein`,
-                    `schltadi_timeout`,
-                    `schltadi_activity`,
-                    `schltadi_isactive`,
-                    `schltadi_status`, 
-                    `schltadi_isconfirm`,
-                    `schlstud_id`,
-                    `schlacadlvl_id`,
-                    `schlacadyr_id`,
-                    `schlprof_id`,
-                    `schlenrollsubjoff_id`,
-                    `schlacadprd_id`)
-                VALUES (?, ?, ?, ?, ?, ?, 1, 1, 0, ?, ?, ?, ?, ?, ?)";
+        $isactive = 1;
+        $status = 1;
+        $isconfirm = 0;
 
-        $stmt = $dbPortal->prepare($sql);
         $stmt->bind_param(
-            "ssssssiiiiiii",
+            "ssssssiiiiiiiii",
             $schltadi_mode,
             $schltadi_type,
             $schltadi_date,
             $schltadi_timein,
             $schltadi_timeout,
             $schltadi_activity,
+            $isactive,
+            $status,
+            $isconfirm,
             $STUDID,
             $LVLID,
             $YRID,
@@ -84,7 +78,7 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
             $PRDID
         );
 
-        if ($dbPortal->query($sql) === TRUE) {
+        if ($stmt->execute()) {
             $fetch['success'] = true;
             $fetch['message'] = "TADI submitted successfully";
             $fetch['count'] = $count;
@@ -105,8 +99,10 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
                 'schlacadprd_id' => $PRDID
             );
         } else {
-            throw new Exception("Error inserting record: " . $dbPortal->error);
+            throw new Exception("Error inserting record: " . $stmt->error);
         }
+
+        $stmt->close();
     } catch (Exception $e) {
         $fetch['error'] = $e->getMessage();
     } finally {

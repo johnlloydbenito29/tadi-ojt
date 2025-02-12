@@ -129,6 +129,11 @@ function GET_ACADEMICLEVEL() {
           $(this).removeClass("is-invalid");
         }
       });
+
+      // Reset form when modal is closed
+      $('#modal').on('hidden.bs.modal', function () {
+        $('#tadiForm')[0].reset();
+      });
     },
   });
 }
@@ -229,14 +234,8 @@ function displaySubjectTable(result) {
                   <tr key="${item.subj_id}">
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
-                      <td>${item.prof_name ? item.prof_name : "No instructor"
-          }</td>
-                      <td>${item.schltadi_isconfirm
-            ? item.schltadi_isconfirm
-            : "Pending"
-          }</td>
-                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
-          } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
+                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"} style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
                   </tr>
                 `;
       });
@@ -293,6 +292,7 @@ function POST_TADI(formData) {
     success: function (response) {
       try {
         const result = JSON.parse(response);
+
         if (result.success) {
 
           console.log("result =>", result.data);
@@ -301,18 +301,11 @@ function POST_TADI(formData) {
           $("#toastMessage").text(result.message);
           toast.show();
 
-          setTimeout(() => {
-            toast.hide();
-          }, 3000);
-
-          // If count is less than 3, ask if they want to add more
           if (result.count <= 3 && result.count > 0) {
             if (confirm(`Would you like to submit another TADI? (${result.count}/3 submitted today)`)) {
-              // Reset form fields
               $('#tadiForm')[0].reset();
               $('#modal').modal('hide');
             } else {
-              // Reset form and close modal
               $('#tadiForm')[0].reset();
               $('#modal').modal('hide');
             }
