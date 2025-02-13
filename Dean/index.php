@@ -71,10 +71,10 @@ echo var_dump($_SESSION);
                 </div>
 
                 <div class="col-md">
-                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
+                    <select class="form-select" id="type" name="type">
                         <option value=>Type</option>
-                        <option value="box-two">Instructor</option>
-                        <option value="card-body">Subject</option>
+                        <option value="instructor">Instructor</option>
+                        <option value="subject">Subject</option>
                         <!-- <option value="1">2023-2024</option>
                         <option value="2">2024-2025</option> -->
                     </select>
@@ -88,11 +88,37 @@ echo var_dump($_SESSION);
             </div>
         </div>
 
-
         <div class="mt-4 ps-3 pe-3">
-            <div class="card shadow-sm id=divOne">
-                <div class="card-body">
-                    <div class="box box-two" style="display:none;">
+            <div class="card shadow-sm">
+                <div class="card-body box box-one">
+                    <h4 class="card-title mb-3">Subject</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="line-height: 2.5;">
+                            <thead style="background-color: #181a46; color: white;">
+                                <tr>
+                                    <th scope="col">Subject Code</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Schedule</th>
+                                    <th scope="col">Instructor/Professor</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" class="text-center">No data available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-4 ps-3 pe-3 box">
+            <div class="card shadow-sm" id="divOne">
+                <div class="card-body" style="display:none;">
+                    <div>
                         <h4 class="card-title mb-3">Instructor</h4>
                         <div class="table-responsive">
                             <table class="table table-hover" style="line-height: 2.5;">
@@ -145,97 +171,95 @@ echo var_dump($_SESSION);
                             <div class="card-body">
                                 <div class="box box-two" style="display:none;">
                                     <h4 class="card-title mb-3">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover" style="line-height: 2.5;">
-                                            <thead style="background-color: #181a46; color: white;">
-                                               
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col">John Artemson De Guzman</td>
-                                                    <td class="col-2"><button class="btn btn-sm w-100"
-                                                            style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                            data-bs-target="#tadiModal1">VIEW TADI</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rendel Francisco</td>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" style="line-height: 2.5;">
+                                                <thead style="background-color: #181a46; color: white;">
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="col">John Artemson De Guzman</td>
+                                                        <td class="col-2"><button class="btn btn-sm w-100"
+                                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
+                                                                data-bs-target="#tadiModal1">VIEW TADI</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Rendel Francisco</td>
+                                                        <td><button class="btn btn-sm w-100"
+                                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
+                                                                data-bs-target="#tadiModal2">VIEW TADI</button></td>
+                                                    </tr>
+                                                    <td>Karl Michael Flores</td>
                                                     <td><button class="btn btn-sm w-100"
                                                             style="background-color: #181a46; color: white;" data-bs-toggle="modal"
                                                             data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                                </tr>
-                                                <td>Karl Michael Flores</td>
-                                                <td><button class="btn btn-sm w-100"
-                                                        style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                        data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true"
+            data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between align-items-start"
+                        style="background-color: #181a46; color: white;">
+                        <div class="subject-info">
+                            <h5 class="modal-title" id="tadiModalLabel1">Subject Tadi's</h5>
+                            <p class="subject-details mb-0"></p>
+                        </div>
+                        <button type="button" style="background-color: rgb(255, 255, 255);" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="mt-4 ps-3 pe-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="box box-two" style="display:none;">
+                                    <h4 class="card-title mb-3">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" style="line-height: 2.5;">
+                                                <thead style="background-color: #181a46; color: white;">
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="col">John Artemson De Guzman</td>
+                                                        <td class="col-2"><button class="btn btn-sm w-100"
+                                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
+                                                                data-bs-target="#tadiModal1">VIEW TADI</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Rendel Francisco</td>
+                                                        <td><button class="btn btn-sm w-100"
+                                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
+                                                                data-bs-target="#tadiModal2">VIEW TADI</button></td>
+                                                    </tr>
+                                                    <td>Karl Michael Flores</td>
+                                                    <td><button class="btn btn-sm w-100"
+                                                            style="background-color: #181a46; color: white;" data-bs-toggle="modal"
+                                                            data-bs-target="#tadiModal2">VIEW TADI</button></td>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
                 </div>
             </div>
+
         </div>
 
 
-
-        <div class="mt-4 ps-3 pe-3">
-            <div class="card shadow-sm">
-                <div class="card-body box" style="display:none;">
-
-                    <h4 class="card-title mb-3">Subject</h4>
-                    <div class="table-responsive">
-                        <table class="table table-hover" style="line-height: 2.5;">
-                            <thead style="background-color: #181a46; color: white;">
-                                <tr>
-                                    <th scope="col">Subject Code</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Schedule</th>
-                                    <th scope="col">Instructor/Professor</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>OOP_1</td>
-                                    <td>Object Oriented Programming</td>
-                                    <td>Monday 1:00-4:00PM</td>
-                                    <td>Jonah Pasis</td>
-                                    <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                </tr>
-                                <tr>
-                                    <td>DSC_2</td>
-                                    <td>Discrete 2</td>
-                                    <td>Saturday 8:00-10:00AM</td>
-                                    <td>Louise Mae Lopez</td>
-                                    <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                </tr>
-                                <td>PE_02</td>
-                                <td>Swimming</td>
-                                <td>Monday 8:00-11:00AM</td>
-                                <td>Ayleen Samonte</td>
-                                <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                </tr>
-                                <td>COMPORG</td>
-                                <td>Computer Organization</td>
-                                <td>Thursday 8:30-9:00AM</td>
-                                <td>Alvin Certeza</td>
-                                <td><button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" data-bs-toggle="modal" data-bs-target="#tadiModal1">VIEW TADI</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- TADI Modals -->
         <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
@@ -364,12 +388,16 @@ echo var_dump($_SESSION);
 
     <script>
         $(document).ready(function() {
-            $("select").change(function() {
+            $("#type").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue) {
-                        $(".box").not("." + optionValue).hide();
-                        $("." + optionValue).show();
+                        $(".box").hide();
+                        if (optionValue === "instructor") {
+                            $(".box-two").show();
+                        } else if (optionValue === "subject") {
+                            $(".box-one").show();
+                        }
                     } else {
                         $(".box").hide(); // Hide all if no option is selected
                     }
@@ -381,7 +409,6 @@ echo var_dump($_SESSION);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="script.js"></script>
     <script src="view/index-script.js"></script>
     <script src="view/index-function.js"></script>
 

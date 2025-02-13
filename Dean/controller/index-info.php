@@ -144,10 +144,10 @@ if ($_GET['type'] == 'GET_ACAD_YEAR') {
 
 
 
-//////GET SUB LIST
+//////GET INSTRUCTOR LIST
 
 
-if ($_GET['type'] == 'GET_SUBJ') {
+if ($_GET['type'] == 'GET_PROF') {
 
 
 	$lvlid = $_GET['lvl_id'];
@@ -185,6 +185,58 @@ if ($_GET['type'] == 'GET_SUBJ') {
 	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
 	$dbPortal->close();
 }
+
+
+
+
+
+///////GET SUBJECT LIST 
+
+if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
+
+	$lvlid = $_GET['lvl_id'];
+	$prdid = $_GET['prd_id'];
+	$yrid = $_GET['yr_id'];
+	$yrlvlid = $_GET['yrlvl_id'];
+
+	$qry = "  SELECT  `schl_acad_sec`.`SchlAcadSec_NAME`  `subj_sec_name`,
+								`schl_enr_subj_off`.`SchlProf_ID`,
+								CONCAT(emp.SchlEmp_LNAME, ',', emp.SchlEmp_FNAME, ' ', emp.SchlEmp_MNAME) AS prof_name,
+								`schl_acad_subj`.`SchlAcadSubj_desc` `subj_desc`,
+								`schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
+								`schl_enr_subj_off`.`SchlEnrollSubjOff_SCHEDULE_2` subj_sched
+								
+
+								FROM `schoolenrollmentsubjectoffered` `schl_enr_subj_off`
+
+								LEFT JOIN `schoolacademicsubject` `schl_acad_subj`
+								ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
+
+								LEFT JOIN `schoolacademiccourses` `schl_acad_crses`
+								ON `schl_enr_subj_off`.`SchlAcadCrses_ID` = `schl_acad_crses`.`SchlAcadCrseSms_ID`
+
+								LEFT JOIN `schooldepartment` `schl_dept`
+								ON `schl_acad_crses`.`SchlDept_ID` = `schl_dept`.`SchlDeptSms_ID`
+
+								LEFT JOIN`schoolacademicsection` AS `schl_acad_sec`
+								ON `schl_enr_subj_off`.`SchlAcadSec_ID` = `schl_acad_sec`.`SchlAcadSecSms_ID`
+
+
+								LEFT JOIN schoolemployee AS emp
+								ON `schl_enr_subj_off`. `SchlProf_ID`= emp.`SchlEmpSms_ID`
+								WHERE
+								`schl_enr_subj_off`.`SchlAcadLvl_ID` = $lvlid  AND -- academic level
+								`schl_enr_subj_off`.`SchlAcadYr_ID`  = $yrid AND  -- year
+								`schl_enr_subj_off`.`SchlAcadPrd_ID` = $prdid  AND -- period
+								`schl_enr_subj_off`.`SchlAcadYrLvl_ID` = $yrlvlid AND -- year level
+								`schl_dept`.`SchlDeptSms_ID` = 6 and
+								`schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
+
+	$rreg = $dbPortal->query($qry);
+	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
+	$dbPortal->close();
+}
+
 
 
 
