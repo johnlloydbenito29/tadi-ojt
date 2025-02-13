@@ -89,7 +89,7 @@ echo var_dump($_SESSION);
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="prof_dashboard_table">
                                     <tr>
                                         <td>OOP_1</td>
                                         <td>Object Oriented Programming</td>
@@ -117,8 +117,9 @@ echo var_dump($_SESSION);
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
                             <div class="subject-info">
-                                <h5 class="modal-title" id="tadi_subj_name">Physical-Education</h5>
-                                <p class="subject-details mb-0" id="courseCode">Course Code: PE_02</p>
+                                <h5 class="modal-title" id="tadi_subj_name">Physical-Education</h5>   
+                                <!-- <p class="subject-details mb-0" id="courseCode">Course Code: PE_02</p> -->
+                                <p class="subject-details mb-0" id="section_name">Course Code: PE_02</p>
                             </div>
                         </div>
                         <div class="modal-body">
@@ -126,7 +127,7 @@ echo var_dump($_SESSION);
 
                             <div class="col-md">
                                 <select class="form-select" id="Section" name="Section">
-                                <option selected>Section</option>
+                                <option selected>Date</option>
                                 <option value="1">#</option>
                                 <option value="2">#</option>
                                 <option value="3">#</option>
@@ -134,22 +135,34 @@ echo var_dump($_SESSION);
                             </div>
 
                             <div class="col-md">
-
-                                <select class="form-select" id="YearLevel" name="YearLevel">
-
-                                <option selected>Year Level</option>
-                                <!-- <option value="1">1st Year</option>
-                                <option value="2">2nd Year</option>
-                                <option value="3">3rd Year</option>
-                                <option value="4">4th Year</option> -->
-                                </select>
-                            </div>
-                            <div class="col-md">
                                 <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
                                 </div>
                             </div>
+             <!-- SUBJECT MODAL -->
+            
+                            <div class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="line-height: 2.5;">
+                                <thead style="background-color: #181a46; color: white;">
+                                    <tr>
+                                            <th scope="col">#</th>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col"></th>   
+                                    </tr>
+                                </thead>
+                                <tbody class="prof_section_table">
+        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
                         
-                            <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                            <!-- <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -164,7 +177,7 @@ echo var_dump($_SESSION);
                                 </div>
                                 </button>
                                 </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <!-- <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -224,13 +237,13 @@ echo var_dump($_SESSION);
                                     </div>
                                 </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             
                             </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

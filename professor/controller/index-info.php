@@ -75,6 +75,7 @@
       $dbPortal->close();
 
     }
+    
 
 if($_GET['type'] == 'GET_SUBJECT_LIST'){
 
@@ -98,7 +99,9 @@ if($_GET['type'] == 'GET_SUBJECT_LIST'){
                 `SchlEnrollRegStudInfo_FIRST_NAME`,' ',
                 `SchlEnrollRegStudInfo_MIDDLE_NAME`,' ',
                 `SchlEnrollRegStudInfo_LAST_NAME`
+                
             )
+
         FROM
             `schooltadi` AS schl_td
         JOIN
@@ -149,7 +152,56 @@ if($_GET['type'] == 'GET_STUDENT_LIST'){
                     `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_LAST_NAME`) `stud_name`,
                     
                     `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
-                    `schl_acad_subj`.`SchlAcadSubj_DESC` `subj_desc`,
+                    `schl_acad_subj`.`SchlAcadSubj_DESC` `subj_desc`,s
+                    `schl_acad_sec`.`SchlAcadSec_NAME` `subj_sec_name`
+                        
+                FROM 	`schooltadi` `schl_tadi`
+                LEFT JOIN `schoolstudent` `schl_stud`
+                    ON `schl_tadi`.`schlstud_id` = `schl_stud`.`SchlStudSms_ID`
+                    
+                LEFT JOIN `schoolenrollmentregistration` `schl_enr_reg`
+                    ON `schl_stud`.`SchlEnrollRegColl_ID` =  `schl_enr_reg`.`SchlEnrollRegSms_ID` 
+                    
+                LEFT JOIN `schoolenrollmentregistrationstudentinformation` `schl_enr_reg_stud_info`
+                    ON `schl_enr_reg`.`SchlEnrollRegSms_ID` = `schl_enr_reg_stud_info`.`SchlEnrollReg_ID` 
+                    
+                LEFT JOIN `schoolenrollmentsubjectoffered` `schl_enr_subj_off`
+                    ON `schl_tadi`.`schlenrollsubjoff_id` = `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID` 
+                    
+                LEFT JOIN `schoolacademicsubject` `schl_acad_subj`
+                    ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
+                    
+                LEFT JOIN `schoolacademicsection` `schl_acad_sec` 
+                    ON `schl_enr_subj_off`.`SchlAcadSec_ID` = `schl_acad_sec`.`SchlAcadSecSms_ID`
+                        
+
+                WHERE 	`schl_tadi`.`schlprof_id` = 96 AND 
+                `schl_tadi`.`schltadi_status` = 1 AND 
+                `schl_tadi`.`schltadi_isconfirm` = 1 
+                        
+
+
+                    
+";
+
+
+
+
+    $rreg = $dbPortal->query($qry);
+    $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+    $dbPortal->close();
+
+}
+
+if($_GET['type'] == 'GET_TADI_SUBJ_LIST'){
+    
+    $qry = "   SELECT 	
+                        CONCAT( `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_FIRST_NAME`, ' ', 
+                    `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_MIDDLE_NAME`, ' ', 
+                    `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_LAST_NAME`) `stud_name`,
+                    
+                    `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
+                    `schl_acad_subj`.`SchlAcadSubj_DESC` `subj_desc`,s
                     `schl_acad_sec`.`SchlAcadSec_NAME` `subj_sec_name`
                         
                 FROM 	`schooltadi` `schl_tadi`
@@ -192,6 +244,68 @@ if($_GET['type'] == 'GET_STUDENT_LIST'){
 
 
 
+if($_GET['type'] == 'GET_TADI_LIST_STUDENT_2'){
+
+            $qry = "SELECT
+            tadi.schltadi_id,
+            acad_subj.SchlAcadSubj_CODE AS subj_code,
+            acad_subj.SchlAcadSubj_NAME AS subj_name,
+            acad_subj.SchlAcadSubj_DESC AS subj_desc,
+            CONCAT(emp.SchlEmp_LNAME, ',', emp.SchlEmp_FNAME, ' ', emp.SchlEmp_MNAME) AS prof_name,
+            tadi.schltadi_date,
+            tadi.schltadi_mode,
+            tadi.schltadi_type,
+            tadi.schltadi_timein,
+            tadi.schltadi_timeout,
+            tadi.schltadi_activity,
+            tadi.schltadi_isactive,
+            tadi.schltadi_status,
+            tadi.schltadi_isconfirm,
+            tadi.schlstud_id,
+            tadi.schlacadlvl_id,
+            tadi.schlacadyr_id,
+            tadi.schlenrollsubjoff_id,
+            tadi.schlprof_id,
+            (
+                SELECT
+                    CONCAT(
+                        reg_stud_info.SchlEnrollRegStudInfo_FIRST_NAME,
+                        ' ',
+                        reg_stud_info.SchlEnrollRegStudInfo_MIDDLE_NAME,
+                        ' ',
+                        reg_stud_info.SchlEnrollRegStudInfo_LAST_NAME
+                    )
+        FROM
+            schooltadi AS st
+        JOIN
+            schoolstudent AS stud ON st.schlstud_id = stud.SchlStudSms_ID
+        JOIN
+            schoolenrollmentregistration AS enr_reg ON stud.SchlEnrollRegColl_ID = enr_reg.SchlEnrollRegSms_ID
+        JOIN
+            schoolenrollmentregistrationstudentinformation AS reg_stud_info ON enr_reg.SchlEnrollRegSms_ID = reg_stud_info.SchlEnrollReg_ID
+        WHERE
+            st.schlenrollsubjoff_id = enr_subj_off.SchlEnrollSubjOffSms_ID
+        ORDER BY
+            stud.SchlStudSms_ID
+        LIMIT 1
+    ) AS stud_name
+FROM
+    schooltadi AS tadi
+LEFT JOIN
+    schoolenrollmentsubjectoffered AS enr_subj_off ON tadi.schlenrollsubjoff_id = enr_subj_off.SchlEnrollSubjOffSms_ID
+LEFT JOIN
+    schoolacademicsubject AS acad_subj ON enr_subj_off.SchlAcadSubj_ID = acad_subj.SchlAcadSubjSms_ID
+LEFT JOIN
+    schoolemployee AS emp ON tadi.schlprof_id = emp.SchlEmpSms_ID
+WHERE
+    tadi.schltadi_isactive = 1
+    AND tadi.schltadi_status = 1
+    AND tadi.schltadi_isconfirm = 1";
+
+                $rreg = $dbPortal->query($qry);
+                $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+                $dbPortal->close();
+}
 
     echo json_encode($fetch);
 
