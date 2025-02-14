@@ -194,39 +194,15 @@ if($_GET['type'] == 'GET_STUDENT_LIST'){
 }
 
 if($_GET['type'] == 'GET_TADI_SUBJ_LIST'){
-    
-    $qry = "   SELECT 	
-                        CONCAT( `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_FIRST_NAME`, ' ', 
-                    `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_MIDDLE_NAME`, ' ', 
-                    `schl_enr_reg_stud_info`.`SchlEnrollRegStudInfo_LAST_NAME`) `stud_name`,
-                    
-                    `schl_acad_subj`.`SchlAcadSubj_CODE` `subj_code`,
-                    `schl_acad_subj`.`SchlAcadSubj_DESC` `subj_desc`,s
-                    `schl_acad_sec`.`SchlAcadSec_NAME` `subj_sec_name`
-                        
-                FROM 	`schooltadi` `schl_tadi`
-                LEFT JOIN `schoolstudent` `schl_stud`
-                    ON `schl_tadi`.`schlstud_id` = `schl_stud`.`SchlStudSms_ID`
-                    
-                LEFT JOIN `schoolenrollmentregistration` `schl_enr_reg`
-                    ON `schl_stud`.`SchlEnrollRegColl_ID` =  `schl_enr_reg`.`SchlEnrollRegSms_ID` 
-                    
-                LEFT JOIN `schoolenrollmentregistrationstudentinformation` `schl_enr_reg_stud_info`
-                    ON `schl_enr_reg`.`SchlEnrollRegSms_ID` = `schl_enr_reg_stud_info`.`SchlEnrollReg_ID` 
-                    
-                LEFT JOIN `schoolenrollmentsubjectoffered` `schl_enr_subj_off`
-                    ON `schl_tadi`.`schlenrollsubjoff_id` = `schl_enr_subj_off`.`SchlEnrollSubjOffSms_ID` 
-                    
-                LEFT JOIN `schoolacademicsubject` `schl_acad_subj`
-                    ON `schl_enr_subj_off`.`SchlAcadSubj_ID` = `schl_acad_subj`.`SchlAcadSubjSms_ID`
-                    
-                LEFT JOIN `schoolacademicsection` `schl_acad_sec` 
-                    ON `schl_enr_subj_off`.`SchlAcadSec_ID` = `schl_acad_sec`.`SchlAcadSecSms_ID`
-                        
 
-                WHERE 	`schl_tadi`.`schlprof_id` = 96 AND 
-                `schl_tadi`.`schltadi_status` = 1 AND 
-                `schl_tadi`.`schltadi_isconfirm` = 1 
+    $USERID = $_SESSION['USERID'];
+    $val = $_GET['value'];
+    
+    $qry = "   SELECT * FROM `schooltadi`
+
+WHERE `schlprof_id` = $USERID AND `schlenrollsubjoff_id` =  $val AND
+                `schooltadi`.`schltadi_status` = 1 AND 
+                `schooltadi`.`schltadi_isconfirm` = 1 
                         
 
 

@@ -175,11 +175,13 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
   result.filter((value, index) => {
     const tadiHandler = `#viewModal${index}`;
 
+    console.log("value =>", value);
+    
 
     $(document).on("click", tadiHandler, function () {
       displayModal(value, index);
-
-
+      GET_TADI_SUBJ_LIST(value.subj_id) // get tadi list
+      displaySectionTableModal(result)
     });
   });
 }
@@ -197,13 +199,12 @@ function displayModal(value) {
   
 
   $("#tadi_subj_name").text(value.subj_desc);
-  // $("#tadi_subj_name").text(value.subj_code);
- $("#section_name").text(value.subj_sec_name);
-}
+  $("#section_name").text(value.subj_sec_name);
+}    
 
 
 function displaySectionTableModal(result) {
-  // console.log('section =>', result);
+  console.log('section =>', result);
 
   var count = 1;
   const tableRows = result.length
@@ -216,8 +217,8 @@ function displaySectionTableModal(result) {
                       <td>${count}</td>
                       <td>${item.stud_name}</td>
                       <td>${new Date(item.schltadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
-                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
-            } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
+                      <td><button class="btn btn-sm w-100" 
+                      style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
                   </tr>
                 `;
 
@@ -240,16 +241,16 @@ function displaySectionTableModal(result) {
 }
 
 
-function GET_TADI_LIST() {
+function GET_TADI_SUBJ_LIST(value) {
   $.ajax({
     type: "GET",
     url: "controller/index-info.php",
     data: {
       type: "GET_TADI_LIST_STUDENT_2",
+      subj_id: value,
     },
     dataType: "json",
     success: function (result) {
-      displaySectionTableModal(result);
       console.log("tadi =>",result);
 
     },
@@ -281,7 +282,7 @@ function display_Section_List(result) {
       }, "")
     : `<tr>
           <td colspan="5" class="text-center">No tadi forms available</td>
-       </tr>`;
+      </tr>`;
 
   $(".prof_section_table").html(tableRows);
 
