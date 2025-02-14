@@ -140,7 +140,7 @@ function GET_SUBJECTLIST() {
     },
     dataType: "json",
     success: function (result) {
-      console.log("subject =>", result);
+      console.log(result);
       DISPLAY_PROFESSOR_SUBJECT(result);
       // GET_SUBJECTLIST();
 
