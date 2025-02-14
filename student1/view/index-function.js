@@ -251,7 +251,23 @@ function displaySubjectTable(result) {
     const tadiHandler = `#tadiModalHandler${index}`;
     $(document).on("click", tadiHandler, function () {
       displayTadi(value, index);
+      GET_SUBJECTLIST(value.subj_id)
     });
+  });
+}
+
+function GET_SUBJECTLIST() {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "GET_SUBJECT_LIST",
+    },
+    dataType: "json",
+    success: function (result) {
+      displaySubjectTable(result);
+      handleTadiSubmission();
+    },
   });
 }
 
