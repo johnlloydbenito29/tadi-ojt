@@ -238,7 +238,7 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 }
 
 
-if ($_GET['type'] == 'GET_DEPARTMENTAL_INSTRUCTOR') {
+if ($_GET['type'] == 'GET_INSTRUCTOR') {
 
 	$lvlid = $_GET['lvl_id'];
 	$prdid = $_GET['prd_id'];

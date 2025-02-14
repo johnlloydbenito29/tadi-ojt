@@ -79,9 +79,25 @@ echo var_dump($_SESSION);
                         <option value="2">2024-2025</option> -->
                     </select>
                 </div>
+                <div class="col-md box box-one" style="display:none;">
+                    <select class="form-select">
+                    <option value="">Code</option>
+                    <option value="">Description</option>
+                   
+                    </select>
+                </div>
+                
+                <div class="col-md box box-two" style="display:none;">
+                    <select class="form-select" id="prof_name" name="prof_name">
+                    <option value="">First Name</option>
+                    <option value="">Middle Name</option>
+                    <option value="">Last Name</option>
+                    </select>
+                </div>
                 <div class="col-md box box-two" style="display:none;">
                     <input type="text" class="form-control" id="searchInput" placeholder="Search Instructor">
                 </div>
+                
                 <div class="col-md">
                     <button type="button" id="search_button" name="search_button" class="btn w-100" style="background-color:#181a46; color: white;">Search</button>
                 </div>
@@ -103,7 +119,7 @@ echo var_dump($_SESSION);
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="subject">
                                 <tr>
                                     <td colspan="5" class="text-center">No data available</td>
                                 </tr>
@@ -115,21 +131,21 @@ echo var_dump($_SESSION);
         </div>
 
 
-        <div class="mt-4 ps-3 pe-3 box box-two">
+        <div class="mt-4 ps-3 pe-3 box box-two mb-4">
             <div class="card shadow-sm" id="div">
                 <div class="card-body box box-two">
                     <h4 class="card-title mb-3">Instructor</h4>
                     <div>
-                      
                         <div class="table-responsive">
                             <table class="table table-hover" style="line-height: 2.5;">
                                 <thead style="background-color: #181a46; color: white;">
                                     <tr>
                                         <th scope="col">Name of Instructor</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Subject</th>
+                                        <th scope="col-2"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="instructor">
                                     <tr>
                                     <td colspan="5" class="text-center">No data available</td>
                                     </tr>
@@ -164,7 +180,7 @@ echo var_dump($_SESSION);
                                                 <thead style="background-color: #181a46; color: white;">
 
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="instructor">
                                                     <tr>
                                                         <td class="col">John Artemson De Guzman</td>
                                                         <td class="col-2"><button class="btn btn-sm w-100"
@@ -384,7 +400,7 @@ echo var_dump($_SESSION);
                         if (optionValue === "instructor") {
                             $(".box-two").show();
                         } else if (optionValue === "subject") {
-                            $(".box-one").show();
+                            $(".box-one").show();    
                         }
                     } else {
                         $(".box").hide(); // Hide all if no option is selected

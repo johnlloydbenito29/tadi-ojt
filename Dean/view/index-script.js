@@ -204,7 +204,7 @@ $(document).ready(function () {
                     : ` <tr>
                             <td colspan="5" class="text-center">No data available</td>
                         </tr>`;
-                $("tbody").html(tableRows);
+                $("#subject").html(tableRows);
             },
         });
     });
@@ -222,7 +222,7 @@ $(document).ready(function () {
             type: "GET",
             url: "controller/index-info.php",
             data: {
-                type: "GET_DEPARTMENTAL_INSTRUCTOR",
+                type: "GET_DEPARTMENTAL_SUBJECT",
                 lvl_id: lvlid,
                 prd_id: prdid,
                 yr_id: yrid,
@@ -235,12 +235,14 @@ $(document).ready(function () {
                 const tableRows = result.length
                     ? result.reduce((acc, value, index) => {
                         $.each([value], function (key, item) {
-                            acc += `        
+                            acc += ` 
+                                <tr key="${item.subj_id}">     
                                   <td>${item.prof_name
                                     ? item.prof_name
                                     : "No instructor"
                                 }</td>
-                                <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+                                <td>${item.subj_desc}</td>
+                                <td><button class="btn btn-sm w-100 col-2" ${item.prof_name ? item.prof_name : "disabled"
                                 } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadimodal1">TADI</button></td>
                               </tr>
                             `;
@@ -250,7 +252,7 @@ $(document).ready(function () {
                     : ` <tr>
                             <td colspan="5" class="text-center">No data available</td>
                         </tr>`;
-                $("tbody").html(tableRows);
+                $("#instructor").html(tableRows);
             },
         });
     });

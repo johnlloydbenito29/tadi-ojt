@@ -37,12 +37,8 @@ function GET_TADILIST() {
 
       $.each(result, function(key, value){
     
-        displaytable += "<tr>";
-    
-        displaytable += "<td>" + value.subj_code + "</td>" + 
-                        "<td>" + value.subj_desc + "</td>" + 
+        displaytable += 
                         "<td>" + value.prof_name + "</td>" + 
-                        "<td>" + value.tadi_date + "</td>" + 
                         "<td><button class=\"btn btn-sm w-100\" style=\"background-color: #181a46; color: white;\" data-bs-toggle=\"modal\" data-bs-target=\"#tadiModal1\">VIEW</button></td>" +
                       "</tr>";
     
@@ -130,12 +126,12 @@ function GET_DEPARTMENTAL_SUBJECT() {
 
   });
 }
-function GET_DEPARTMENTAL_INSTRUCTOR() {
+function GET_INSTRUCTOR() {
   $.ajax({
     type: "GET",
     url: "controller/index-info.php",
     data: {
-      type: "GET_DEPARTMENTAL_INSTRUCTOR",
+      type: "GET_INSTRUCTOR",
     },
     dataType: "json",
     success: function (result) {
