@@ -3,7 +3,7 @@
 
 $(document).ready(function(){
 
-    GET_STUDENTLIST();
+    GET_SUBJECTLIST();
     GET_SCHOOLYEAR();
     GET_ACADEMICPERIOD();
     GET_YEARLEVEL();

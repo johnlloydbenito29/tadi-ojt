@@ -131,7 +131,7 @@ function GET_ACADEMICLEVEL() {
 }
 
 
-function GET_STUDENTLIST() {
+function GET_SUBJECTLIST() {
   $.ajax({
     type: "GET",
     url: "controller/index-info.php",
@@ -140,6 +140,7 @@ function GET_STUDENTLIST() {
     },
     dataType: "json",
     success: function (result) {
+      console.log("subject =>", result);
       DISPLAY_PROFESSOR_SUBJECT(result);
       // GET_SUBJECTLIST();
 
