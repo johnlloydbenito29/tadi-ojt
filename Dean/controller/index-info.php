@@ -198,6 +198,16 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 	$prdid = $_GET['prd_id'];
 	$yrid = $_GET['yr_id'];
 	$yrlvlid = $_GET['yrlvl_id'];
+	$category = $_GET['category'];
+	$searchValue = $_GET['searchVal'];
+
+	$searchCondition = "";
+	
+	if (!empty($searchValue)) {
+		$searchCondition = "`schl_acad_subj`.`SchlAcadSubj_desc` LIKE '%$searchValue%' AND";
+	} else {
+		$searchCondition = "";
+	}
 
 	$qry = "  SELECT  `schl_acad_sec`.`SchlAcadSec_NAME`  `subj_sec_name`,
 								`schl_enr_subj_off`.`SchlProf_ID`,
@@ -230,7 +240,9 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 								`schl_enr_subj_off`.`SchlAcadPrd_ID` = $prdid  AND -- period
 								`schl_enr_subj_off`.`SchlAcadYrLvl_ID` = $yrlvlid AND -- year level
 								`schl_dept`.`SchlDeptSms_ID` = 6 and
+								`schl_acad_subj`.`SchlAcadSubj_desc` LIKE '%$searchValue%' AND
 								`schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
+
 
 	$rreg = $dbPortal->query($qry);
 	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);

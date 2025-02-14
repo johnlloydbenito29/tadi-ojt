@@ -163,10 +163,10 @@ $(document).ready(function () {
 
     // FOR GETTING DEPARTMENTAL SUBJECT
     $("#search_button").on("click", function () {
-        var lvlid = $("#academiclevel").val();
-        var yrlvlid = $("#academicyearlevel").val();
-        var prdid = $("#academicperiod").val();
-        var yrid = $("#acadyear").val();
+        const lvlid = $("#academiclevel").val();
+        const yrlvlid = $("#academicyearlevel").val();
+        const prdid = $("#academicperiod").val();
+        const yrid = $("#acadyear").val();        
 
         $.ajax({
             type: "GET",
@@ -177,6 +177,7 @@ $(document).ready(function () {
                 prd_id: prdid,
                 yr_id: yrid,
                 yrlvl_id: yrlvlid,
+
             },
             dataType: "json",
             success: function (result) {
@@ -188,7 +189,7 @@ $(document).ready(function () {
                             acc += `
                               <tr key="${item.subj_id}">
                               <td>${item.subj_code}</td>
-                              <td class="col-4">${item.subj_desc}</td>
+                              <td class="col-6">${item.subj_desc}</td>
                                   <td>${item.subj_sched ? item.subj_sched : "No schedule"}</td>
                                   <td>${item.prof_name
                                     ? item.prof_name
@@ -201,7 +202,7 @@ $(document).ready(function () {
                         });
                         return acc;
                     }, "")
-                    : ` <tr>
+                    : ` <tr class="flex justify-center align-center">
                             <td colspan="5" class="text-center">No data available</td>
                         </tr>`;
                 $("#subject").html(tableRows);
@@ -209,15 +210,20 @@ $(document).ready(function () {
         });
     });
 
-
-
     // FOR GETTING DEPARTMENTAL INSTRUCTOR
     $("#search_button").on("click", function () {
-        var lvlid = $("#academiclevel").val();
-        var yrlvlid = $("#academicyearlevel").val();
-        var prdid = $("#academicperiod").val();
-        var yrid = $("#acadyear").val();
+        const lvlid = $("#academiclevel").val();
+        const yrlvlid = $("#academicyearlevel").val();
+        const prdid = $("#academicperiod").val();
+        const yrid = $("#acadyear").val();
+        const searchVal = $("#searchInput").val();
+        const category = $("#category").val(); 
+            
 
+        console.log("##searchVal", searchVal);
+        console.log("##category", category);
+        
+            
         $.ajax({
             type: "GET",
             url: "controller/index-info.php",
@@ -227,6 +233,8 @@ $(document).ready(function () {
                 prd_id: prdid,
                 yr_id: yrid,
                 yrlvl_id: yrlvlid,
+                searchVal: searchVal,
+                category: category,
             },
             dataType: "json",
             success: function (result) {
@@ -257,7 +265,6 @@ $(document).ready(function () {
         });
     });
 
-    // $.ajax({
     //     type: "GET",
     //     url: "controller/index-info.php",
     //     data: {

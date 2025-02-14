@@ -38,66 +38,55 @@ echo var_dump($_SESSION);
             <div class="row justify-content-center align-items-center g-3">
                 <div class="col-md">
                     <select class="form-select" id="academiclevel" name="academiclevel">
-                       
+
                     </select>
                 </div>
                 <div class="col-md">
                     <select class="form-select" id="academicyearlevel" name="academicyearlevel">
                         <option>Year Level</option>
-                        <!-- <option value="1">2024-2025</option>
-                        <option value="2">2023-2024</option> -->
-                        <!-- <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option> -->
                     </select>
                 </div>
 
                 <div class="col-md">
                     <select class="form-select" id="academicperiod" name="academicperiod">
                         <option selected>Period</option>
-                        <!-- <option value="1">1st Sem</option>
-                        <option value="2">2nd Sem</option>
-                        <option value="3">Mid Year <U></U></option> -->
                     </select>
                 </div>
 
                 <div class="col-md">
                     <select class="form-select" id="acadyear" name="acadyear">
                         <option selected>Academic Year</option>
-                        <!-- <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option> -->
                     </select>
                 </div>
 
                 <div class="col-md">
                     <select class="form-select" id="type" name="type">
-                        <option value=>Type</option>
+                        <option value="">All</option>
                         <option value="instructor">Instructor</option>
                         <option value="subject">Subject</option>
-                        <!-- <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option> -->
                     </select>
                 </div>
                 <div class="col-md box box-one" style="display:none;">
                     <select class="form-select">
-                    <option value="">Code</option>
-                    <option value="">Description</option>
-                   
+                        <option value="">Code</option>
+                        <option value="">Description</option>
+
                     </select>
                 </div>
-                
+
                 <div class="col-md box box-two" style="display:none;">
-                    <select class="form-select" id="prof_name" name="prof_name">
-                    <option value="">First Name</option>
-                    <option value="">Middle Name</option>
-                    <option value="">Last Name</option>
+                    <select class="form-select" id="category" name="category">
+                        <option value="first_name">First Name</option>
+                        <option value="middle_name">Middle Name</option>
+                        <option value="last_name">Last Name</option>
+                        <option value="suj_desc">Subject Description</option>
+                        <option value="suj_code">Subject Code</option>
                     </select>
                 </div>
                 <div class="col-md box box-two" style="display:none;">
                     <input type="text" class="form-control" id="searchInput" placeholder="Search Instructor">
                 </div>
-                
+
                 <div class="col-md">
                     <button type="button" id="search_button" name="search_button" class="btn w-100" style="background-color:#181a46; color: white;">Search</button>
                 </div>
@@ -109,14 +98,14 @@ echo var_dump($_SESSION);
                 <div class="card-body box box-one">
                     <h4 class="card-title mb-3">Subject</h4>
                     <div class="table-responsive">
-                        <table class="table table-hover" style="line-height: 2.5;">
+                        <table class="table table-hover table-bordered" style="line-height: 2.5;">
                             <thead style="background-color: #181a46; color: white;">
                                 <tr>
                                     <th scope="col">Subject Code</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Schedule</th>
                                     <th scope="col">Instructor/Professor</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="subject">
@@ -130,14 +119,14 @@ echo var_dump($_SESSION);
             </div>
         </div>
 
-
+  
         <div class="mt-4 ps-3 pe-3 box box-two mb-4">
             <div class="card shadow-sm" id="div">
                 <div class="card-body box box-two">
                     <h4 class="card-title mb-3">Instructor</h4>
                     <div>
                         <div class="table-responsive">
-                            <table class="table table-hover" style="line-height: 2.5;">
+                            <table class="table table-hover table-bordered" style="line-height: 2.5;">
                                 <thead style="background-color: #181a46; color: white;">
                                     <tr>
                                         <th scope="col">Name of Instructor</th>
@@ -147,7 +136,7 @@ echo var_dump($_SESSION);
                                 </thead>
                                 <tbody id="instructor">
                                     <tr>
-                                    <td colspan="5" class="text-center">No data available</td>
+                                        <td colspan="5" class="text-center">No data available</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -262,8 +251,6 @@ echo var_dump($_SESSION);
             </div>
 
         </div>
-
-
 
         <!-- TADI Modals -->
         <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true" data-bs-backdrop="static">
@@ -385,7 +372,6 @@ echo var_dump($_SESSION);
                 </div>
             </div>
         </div>
-        </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -400,10 +386,10 @@ echo var_dump($_SESSION);
                         if (optionValue === "instructor") {
                             $(".box-two").show();
                         } else if (optionValue === "subject") {
-                            $(".box-one").show();    
+                            $(".box-one").show();
                         }
                     } else {
-                        $(".box").hide(); // Hide all if no option is selected
+                        $(".box").show(); // Hide all if no option is selected
                     }
                 });
             });
