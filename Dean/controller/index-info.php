@@ -238,6 +238,39 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 }
 
 
+if ($_GET['type'] == 'GET_DEPARTMENTAL_INSTRUCTOR') {
+
+	$lvlid = $_GET['lvl_id'];
+	$prdid = $_GET['prd_id'];
+	$yrid = $_GET['yr_id'];
+	$yrlvlid = $_GET['yrlvl_id'];
+
+	$qry = "  SELECT  
+					`CONCAT(emp.SchlEmp_LNAME, ',', emp.SchlEmp_FNAME, ' ', emp.SchlEmp_MNAME) AS prof_name
+ 
+
+							FROM `schoolenrollmentsubjectoffered` `schl_enr_subj_off`
+
+							LEFT JOIN `schoolacademiccourses` `schl_acad_crses`
+							ON `schl_enr_subj_off`.`SchlAcadCrses_ID` = `schl_acad_crses`.`SchlAcadCrseSms_ID`
+
+							LEFT JOIN `schooldepartment` `schl_dept`
+							ON `schl_acad_crses`.`SchlDept_ID` = `schl_dept`.`SchlDeptSms_ID`
+
+							LEFT JOIN schoolemployee AS emp
+							ON `schl_enr_subj_off`. `SchlProf_ID`= emp.`SchlEmpSms_ID`
+							WHERE
+							`schl_enr_subj_off`.`SchlAcadLvl_ID` = $lvlid  AND
+							`schl_enr_subj_off`.`SchlAcadYr_ID`  = $yrid AND  
+							`schl_enr_subj_off`.`SchlAcadPrd_ID` = $prdid  AND 
+							`schl_enr_subj_off`.`SchlAcadYrLvl_ID` =  $yrlvlid AND 
+							`schl_dept`.`SchlDeptSms_ID` = 6 AND 
+							`schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
+
+						$rreg = $dbPortal->query($qry);
+						$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
+						$dbPortal->close();
+}
 
 
 

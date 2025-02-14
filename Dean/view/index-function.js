@@ -130,3 +130,20 @@ function GET_DEPARTMENTAL_SUBJECT() {
 
   });
 }
+function GET_DEPARTMENTAL_INSTRUCTOR() {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "GET_DEPARTMENTAL_INSTRUCTOR",
+    },
+    dataType: "json",
+    success: function (result) {
+
+      console.log('##result', result);
+
+    }
+
+
+  });
+}

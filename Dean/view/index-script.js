@@ -123,7 +123,7 @@ $(document).ready(function () {
         });
 
         ///
-    });
+    }); 
 
     $("#academicperiod").on("change", function () {
         var lvlid = $("#academiclevel").val();
@@ -161,7 +161,7 @@ $(document).ready(function () {
         });
     });
 
-    // FOR GETTING INSTRUCTOR
+    // FOR GETTING DEPARTMENTAL SUBJECT
     $("#search_button").on("click", function () {
         var lvlid = $("#academiclevel").val();
         var yrlvlid = $("#academicyearlevel").val();
@@ -196,6 +196,52 @@ $(document).ready(function () {
                                 }</td>
                                   <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
                                 } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadimodal2">TADI</button></td>
+                              </tr>
+                            `;
+                        });
+                        return acc;
+                    }, "")
+                    : ` <tr>
+                            <td colspan="5" class="text-center">No data available</td>
+                        </tr>`;
+                $("tbody").html(tableRows);
+            },
+        });
+    });
+
+
+
+    // FOR GETTING DEPARTMENTAL INSTRUCTOR
+    $("#search_button").on("click", function () {
+        var lvlid = $("#academiclevel").val();
+        var yrlvlid = $("#academicyearlevel").val();
+        var prdid = $("#academicperiod").val();
+        var yrid = $("#acadyear").val();
+
+        $.ajax({
+            type: "GET",
+            url: "controller/index-info.php",
+            data: {
+                type: "GET_DEPARTMENTAL_INSTRUCTOR",
+                lvl_id: lvlid,
+                prd_id: prdid,
+                yr_id: yrid,
+                yrlvl_id: yrlvlid,
+            },
+            dataType: "json",
+            success: function (result) {
+                console.log("##result", result);
+
+                const tableRows = result.length
+                    ? result.reduce((acc, value, index) => {
+                        $.each([value], function (key, item) {
+                            acc += `        
+                                  <td>${item.prof_name
+                                    ? item.prof_name
+                                    : "No instructor"
+                                }</td>
+                                <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"
+                                } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadimodal1">TADI</button></td>
                               </tr>
                             `;
                         });

@@ -38,7 +38,7 @@ echo var_dump($_SESSION);
             <div class="row justify-content-center align-items-center g-3">
                 <div class="col-md">
                     <select class="form-select" id="academiclevel" name="academiclevel">
-                        <option selected>Academic Level</option>
+                       
                     </select>
                 </div>
                 <div class="col-md">
@@ -115,11 +115,12 @@ echo var_dump($_SESSION);
         </div>
 
 
-        <div class="mt-4 ps-3 pe-3 box">
-            <div class="card shadow-sm" id="divOne">
-                <div class="card-body" style="display:none;">
+        <div class="mt-4 ps-3 pe-3 box box-two">
+            <div class="card shadow-sm" id="div">
+                <div class="card-body box box-two">
+                    <h4 class="card-title mb-3">Instructor</h4>
                     <div>
-                        <h4 class="card-title mb-3">Instructor</h4>
+                      
                         <div class="table-responsive">
                             <table class="table table-hover" style="line-height: 2.5;">
                                 <thead style="background-color: #181a46; color: white;">
@@ -130,21 +131,8 @@ echo var_dump($_SESSION);
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="col">John Artemson De Guzman</td>
-                                        <td class="col-2"><button class="btn btn-sm w-100"
-                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                data-bs-target="#tadiModal1">VIEW TADI</button></td>
+                                    <td colspan="5" class="text-center">No data available</td>
                                     </tr>
-                                    <tr>
-                                        <td>Rendel Francisco</td>
-                                        <td><button class="btn btn-sm w-100"
-                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                    </tr>
-                                    <td>Karl Michael Flores</td>
-                                    <td><button class="btn btn-sm w-100"
-                                            style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                            data-bs-target="#tadiModal2">VIEW TADI</button></td>
                                 </tbody>
                             </table>
                         </div>
@@ -411,6 +399,8 @@ echo var_dump($_SESSION);
         crossorigin="anonymous"></script>
     <script src="view/index-script.js"></script>
     <script src="view/index-function.js"></script>
+
+
 
 </body>
 
