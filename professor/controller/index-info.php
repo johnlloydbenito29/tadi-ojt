@@ -290,20 +290,3 @@ WHERE
 
 
 
-
-<!-- SELECT  CONCAT(
-                `SchlEnrollRegStudInfo_FIRST_NAME`,' ',
-                `SchlEnrollRegStudInfo_MIDDLE_NAME`,' ',
-                `SchlEnrollRegStudInfo_LAST_NAME`) AS STUD_NAME
-	
-        FROM
-            `schooltadi` AS schl_td
-        JOIN
-            `schoolstudent` AS schl_stud ON schl_td.`schlstud_id` = schl_stud.`SchlStudSms_ID`
-        JOIN
-            `schoolenrollmentregistration` AS schl_enr_reg ON schl_stud.`SchlEnrollRegColl_ID` = schl_enr_reg .`SchlEnrollRegSms_ID`
-        JOIN
-            ``schoolenrollmentregistrationstudentinformation`` AS schl_reg_stud ON schl_enr_reg .`SchlEnrollRegSms_ID` = `schl_reg_stud`.`SchlEnrollReg_ID`
-       WHERE `schlprof_id` = 96 AND 
-	`schlenrollsubjoff_id` =  21575 AND 
-	`schltadi_isconfirm` = 1  -->
