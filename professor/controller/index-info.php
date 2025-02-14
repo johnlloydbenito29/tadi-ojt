@@ -197,12 +197,27 @@ if($_GET['type'] == 'GET_TADI_SUBJ_LIST'){
 
     $USERID = $_SESSION['USERID'];
     $val = $_GET['value'];
-    $qry = "   SELECT * FROM `schooltadi`
+    $subj_name = $_GET['subj_name'];
 
-WHERE `schlprof_id` = $USERID AND 
-      `schlenrollsubjoff_id` =  $val AND
-      `schooltadi`.`schltadi_status` = 1 AND 
-      `schooltadi`.`schltadi_isconfirm` = 1 
+
+    $qry = "   SELECT  CONCAT(
+                `SchlEnrollRegStudInfo_FIRST_NAME`,' ',
+                `SchlEnrollRegStudInfo_MIDDLE_NAME`,' ',
+                `SchlEnrollRegStudInfo_LAST_NAME`) AS STUD_NAME,
+                `schl_acad_subj`.`SchlAcadSubj_NAME` AS subj_name
+
+        FROM
+            `schooltadi` AS schl_td
+        JOIN
+            `schoolstudent` AS schl_stud ON schl_td.`schlstud_id` = schl_stud.`SchlStudSms_ID`
+        JOIN
+            `schoolenrollmentregistration` AS schl_enr_reg ON schl_stud.`SchlEnrollRegColl_ID` = schl_enr_reg .`SchlEnrollRegSms_ID`
+        JOIN
+            ``schoolenrollmentregistrationstudentinformation`` AS schl_reg_stud ON schl_enr_reg .`SchlEnrollRegSms_ID` = `schl_reg_stud`.`SchlEnrollReg_ID`
+       WHERE `schlprof_id` = $USERID AND 
+	`schlenrollsubjoff_id` =  $val AND 
+	`schltadi_isconfirm` = 1 AND 
+    `schl_acad_subj`.`SchlAcadSubj_NAME` = '$subj_name'
 ";
 
     $rreg = $dbPortal->query($qry);
