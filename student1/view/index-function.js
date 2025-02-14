@@ -122,9 +122,17 @@ function GET_ACADEMICLEVEL() {
         const endTime = $(this).val();
 
         if (startTime && endTime && endTime <= startTime) {
-          alert("Class end time must be later than start time");
+          $(this).addClass("is-invalid");
+          $(this).next(".invalid-feedback").text("Class end time must be later than start time");
           $(this).val("");
+        } else {
+          $(this).removeClass("is-invalid");
         }
+      });
+
+      // Reset form when modal is closed
+      $('#modal').on('hidden.bs.modal', function () {
+        $('#tadiForm')[0].reset();
       });
     },
   });
@@ -182,7 +190,24 @@ function handleTadiSubmission() {
 
     if (startTime && endTime && endTime <= startTime) {
       currentModal.find("#classEndDateTime").addClass("is-invalid");
-      alert("Class end time must be later than start time");
+      currentModal.find("#classEndDateTime").siblings(".invalid-feedback").text("Class end time must be later than start time");
+      isValid = false;
+    }
+
+    // Validate comments field for special characters and length
+    const comments = currentModal.find("#comments").val();
+    const specialCharsRegex = /[<>{}[\]\\\/;()&$#@!%^*+=|`]/; // Regex for restricted special characters
+
+    if (specialCharsRegex.test(comments)) {
+      currentModal.find("#comments").addClass("is-invalid");
+      currentModal.find("#comments").siblings(".invalid-feedback").text("Comments cannot contain special characters like < > { } [ ] \\ /");
+      isValid = false;
+    }
+
+    // Check minimum comment length 
+    if (comments.length < 50) {
+      currentModal.find("#comments").addClass("is-invalid");
+      currentModal.find("#comments").siblings(".invalid-feedback").text("Comments must be at least 50 characters long");
       isValid = false;
     }
 
@@ -204,27 +229,18 @@ function handleTadiSubmission() {
 function displaySubjectTable(result) {
   const tableRows = result.length
     ? result.reduce((acc, value, index) => {
-        $.each([value], function (key, item) {
-          acc += `
+      $.each([value], function (key, item) {
+        acc += `
                   <tr key="${item.subj_id}">
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
-                      <td>${
-                        item.prof_name ? item.prof_name : "No instructor"
-                      }</td>
-                      <td>${
-                        item.schltadi_isconfirm
-                          ? item.schltadi_isconfirm
-                          : "Pending"
-                      }</td>
-                      <td><button class="btn btn-sm w-100" ${
-                        item.prof_name ? item.prof_name : "disabled"
-                      } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
+                      <td>${item.prof_name ? item.prof_name : "No instructor"}</td>
+                      <td><button class="btn btn-sm w-100" ${item.prof_name ? item.prof_name : "disabled"} style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#modal">TADI</button></td>
                   </tr>
                 `;
-        });
-        return acc;
-      }, "")
+      });
+      return acc;
+    }, "")
     : "";
 
   console.log("result =>", result);
@@ -292,18 +308,35 @@ function POST_TADI(formData) {
     success: function (response) {
       try {
         const result = JSON.parse(response);
-        if (result.success) {
-          alert("TADI submitted successfully");
 
-          console.log("result =>", result);
+        if (result.success) {
+
+          console.log("result =>", result.data);
+
+          const toast = new bootstrap.Toast($("#successToast")[0]);
+          $("#toastMessage").text(result.message);
+          toast.show();
+
+          if (result.count <= 3 && result.count > 0) {
+            if (confirm(`Would you like to submit another TADI? (${result.count}/3 submitted today)`)) {
+              $('#tadiForm')[0].reset();
+              $('#modal').modal('hide');
+            } else {
+              $('#tadiForm')[0].reset();
+              $('#modal').modal('hide');
+            }
+          }
+
         } else {
-          alert(
-            "Error submitting TADI: " + (result.message || "Unknown error")
-          );
+          const errorAlert = $("#errorAlert");
+          $("#errorAlertMessage").text(result.message);
+          errorAlert.removeClass("d-none");
         }
       } catch (e) {
-        console.error("Invalid JSON response:", response);
-        alert("Error processing server response");
+        console.log(e);
+        const toast = new bootstrap.Toast($("#errorToast")[0]);
+        $("#errorToastMessage").text("An error occurred while processing the response");
+        toast.show();
       }
     },
     error: function (xhr, status, error) {
