@@ -182,7 +182,8 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
 
     $(document).on("click", tadiHandler, function () {
       displayModal(value, index);
-      GET_TADI_SUBJ_LIST(value.subj_id) // get tadi list
+        GET_TADI_SUBJ_LIST(value.subj_id); // get tadi list
+      
       
     });
   });
