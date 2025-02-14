@@ -197,20 +197,13 @@ if($_GET['type'] == 'GET_TADI_SUBJ_LIST'){
 
     $USERID = $_SESSION['USERID'];
     $val = $_GET['value'];
-    
     $qry = "   SELECT * FROM `schooltadi`
 
-WHERE `schlprof_id` = $USERID AND `schlenrollsubjoff_id` =  $val AND
-                `schooltadi`.`schltadi_status` = 1 AND 
-                `schooltadi`.`schltadi_isconfirm` = 1 
-                        
-
-
-                    
+WHERE `schlprof_id` = $USERID AND 
+      `schlenrollsubjoff_id` =  $val AND
+      `schooltadi`.`schltadi_status` = 1 AND 
+      `schooltadi`.`schltadi_isconfirm` = 1 
 ";
-
-
-
 
     $rreg = $dbPortal->query($qry);
     $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
