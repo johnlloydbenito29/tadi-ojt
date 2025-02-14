@@ -261,7 +261,7 @@ function GET_SUBJECTLIST() {
     type: "GET",
     url: "controller/index-info.php",
     data: {
-      type: "GET_TADI_SUBJ_LIST",
+      type: "GET_SUBJECT_LIST",
     },
     dataType: "json",
     success: function (result) {
