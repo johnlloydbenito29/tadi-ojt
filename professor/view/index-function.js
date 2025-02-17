@@ -25,7 +25,8 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
                       <td>${item.subj_sec_name}</td>
                       <td>
                       <button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" 
-                        id="viewModal${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">
+                        id="viewTadiRecord data-bs-toggle="modal" data-bs-target="#tadiModal" name="${item.subj_id}" 
+                      onclick="GET_SUBJ_OFFERED(this)">
                       VIEW TADI</button></td>
                   </tr>
                 `;
@@ -40,9 +41,6 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
 
   result.filter((value, index) => {
     const tadiHandler = `#viewModal${index}`;
-
-    console.log("value =>", value);
-    
 
     $(document).on("click", tadiHandler, function () {
       displayModalHeader(value, index);
@@ -60,7 +58,7 @@ function displayModalHeader(value) {
 }    
 
 
-function displaySectionTableModal(result) {
+function displaySubjectTadi(result) {
 
   var count = 1;
   const tableRows = result.length
@@ -74,7 +72,7 @@ function displaySectionTableModal(result) {
                       <td>${item.stud_name}</td>
                       <td>${new Date(item.schltadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
                       <td><button class="btn btn-sm w-100" 
-                      style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW</button></td>
+                      style="background-color: #181a46; color: white;" id="view_button${index}" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW</button></td>
                   </tr>
                 `;
 
@@ -87,9 +85,10 @@ function displaySectionTableModal(result) {
        </tr>`;
 
   $(".prof_section_table").html(tableRows);
+  
 
   result.filter((value, index) => {
-    const tadiHandler = `#tadiModalHandler${index}`;  
+    const tadiHandler = `#view_button${index}`;  
     $(document).on('click', tadiHandler, function () {
       displayModal(value, index);
     });
@@ -107,7 +106,6 @@ function GET_TADI_SUBJ_LIST(value) {
     },
     dataType: "json",
     success: function (result) {
-      console.log("tadi =>",result);
       displaySectionTableModal(result)
       
 
@@ -140,3 +138,27 @@ function displayModal(value) {
 }
 
 
+function GET_SUBJ_OFFERED(button) {
+  // Get the value of the 'name' attribute of the clicked button
+  var subjOff_id = $(button).attr('name');
+  
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "CHECK_MATCHED_SUBJ_ID",
+      subj_id: subjOff_id,
+    },
+    dataType: "json",
+    success: function (result) {
+      console.log("Confirmation Result: ", result);
+      displaySectionTableModal(result)
+      
+
+      
+
+    },
+  });
+  // Display the name (or use it elsewhere)
+
+}
