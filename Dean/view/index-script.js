@@ -224,25 +224,22 @@ $(document).ready(function () {
         const yrlvlid = $("#academicyearlevel").val();
         const prdid = $("#academicperiod").val();
         const yrid = $("#acadyear").val();
-        const searchVal = $("#searchInput").val();
-        const category = $("#category").val(); 
+        const searchVal = $("#searchValInstr").val();
             
 
         console.log("##searchVal", searchVal);
-        console.log("##category", category);
-        
+
             
         $.ajax({
             type: "GET",
             url: "controller/index-info.php",
             data: {
-                type: "GET_DEPARTMENTAL_SUBJECT",
+                type: "GET_INSTRUCTOR_LIST",
                 lvl_id: lvlid,
                 prd_id: prdid,
                 yr_id: yrid,
                 yrlvl_id: yrlvlid,
                 searchVal: searchVal,
-                category: category,
             },
             dataType: "json",
             success: function (result) {

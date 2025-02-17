@@ -69,26 +69,11 @@ echo var_dump($_SESSION);
                 </div>
 
                 <div class="col-md box box-one" style="display:none;">
-                    <select class="form-select" id="category">
-                        <option value="" disabled>Category</option>
-                        <option value="subj_code">Code</option>
-                        <option value="subj_desc">Description</option>
-                    </select>
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search Subject">
                 </div>
 
                 <div class="col-md box box-two" style="display:none;">
-                    <select class="form-select" id="category" name="category">
-                        <option value="" disabled>Category</option>
-                        
-                        <option value="first_name">First Name</option>
-                        <option value="middle_name">Middle Name</option>
-                        <option value="last_name">Last Name</option>
-                        <option value="suj_desc">Subject Description</option>
-                        <option value="suj_code">Subject Code</option>
-                    </select>
-                </div>
-                <div class="col-md box box-two" style="display:none;">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Search Instructor">
+                    <input type="text" class="form-control" id="searchValInstr" placeholder="Search Instructor">
                 </div>
 
                 <div class="col-md">
