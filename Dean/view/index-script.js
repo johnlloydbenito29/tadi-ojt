@@ -166,7 +166,14 @@ $(document).ready(function () {
         const lvlid = $("#academiclevel").val();
         const yrlvlid = $("#academicyearlevel").val();
         const prdid = $("#academicperiod").val();
-        const yrid = $("#acadyear").val();        
+        const yrid = $("#acadyear").val();
+        const searchVal = $("#searchInput").val();
+        const category = $("#category").val(); 
+        const type = $("#type").val();
+
+        console.log("#searchVal", searchVal);
+        console.log("#category", category);
+        console.log('#type')
 
         $.ajax({
             type: "GET",
@@ -177,7 +184,8 @@ $(document).ready(function () {
                 prd_id: prdid,
                 yr_id: yrid,
                 yrlvl_id: yrlvlid,
-
+                searchVal: searchVal,
+                category: category,
             },
             dataType: "json",
             success: function (result) {

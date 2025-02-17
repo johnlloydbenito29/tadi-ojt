@@ -38,6 +38,7 @@ echo var_dump($_SESSION);
             <div class="row justify-content-center align-items-center g-3">
                 <div class="col-md">
                     <select class="form-select" id="academiclevel" name="academiclevel">
+                    <option value="" disabled>Academic Level</option>
 
                     </select>
                 </div>
@@ -61,21 +62,24 @@ echo var_dump($_SESSION);
 
                 <div class="col-md">
                     <select class="form-select" id="type" name="type">
-                        <option value="">All</option>
+                        <option value="all">All</option>
                         <option value="instructor">Instructor</option>
                         <option value="subject">Subject</option>
                     </select>
                 </div>
-                <div class="col-md box box-one" style="display:none;">
-                    <select class="form-select">
-                        <option value="">Code</option>
-                        <option value="">Description</option>
 
+                <div class="col-md box box-one" style="display:none;">
+                    <select class="form-select" id="category">
+                        <option value="" disabled>Category</option>
+                        <option value="subj_code">Code</option>
+                        <option value="subj_desc">Description</option>
                     </select>
                 </div>
 
                 <div class="col-md box box-two" style="display:none;">
                     <select class="form-select" id="category" name="category">
+                        <option value="" disabled>Category</option>
+                        
                         <option value="first_name">First Name</option>
                         <option value="middle_name">Middle Name</option>
                         <option value="last_name">Last Name</option>

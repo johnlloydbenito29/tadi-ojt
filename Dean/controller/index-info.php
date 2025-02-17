@@ -142,11 +142,6 @@ if ($_GET['type'] == 'GET_ACAD_YEAR') {
 	$dbPortal->close();
 }
 
-
-
-//////GET INSTRUCTOR LIST
-
-
 if ($_GET['type'] == 'GET_PROF') {
 
 
@@ -186,12 +181,6 @@ if ($_GET['type'] == 'GET_PROF') {
 	$dbPortal->close();
 }
 
-
-
-
-
-///////GET SUBJECT LIST 
-
 if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 
 	$lvlid = $_GET['lvl_id'];
@@ -200,14 +189,41 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 	$yrlvlid = $_GET['yrlvl_id'];
 	$category = $_GET['category'];
 	$searchValue = $_GET['searchVal'];
+	$type = $_GET['type'];
+
+
 
 	$searchCondition = "";
-	
-	if (!empty($searchValue)) {
-		$searchCondition = "`schl_acad_subj`.`SchlAcadSubj_desc` LIKE '%$searchValue%' AND";
-	} else {
-		$searchCondition = "";
-	}
+
+	// if ($searchValue != '') {
+	// 	if ($category == 'subj_code'){
+	// 		$searchCondition = "`schl_acad_subj`.`SchlAcadSubj_CODE` LIKE '%$searchValue%' AND ";
+	// 	}
+
+	// 	if ($category == 'subj_desc'){
+	// 		$searchCondition = "`schl_acad_subj`.`SchlAcadSubj_desc` LIKE '%$searchValue%' AND ";
+	// 	}
+
+	// 	$searchCondition = rtrim($searchCondition, ' AND ') . ' AND ';
+	// }
+
+	$searchCondition = "CONCAT(emp.SchlEmp_LNAME, ',', emp.SchlEmp_FNAME, ' ', emp.SchlEmp_MNAME , ' ', `schl_acad_subj`.`SchlAcadSubj_CODE`, ' ', `schl_acad_subj`.`SchlAcadSubj_desc`) LIKE '%$searchValue%' AND";
+
+	// if ($type = 'instructor') {
+	// 	if ($category == 'first_name') {
+	// 	}
+	// } else {
+	// 	$searchCondition = "";
+	// }
+
+
+	// if ($type = 'subject') {
+	// 	$searchCondition = "`schl_acad_subj`.`SchlAcad". $category ."` LIKE '%$searchValue%' AND ";
+	// } else
+
+	// $searchCondition = "`schl_acad_subj`.`SchlAcad". $category ."` LIKE '%$searchValue%' AND ";
+
+
 
 	$qry = "  SELECT  `schl_acad_sec`.`SchlAcadSec_NAME`  `subj_sec_name`,
 								`schl_enr_subj_off`.`SchlProf_ID`,
@@ -235,12 +251,12 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 								LEFT JOIN schoolemployee AS emp
 								ON `schl_enr_subj_off`. `SchlProf_ID`= emp.`SchlEmpSms_ID`
 								WHERE
+								$searchCondition
 								`schl_enr_subj_off`.`SchlAcadLvl_ID` = $lvlid  AND -- academic level
 								`schl_enr_subj_off`.`SchlAcadYr_ID`  = $yrid AND  -- year
 								`schl_enr_subj_off`.`SchlAcadPrd_ID` = $prdid  AND -- period
 								`schl_enr_subj_off`.`SchlAcadYrLvl_ID` = $yrlvlid AND -- year level
 								`schl_dept`.`SchlDeptSms_ID` = 6 and
-								`schl_acad_subj`.`SchlAcadSubj_desc` LIKE '%$searchValue%' AND
 								`schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
 
 
@@ -248,7 +264,6 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
 	$dbPortal->close();
 }
-
 
 if ($_GET['type'] == 'GET_INSTRUCTOR') {
 
@@ -277,11 +292,12 @@ if ($_GET['type'] == 'GET_INSTRUCTOR') {
 							`schl_enr_subj_off`.`SchlAcadPrd_ID` = $prdid  AND 
 							`schl_enr_subj_off`.`SchlAcadYrLvl_ID` =  $yrlvlid AND 
 							`schl_dept`.`SchlDeptSms_ID` = 6 AND 
-							`schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
+							`schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1
+							";
 
-						$rreg = $dbPortal->query($qry);
-						$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
-						$dbPortal->close();
+	$rreg = $dbPortal->query($qry);
+	$fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
+	$dbPortal->close();
 }
 
 
