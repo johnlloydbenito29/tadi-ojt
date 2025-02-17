@@ -139,7 +139,7 @@ echo var_dump($_SESSION);
                                         <th scope="col"></th>   
                                     </tr>
                                 </thead>
-                                <tbody class="prof_section_table">
+                                <tbody class="prof_tadi_list_table">
         
                                 </tbody>
                             </table>

@@ -25,8 +25,7 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
                       <td>${item.subj_sec_name}</td>
                       <td>
                       <button class="btn btn-sm w-100" style="background-color: #181a46; color: white;" 
-                        id="viewTadiRecord data-bs-toggle="modal" data-bs-target="#tadiModal" name="${item.subj_id}" 
-                      onclick="GET_SUBJ_OFFERED(this)">
+                        id="viewTadiRecord${index}" data-bs-toggle="modal" data-bs-target="#tadiModal" name="${item.subj_id}">
                       VIEW TADI</button></td>
                   </tr>
                 `;
@@ -38,13 +37,10 @@ function DISPLAY_PROFESSOR_SUBJECT(result) {
   
 
   $(".prof_dashboard_table").html(tableRows);
-
-  result.filter((value, index) => {
-    const tadiHandler = `#viewModal${index}`;
-
-    $(document).on("click", tadiHandler, function () {
-      displayModalHeader(value, index);
-      GET_TADI_SUBJ_LIST(value.subj_id) // get tadi list
+  result.forEach((value, index) => {
+    $(document).on("click",`#viewTadiRecord${index}` , function () {
+      const subjOff_id = $(this).attr("name"); // Get the subj_id from the button's name attribute
+      GET_SUBJ_OFFERED(subjOff_id); 
       
     });
   });
@@ -69,8 +65,8 @@ function displaySubjectTadi(result) {
 
                   <tr key="${item.schltadi_id}">
                       <td>${count}</td>
-                      <td>${item.stud_name}</td>
-                      <td>${new Date(item.schltadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
+                      <td>${item.STUD_NAME}</td>
+                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
                       <td><button class="btn btn-sm w-100" 
                       style="background-color: #181a46; color: white;" id="view_button${index}" data-bs-toggle="modal" data-bs-target="#tadiModal2">VIEW</button></td>
                   </tr>
@@ -84,7 +80,7 @@ function displaySubjectTadi(result) {
           <td colspan="5" class="text-center">No tadi forms available</td>
        </tr>`;
 
-  $(".prof_section_table").html(tableRows);
+  $(".prof_tadi_list_table").html(tableRows);
   
 
   result.filter((value, index) => {
@@ -138,9 +134,8 @@ function displayModal(value) {
 }
 
 
-function GET_SUBJ_OFFERED(button) {
-  // Get the value of the 'name' attribute of the clicked button
-  var subjOff_id = $(button).attr('name');
+function GET_SUBJ_OFFERED(subjOff_id) {
+ 
   
   $.ajax({
     type: "GET",
@@ -152,7 +147,8 @@ function GET_SUBJ_OFFERED(button) {
     dataType: "json",
     success: function (result) {
       console.log("Confirmation Result: ", result);
-      displaySectionTableModal(result)
+      displaySubjectTadi(result)
+
       
 
       
