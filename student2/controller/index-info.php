@@ -1,10 +1,10 @@
 <?php
 
-include('../configuration/connection-config.php');
+	include('../configuration/connection-config.php');
 
-    session_start();
+	session_start();
 
-    if($_GET['type'] == 'GET_TADI_LIST_STUDENT_2'){
+	if($_GET['type'] == 'GET_TADI_LIST_STUDENT_2'){
 
         $qry = "SELECT 
                     `schl_tadi`.`schltadi_id` `tadi_id`,
@@ -48,27 +48,26 @@ include('../configuration/connection-config.php');
                     
                 order by  `schl_tadi`.`schltadi_date` desc";
 
-                    $rreg = $dbPortal->query($qry);
-                    $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
-                    $dbPortal->close();
+		$rreg = $dbPortal->query($qry);
+		$fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+		$dbPortal->close();
     }
 
-    if($_GET['type'] == 'CHECK_SUBMISSION'){
+	if($_GET['type'] == 'CHECK_SUBMISSION'){
 
         $qry = "SELECT COUNT(*) `count`
 		    
-		    WHERE `schltadi_date` = '2025-02-07' AND  --current
-                  `schlprof_id` = 255 AND           
-                  `schlenrollsubjoff_id` = 21573
-                 ";
+				WHERE `schltadi_date` = '2025-02-07' AND  --current
+					`schlprof_id` = 255 AND           
+					`schlenrollsubjoff_id` = 21573";
 
         $rreg = $dbPortal->query($qry);
         $fetch = $rreg->fetch_ALL(MYSQLI_ASSOC);
         $dbPortal->close();
 
     }
-    
-    if($_GET['type'] == 'GET_SUBJECT_LIST'){
+
+	if($_GET['type'] == 'GET_SUBJECT_LIST'){
 
         $LVLID = $_SESSION['LVLID'];
         $YRID = $_SESSION['YRID'];
@@ -103,13 +102,7 @@ include('../configuration/connection-config.php');
                             `schl_enr_subj_off`.`SchlAcadYr_ID`  = $YRID AND 
                             `schl_enr_subj_off`.`SchlAcadPrd_ID` =  $PRDID AND 
                             `schl_enr_subj_off`.`SchlAcadYrLvl_ID` = $YRLVLID  AND 
-                            `schl_enr_subj_off`.`SchlAcadCrses_ID` = $CRSEID
-
-    
-            
-    
-    
-    ";
+                            `schl_enr_subj_off`.`SchlAcadCrses_ID` = $CRSEID";
     
         $rreg = $dbPortal->query($qry);
         $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
@@ -117,8 +110,7 @@ include('../configuration/connection-config.php');
     
     }
 
-
-    if($_GET['type'] == 'GET_TADI_LIST_STUDENT_2'){
+	if($_GET['type'] == 'GET_TADI_LIST_STUDENT_2'){
 
         $qry = "SELECT 
                     `schl_tadi`.`schltadi_id` `tadi_id`,
@@ -162,9 +154,9 @@ include('../configuration/connection-config.php');
                     
                 order by  `schl_tadi`.`schltadi_date` desc";
 
-                    $rreg = $dbPortal->query($qry);
-                    $fetch = $rreg->fetch_all(MYSQLI_ASSOC);
-                    $dbPortal->close();
+		$rreg = $dbPortal->query($qry);
+		$fetch = $rreg->fetch_all(MYSQLI_ASSOC);
+		$dbPortal->close();
     }
 
     
