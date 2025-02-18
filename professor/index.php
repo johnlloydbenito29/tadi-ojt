@@ -33,11 +33,11 @@ echo var_dump($_SESSION);
             <h2 class="mb-4 text-center">Student Academic Tadi</h2>
             <div class="row justify-content-center align-items-center g-3">
                 <div class="col-md">
-                    <select class="form-select" id="academicLevel" name="academicLevel">
+                <select class="form-select" id="academiclevel" name="academiclevel">
                         <option selected>Status Level</option>
-                        <option value="1">Basic Education</option>
+                        <!-- <option value="1">Basic Education</option>
                         <option value="2">Tertiary</option>
-                        <option value="3">Graduate School</option>
+                        <option value="3">Graduate School</option> -->
                     </select>
                 </div>
                 <div class="col-md">
@@ -148,9 +148,9 @@ echo var_dump($_SESSION);
                 </div>
             </div>
 
-                 
+            
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeTadiModal2">Close</button>
                             
                             </div>
                             </div>
@@ -205,9 +205,7 @@ echo var_dump($_SESSION);
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Not Approve</button>
-                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Approve</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeTadiModal2">Close</button>
                                     </div>
                                 </div>
 

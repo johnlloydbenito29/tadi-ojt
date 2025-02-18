@@ -8,6 +8,7 @@ $(document).ready(function () {
         },
         dataType: "json",
         success: function (result) {
+            
             var optLevel = "";
             console.log(result);
             if (result.length) {
