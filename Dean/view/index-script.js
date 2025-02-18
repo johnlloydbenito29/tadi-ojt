@@ -256,7 +256,7 @@ $(document).ready(function () {
                                 }</td>
                                 <td>${item.subj_desc}</td>
                                 <td><button class="btn btn-sm w-100 col-2" ${item.prof_name ? item.prof_name : "disabled"
-                                } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadimodal1">TADI</button></td>
+                                } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadimodal1">VIEW</button></td>
                               </tr>
                             `;
                         });
@@ -388,3 +388,6 @@ $(document).ready(function () {
     //     },
     // });
 });
+
+
+

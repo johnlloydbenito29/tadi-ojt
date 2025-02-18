@@ -134,7 +134,7 @@ echo var_dump($_SESSION);
                                 <thead style="background-color: #181a46; color: white;">
                                     <tr>
                                             <th scope="col">#</th>
-                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Subjects</th>
                                         <th scope="col">Date</th>
                                         <th scope="col"></th>   
                                     </tr>

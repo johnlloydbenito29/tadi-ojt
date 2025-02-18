@@ -136,58 +136,66 @@ echo var_dump($_SESSION);
         </div>
 
         <!-- TADI Modals -->
-        <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true"
-            data-bs-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header d-flex justify-content-between align-items-start"
-                        style="background-color: #181a46; color: white;">
-                        <div class="subject-info">
-                            <h5 class="modal-title" id="tadiModalLabel1">Subject Tadi's</h5>
-                            <p class="subject-details mb-0"></p>
-                        </div>
-                        <button type="button" style="background-color: rgb(255, 255, 255);" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="mt-4 ps-3 pe-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <div class="box box-two" style="display:none;">
-                                    <h4 class="card-title mb-3">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover" style="line-height: 2.5;">
-                                                <thead style="background-color: #181a46; color: white;">
+        <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
+                            <div class="subject-info">
+                                <h5 class="modal-title" id="tadi_subj_name">Subject Tadi's</h5>   
+                                <!-- <p class="subject-details mb-0" id="courseCode">Course Code: PE_02</p> -->
 
-                                                </thead>
-                                                <tbody id="instructor">
-                                                    <tr>
-                                                        <td class="col">John Artemson De Guzman</td>
-                                                        <td class="col-2"><button class="btn btn-sm w-100"
-                                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                                data-bs-target="#tadiModal1">VIEW TADI</button></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Rendel Francisco</td>
-                                                        <td><button class="btn btn-sm w-100"
-                                                                style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                                data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                                    </tr>
-                                                    <td>Karl Michael Flores</td>
-                                                    <td><button class="btn btn-sm w-100"
-                                                            style="background-color: #181a46; color: white;" data-bs-toggle="modal"
-                                                            data-bs-target="#tadiModal2">VIEW TADI</button></td>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="modal-body">
+                        <div class="row justify-content-center align-items-center g-3">
 
+                            <div class="col-md">
+                                <select class="form-select" id="Section" name="Section">
+                                <option selected>Date</option>
+                                <option value="1">#</option>
+                                <option value="2">#</option>
+                                <option value="3">#</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md">
+                                <button type="button" class="btn w-100" style="background-color: #181a46; color: white;">Search</button>
+                                </div>
+                            </div>
+             <!-- TADI_SUBJECT MODAL -->
+            
+                            <div class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="line-height: 2.5;">
+                                <thead style="background-color: #181a46; color: white;">
+                                    <tr>
+                                            <th scope="col">#</th>
+                                        <th scope="col">Subject Name</th>
+                                        <th scope="col"></th>   
+                                    </tr>
+                                </thead>
+                                <tbody class="prof_tadi_list_table">
+                                <tr>
+                                        <td colspan="5" class="text-center">No data available</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
+                 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            
+                            </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
 
         <div class="modal fade" id="tadiModal1" tabindex="-1" aria-labelledby="tadiModalLabel1" aria-hidden="true"
             data-bs-backdrop="static">
