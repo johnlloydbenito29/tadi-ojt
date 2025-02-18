@@ -1,3 +1,12 @@
 label {
     font-weight: bold;
 }
+
+.btn-close {
+    color: white; /* This will change the 'X' color to white */
+    opacity: 1; /* Ensure the button is fully opaque */
+}
+
+.btn-close:hover {
+    color: white; /* Ensures the color stays white on hover */
+}

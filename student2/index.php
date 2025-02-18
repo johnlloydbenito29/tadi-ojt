@@ -47,7 +47,6 @@ echo var_dump($_SESSION);
                                         <th scope="col">Description</th>
                                         <th scope="col">Instructor</th>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -70,6 +69,8 @@ echo var_dump($_SESSION);
                                 <p id="subject_code" class="subject-details mb-0"></p>
                                 <p id="tadi_date" class="mb-0"></p>
                             </div>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row mt-4">
@@ -108,9 +109,8 @@ echo var_dump($_SESSION);
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Not Approve</button>
-                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Approve</button>
+                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal" id="status_approve">Not Approve</button>
+                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal" id="status_disapprove">Approve</button>
                                     </div>
                                 </div>
 

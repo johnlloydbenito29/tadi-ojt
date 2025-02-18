@@ -273,6 +273,8 @@ function displayModal(value) {
   $("#prof_name").text(value.prof_name);
   $("#modalities").text(value.tadi_mode.toUpperCase().replace(/_/g, ' '));
   $("#session_type").text(value.tadi_type.toUpperCase().replace(/_/g, ' '));
+  $("#modalities").text(value.tadi_mode.toUpperCase().replace(/_/g, ' '));
+  $("#session_type").text(value.tadi_type.toUpperCase().replace(/_/g, ' '));
   $("#time_in").text(convert12HourFormat(value.time_in));
   $("#time_out").text(convert12HourFormat(value.time_out));
   $("#report").text(value.tadi_activity);
@@ -309,6 +311,7 @@ function GET_SUBJ_OFFERED(subjOff_id) {
 
     },
   });
+
   // Display the name (or use it elsewhere)
 
 }

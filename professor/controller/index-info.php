@@ -50,11 +50,11 @@
                 LEFT JOIN
                     `schoolacademicsection` AS `schl_acad_sec` ON `schl_enr_subj_off`.`SchlAcadSec_ID` = `schl_acad_sec`.`SchlAcadSecSms_ID`
                 WHERE
-                    `schl_enr_subj_off`.`SchlAcadLvl_ID` = $LVLID AND 
-                    `schl_enr_subj_off`.`SchlAcadYr_ID` = $YRID AND 
-                    `schl_enr_subj_off`.`SchlAcadPrd_ID` = $PRDID AND 
-                    `schl_enr_subj_off`.`SchlProf_ID` = $USERID AND 
-                    `schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
+                    `schl_enr_subj_off`.`SchlAcadLvl_ID` = 2
+                    AND `schl_enr_subj_off`.`SchlAcadYr_ID` = 16
+                    AND `schl_enr_subj_off`.`SchlAcadPrd_ID` = 5
+                    AND `schl_enr_subj_off`.`SchlProf_ID` = 96
+                    AND `schl_enr_subj_off`.`SchlEnrollSubjOff_ISACTIVE` = 1";
 
 
         $rreg = $dbPortal->query($qry);
