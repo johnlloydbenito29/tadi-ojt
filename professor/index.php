@@ -157,57 +157,63 @@ echo var_dump($_SESSION);
                         </div> 
                     </div>
                 </div>
-
                 <div class="modal fade" id="tadiModal2" tabindex="-1" aria-labelledby="tadiModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
-                            <div class="subject-info">
-                                <h5 class="modal-title" id="tadi_modal_label"></h5>
-                                <p id="subject_code" class="subject-details mb-0"></p>
-                                <p id="tadi_date" class="mb-0"></p>
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-start" style="background-color: #181a46; color: white;">
+                <div class="subject-info">
+                    <h5 class="modal-title" id="tadi_modal_label"></h5>
+                    <p id="subject_code" class="subject-details mb-0"></p>
+                    <p id="tadi_date" class="mb-0"></p>
+                </div>
+                <!-- Close Button on Top Right -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-4">
+                    <div class="col flex">
+                        <h6>Professor Name:</h6>
+                        <p id="prof_name"></p>
+                    </div>
+
+                    <div class="col flex">
+                        <h6>Learning Delivery Modalities:</h6>
+                        <p id="modalities"></p>
+                    </div>
+
+                    <div class="col flex">
+                        <h6>Session Type:</h6>
+                        <p id="session_type"></p>
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-4 flex">
+                            <h6>Class Start Time:</h6>
+                            <p id="time_in"></p>
+                        </div>
+
+                        <div class="col flex">
+                            <h6>Class End Time:</h6>
+                            <p id="time_out"></p>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <div class="flex">
+                                <h6 class="mb-4">Remarks:</h6>
+
+                                <div class="border border-secondary-subtle p-3 border-1 rounded">
+                                    <p id="report"> </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="row mt-4">
-                                <div class="col flex">
-                                    <h6>Professor Name:</h6>
-                                    <p id="prof_name"></p>
-                                </div>
-
-                                <div class="col flex">
-                                    <h6>Learning Delivery Modalities:</h6>
-                                    <p id="modalities"></p>
-                                </div>
-
-                                <div class="col flex">
-                                    <h6>Session Type:</h6>
-                                    <p id="session_type"></p>
-                                </div>
-
-                                <div class="row my-4">
-                                    <div class="col-4 flex">
-                                        <h6>Class Start Time:</h6>
-                                        <p id="time_in"></p>
-                                    </div>
-
-                                    <div class="col flex">
-                                        <h6>Class End Time:</h6>
-                                        <p id="time_out"></p>
-                                    </div>
-                                    <div class="col-12 mt-4">
-                                        <div class="flex">
-                                            <h6 class="mb-4">Remarks:</h6>
-
-                                            <div class="border border-secondary-subtle p-3 border-1 rounded">
-                                                <p id="report"> </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                             </div>
                         </div>
