@@ -13,8 +13,6 @@ $_SESSION['CRSEID'] = "19";
 echo var_dump($_SESSION);
 
 
-3
-
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +51,7 @@ echo var_dump($_SESSION);
                                     </tr>
                                 </thead>
                                 <tbody>
-        
+
                                 </tbody>
                             </table>
                         </div>
@@ -89,41 +87,35 @@ echo var_dump($_SESSION);
                                     <p id="session_type"></p>
                                 </div>
 
+                                <div class="row my-4">
+                                    <div class="col-4 flex">
+                                        <h6>Class Start Time:</h6>
+                                        <p id="time_in"></p>
+                                    </div>
 
-                            </div>
+                                    <div class="col flex">
+                                        <h6>Class End Time:</h6>
+                                        <p id="time_out"></p>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <div class="flex">
+                                            <h6 class="mb-4">Remarks:</h6>
 
-
-                            <div class="row my-4">
-                                <div class="col-4 flex">
-                                    <h6>Class Start Time:</h6>
-                                    <p id="time_in"></p>
-                                </div>
-
-                                <div class="col flex">
-                                    <h6>Class End Time:</h6>
-                                    <p id="time_out"></p>
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <div class="flex">
-                                        <h6 class="mb-4">Remarks:</h6>
-
-                                        <div class="border border-secondary-subtle p-3 border-1 rounded">
-                                            <p id="report"> </p>
+                                            <div class="border border-secondary-subtle p-3 border-1 rounded">
+                                                <p id="report"> </p>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Not Approve</button>
+                                        <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal">Approve</button>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal" id="status_disapprove"> Not Approve</button>
-                                <button type="button" class="btn" style="background-color: #181a46; color: white;" data-bs-dismiss="modal" id="status_approve" >Approve</button>
-                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 

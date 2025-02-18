@@ -28,77 +28,81 @@ if ($_POST['type'] == 'SUBMIT_TADI') {
         $schltadi_activity = $dbPortal->real_escape_string($form_data['comments']);
         $subj_id = $dbPortal->real_escape_string($form_data['subjoff_id']);
 
-        $sql = "INSERT INTO schooltadi 
-                (   `schltadi_mode`,
-                    `schltadi_type`,
-                    `schltadi_date`,
-                    `schltadi_timein`,
-                    `schltadi_timeout`,
-                    `schltadi_activity`,
-                    `schltadi_isactive`,
-                    `schltadi_status`,
-                    `schltadi_isconfirm`,
-                    `schlstud_id`,
-                    `schlacadlvl_id`,
-                    `schlacadyr_id`,
-                    `schlprof_id`,
-                    `schlenrollsubjoff_id`,
-                    `schlacadprd_id`)
-                    VALUES 
-                    (
-                    '$schltadi_mode', 
-                    '$schltadi_type', 
-                    '$schltadi_date',
-                    '$schltadi_timein',
-                    '$schltadi_timeout',
-                    '$schltadi_activity',
-                    1, 
-                    1, 
-                    0, 
-                    $STUDID,
-                    $LVLID, 
-                    $YRID, 
-                    $prof_id,
-                    $subj_id,
-                    $PRDID)";
+        // First check existing submissions
+        $check_sql = "SELECT COUNT(*) as count 
+                        FROM schooltadi 
+                        WHERE schlenrollsubjoff_id = $subj_id 
+                        AND schlprof_id = $prof_id
+                        AND DATE(schltadi_date) = '$schltadi_date'";
 
-        if ($dbPortal->query($sql) === TRUE) {
-            $fetch['success'] = true;
-            // Check for duplicate submissions on the same day for the same subject
-            $check_sql = "SELECT COUNT(*) as count 
-                            FROM schooltadi 
-                            WHERE schlenrollsubjoff_id = $subj_id 
-                            AND schlprof_id = $prof_id
-                            AND schlstud_id = $STUDID
-                            AND DATE(schltadi_date) = '$schltadi_date'";
+        $result = $dbPortal->query($check_sql);
+        $row = $result->fetch_assoc();
+        $count = (int) $row['count'];
 
-            $result = $dbPortal->query($check_sql);
-            $row = $result->fetch_assoc();
+        error_log("TADI submission count for student $STUDID: $count");
 
-            if ($row['count'] >= 3) {
-                $fetch['success'] = false;
-                $fetch['message'] = "You have already submitted 3 TADIs for this subject today";
-            } else {
-                $fetch['success'] = true;
-                $fetch['data'] = array(
-                    'schltadi_mode' => $schltadi_mode,
-                    'schltadi_type' => $schltadi_type,
-                    'schltadi_date' => $schltadi_date,
-                    'schltadi_timein' => $schltadi_timein,
-                    'schltadi_timeout' => $schltadi_timeout,
-                    'schltadi_activity' => $schltadi_activity,
-                    'schlstud_id' => $STUDID,
-                    'schlacadlvl_id' => $LVLID,
-                    'schlacadyr_id' => $YRID,
-                    'schlprof_id' => $prof_id,
-                    'schlenrollsubjoff_id' => $subj_id,
-                    'schlacadprd_id' => $PRDID
-                );
-                $fetch['message'] = "TADI submitted successfully";
-            }
-        } else {
-            throw new Exception("Error inserting record: " . $dbPortal->error);
+        if ($count >= 3) {
+            $fetch['success'] = false;
+            $fetch['message'] = "You have already submitted 3 TADIs today. You cannot submit more TADIs for today.";
+            echo json_encode($fetch);
+            exit;
         }
+
+        $stmt = $dbPortal->prepare("INSERT INTO schooltadi 
+                (schltadi_mode, schltadi_type, schltadi_date, schltadi_timein, 
+                schltadi_timeout, schltadi_activity, schltadi_isactive, schltadi_status,
+                schltadi_isconfirm, schlstud_id, schlacadlvl_id, schlacadyr_id,
+                schlprof_id, schlenrollsubjoff_id, schlacadprd_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $isactive = 1;
+        $status = 1;
+        $isconfirm = 0;
+
+        $stmt->bind_param(
+            "ssssssiiiiiiiii",
+            $schltadi_mode,
+            $schltadi_type,
+            $schltadi_date,
+            $schltadi_timein,
+            $schltadi_timeout,
+            $schltadi_activity,
+            $isactive,
+            $status,
+            $isconfirm,
+            $STUDID,
+            $LVLID,
+            $YRID,
+            $prof_id,
+            $subj_id,
+            $PRDID
+        );
+
+        if ($stmt->execute()) {
+            $fetch['success'] = true;
+            $fetch['message'] = "TADI submitted successfully";
+            $fetch['count'] = $count;
+
+            $fetch['data'] = array(
+                'schltadi_id' => $dbPortal->insert_id,
+                'schltadi_mode' => $schltadi_mode,
+                'schltadi_type' => $schltadi_type,
+                'schltadi_date' => $schltadi_date,
+                'schltadi_timein' => $schltadi_timein,
+                'schltadi_timeout' => $schltadi_timeout,
+                'schltadi_activity' => $schltadi_activity,
+                'schlstud_id' => $STUDID,
+                'schlacadlvl_id' => $LVLID,
+                'schlacadyr_id' => $YRID,
+                'schlprof_id' => $prof_id,
+                'schlenrollsubjoff_id' => $subj_id,
+                'schlacadprd_id' => $PRDID
+            );
+        } else {
+            throw new Exception("Error inserting record: " . $stmt->error);
+        }
+
+        $stmt->close();
     } catch (Exception $e) {
         $fetch['error'] = $e->getMessage();
     } finally {
