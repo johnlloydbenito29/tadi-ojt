@@ -191,7 +191,7 @@ if ($_GET['type'] == 'GET_DEPARTMENTAL_SUBJECT') {
 	$type = $_GET['type'];
 
 
-	$searchCondition = "CONCAT(emp.SchlEmp_LNAME, ' ', emp.SchlEmp_FNAME, ' ', emp.SchlEmp_MNAME ) LIKE '%$searchValue%' AND";
+	$searchCondition = "CONCAT(`schl_acad_subj`.`SchlAcadSubj_CODE`, ' ', `schl_acad_subj`.`SchlAcadSubj_desc`) LIKE '%$searchValue%' AND";
 
 	$qry = "  SELECT  `schl_acad_sec`.`SchlAcadSec_NAME`  `subj_sec_name`,
 								`schl_enr_subj_off`.`SchlProf_ID`,
@@ -243,7 +243,7 @@ if ($_GET['type'] == 'GET_INSTRUCTOR_LIST') {
 	$type = $_GET['type'];
 
 
-	$searchCondition = "CONCAT(`schl_acad_subj`.`SchlAcadSubj_CODE`, ' ', `schl_acad_subj`.`SchlAcadSubj_desc`) LIKE '%$searchValue%' AND";
+	$searchCondition = "CONCAT(emp.SchlEmp_LNAME, ' ', emp.SchlEmp_FNAME, ' ', emp.SchlEmp_MNAME ) LIKE '%$searchValue%' AND";  
 
 	$qry = "  SELECT  `schl_acad_sec`.`SchlAcadSec_NAME`  `subj_sec_name`,
 								`schl_enr_subj_off`.`SchlProf_ID`,

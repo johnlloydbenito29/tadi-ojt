@@ -173,7 +173,7 @@ $(document).ready(function () {
 
         console.log("#searchVal", searchVal);
         console.log("#category", category);
-        console.log('#type')
+        console.log('#type', type);
 
         $.ajax({
             type: "GET",
@@ -224,10 +224,10 @@ $(document).ready(function () {
         const yrlvlid = $("#academicyearlevel").val();
         const prdid = $("#academicperiod").val();
         const yrid = $("#acadyear").val();
-        const searchVal = $("#searchValInstr").val();
+        const searchValue = $("#searchValInstr").val();
             
 
-        console.log("##searchVal", searchVal);
+        console.log("##searchValue", searchValue);
 
             
         $.ajax({
@@ -239,7 +239,7 @@ $(document).ready(function () {
                 prd_id: prdid,
                 yr_id: yrid,
                 yrlvl_id: yrlvlid,
-                searchVal: searchVal,
+                searchValInstr: searchValue,
             },
             dataType: "json",
             success: function (result) {
