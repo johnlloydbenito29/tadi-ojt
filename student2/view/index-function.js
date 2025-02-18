@@ -14,21 +14,36 @@ function GET_TADILIST() {
 }
 
 function displayTadiTable(result) {
-  console.log('result =>', result);
+
 
   var count = 1;
-  const tableRows = result.length
+  var maxRows=10;
+
+  const limitedResult = result.slice(0, maxRows)
+  const tableRows = limitedResult.length
     ? result
       .reduce((acc, value, index) => {
         $.each([value], function (key, item) {
-          acc += `
+         
+         
 
+          // Set the confirmation status based on the value of is_confirm
+          // var confirmationStatus =
+          // item.is_confirm == 1
+          //   ? `<span class="badge bg-success">Approved</span>`
+          //   : item.is_confirm == 2
+          //   ? `<span class="badge bg-danger">Disapproved</span>`
+          //   : `<span class="badge bg-primary">Pending</span>`;
+          //<td>${ statusIdentifier(item.is_confirm)}
+
+          acc += `
+                  
                   <tr key="${item.subj_code}">
                       <td>${count}</td>
                       <td>${item.subj_code}</td>
                       <td>${item.subj_desc}</td>
                       <td>${item.prof_name }</td>
-                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>    
+                      <td>${new Date(item.tadi_date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</td>
                       <td><button class="btn btn-sm w-100"  } style="background-color: #181a46; color: white;" id="tadiModalHandler${index}" data-bs-toggle="modal" data-bs-target="#tadiModal">VIEW</button></td>
                   </tr>
                 `;
@@ -38,7 +53,7 @@ function displayTadiTable(result) {
         return acc;     
       }, "")
     : `<tr>
-          <td colspan="5" class="text-center">No tadi forms available</td>
+          <td colspan="7" class="text-center">No tadi forms available</td>
        </tr>`;
 
   $("tbody").html(tableRows);
@@ -51,7 +66,6 @@ function displayTadiTable(result) {
   });
 }
 
-
 function convert12HourFormat(time) {
 
   let [hours, minutes] = time.split(':');
@@ -63,8 +77,6 @@ function convert12HourFormat(time) {
   console.log(formattedTime);
   return formattedTime
 }
-
-
 
 function displayModal(value) {
 
@@ -129,5 +141,23 @@ function UPDATE_TADI_STATUS(status, id){
     },
   });
 
+}
+
+function statusIdentifier (value) {
+  let status
+
+  if (value == 1) {
+    status = `<span class="badge bg-success">Approved</span>`
+  } else if (value == 2) {
+    status = `<span class="badge bg-danger">Disapproved</span>`
+  } else {
+    status = `<span class="badge bg-primary">Pending</span>`
+  }
+ 
+  console.log('status =>', status);
+
+  return status
+
+  
 }
 

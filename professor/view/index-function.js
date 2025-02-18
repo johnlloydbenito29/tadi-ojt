@@ -92,22 +92,6 @@ function displaySubjectTadi(result) {
 }
 
 
-function GET_TADI_SUBJ_LIST(value) {
-  $.ajax({
-    type: "GET",
-    url: "controller/index-info.php",
-    data: {
-      type: "GET_TADI_LIST_STUDENT_2",
-      subj_id: value,
-    },
-    dataType: "json",
-    success: function (result) {
-      displaySectionTableModal(result)
-      
-
-    },
-  });
-}
 
 
 
@@ -126,8 +110,8 @@ function displayModal(value) {
   $("#tadi_date").text(formattedDate);
   $("#prof_name").text(value.prof_name);
   $("#prof_name").text(value.prof_name);
-  // $("#modalities").text(value.tadi_mode.toUpperCase().replace(/_/g, ' '));
-  // $("#session_type").text(value.tadi_type.toUpperCase().replace(/_/g, ' '));
+  $("#modalities").text(value.tadi_mode.toUpperCase().replace(/_/g, ' '));
+  $("#session_type").text(value.tadi_type.toUpperCase().replace(/_/g, ' '));
   $("#time_in").text(convert12HourFormat(value.time_in));
   $("#time_out").text(convert12HourFormat(value.time_out));
   $("#report").text(value.tadi_activity);
@@ -155,6 +139,19 @@ function GET_SUBJ_OFFERED(subjOff_id) {
 
     },
   });
+
   // Display the name (or use it elsewhere)
 
+}
+
+function convert12HourFormat(time) {
+
+  let [hours, minutes] = time.split(':');
+  let period = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12 || 12;
+
+  let formattedTime = `${hours}:${minutes} ${period}`;
+  console.log(formattedTime);
+  return formattedTime
 }

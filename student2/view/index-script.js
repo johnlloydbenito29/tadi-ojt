@@ -13,4 +13,8 @@ $(document).ready(function(){
         UPDATE_TADI_STATUS(1, tadi_id);  
     })
  
+
+   
+   
 })
+
