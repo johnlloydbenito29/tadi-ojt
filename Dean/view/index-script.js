@@ -93,35 +93,35 @@ $(document).ready(function () {
             },
         });
 
-        $.ajax({
-            // FOR GETTING ACADEMIC YEAR
-            type: "GET",
-            url: "controller/index-info.php",
-            data: {
-                type: "GET_ACAD_YEAR",
-                lvl_id: lvlid,
-            },
-            dataType: "json",
-            success: function (result) {
-                console.log("result =>", result);
+        // $.ajax({
+        //     // FOR GETTING ACADEMIC YEAR
+        //     type: "GET",
+        //     url: "controller/index-info.php",
+        //     data: {
+        //         type: "GET_ACAD_YEAR",
+        //         lvl_id: lvlid,
+        //     },
+        //     dataType: "json",
+        //     success: function (result) {
+        //         console.log("result1 =>", result);
 
-                var optYearLevel = "";
-                if (result.length) {
-                    $.each(result, function (key, value) {
-                        optYearLevel +=
-                            "<option value='" +
-                            value.YEAR_ID +
-                            "'>" +
-                            value.YEAR_NAME +
-                            "</option>";
-                    });
-                } else {
-                    optYearLevel = "<option> No Year Found.</option>";
-                }
-                $("#acadyear option").remove();
-                $("#acadyear").append(optYearLevel);
-            },
-        });
+        //         var optYearLevel = "";
+        //         if (result.length) {
+        //             $.each(result, function (key, value) {
+        //                 optYearLevel +=
+        //                     "<option value='" +
+        //                     value.YEAR_ID +
+        //                     "'>" +
+        //                     value.YEAR_NAME +
+        //                     "</option>";
+        //             });
+        //         } else {
+        //             optYearLevel = "<option> No Year Found.</option>";
+        //         }
+        //         $("#acadyear option").remove();
+        //         $("#acadyear").append(optYearLevel);
+        //     },
+        // });
 
         ///
     }); 
@@ -141,7 +141,7 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (result) {
-                console.log("result =>", result);
+                console.log("result2     =>", result);
 
                 var optYear = "";
                 if (result.length) {

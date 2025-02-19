@@ -29,105 +29,116 @@ function GET_ACADEMICLEVEL() {
 
   $("#academiclevel").on("change", function () {
     var lvlid = this.value;
-
-    $.ajax({
-      // FOR GETTING ACADEMIC YEAR LEVEL
-      type: "GET",
-      url: "controller/index-info.php",
-      data: {
-        type: "GET_ACADEMIC_YEAR_LEVEL",
-        lvl_id: lvlid,
-      },
-      dataType: "json",
-      success: function (result) {
-        var optYearLevel = "";
-        console.log("academicyearlevel", result);
-        if (result.length) {
-          $.each(result, function (key, value) {
-            optYearLevel +=
-              "<option value='" +
-              value.ACAD_YRLVL_ID +
-              "'>" +
-              value.ACAD_YRLVL_NAME +
-              "</option>";
-          });
-        } else {
-          optYearLevel = "<option>No Year Level Found.</option>";
-        }
-
-        $("#academicYearLevel option").remove();
-        $("#academicYearLevel").append(optYearLevel);
-      },
-    });
-    $.ajax({
-      // FOR GETTING ACADEMIC PERIOD
-      type: "GET",
-      url: "controller/index-info.php",
-      data: {
-          type: "GET_ACADEMIC_PERIOD",
-          lvl_id: lvlid,
-      },
-      dataType: "json",
-      success: function (result) {
-          var optYearLevel = "";
-          console.log(result);
-          if (result.length) {
-              $.each(result, function (key, value) {
-                  optYearLevel +=
-                      "<option value='" +
-                      value.acad_prd_id +
-                      "'>" +
-                      value.acad_prd_name +
-                      "</option>";
-              });
-          } else {
-              optYearLevel = "<option> No Period Found.</option>";
-          }
-
-          $("#period option").remove();
-          $("#period").append(optYearLevel);
-
-          $("#period").trigger("change");
-      },
-  });
-  $("#academicperiod").on("change", function () {
-    var lvlid = $("#academiclevel").val();
-    var prdid = this.value;
-
-    $.ajax({
-      // FOR GETTING ACADEMIC YEAR
-      type: "GET",
-      url: "controller/index-info.php",
-      data: {
-          type: "GET_ACAD_YEAR",
-          lvl_id: lvlid,
-      },
-      dataType: "json",
-      success: function (result) {
-          console.log("result =>", result);
-
-          var optYearLevel = "";
-          if (result.length) {
-              $.each(result, function (key, value) {
-                  optYearLevel +=
-                      "<option value='" +
-                      value.YEAR_ID +
-                      "'>" +
-                      value.YEAR_NAME +
-                      "</option>";
-              });
-          } else {
-              optYearLevel = "<option> No Year Found.</option>";
-          }
-          $("#acadyear option").remove();
-          $("#acadyear").append(optYearLevel);
-      },
-  });
-    });
+    getAcademicYearLevels(lvlid);
+    getAcademicPeriods(lvlid);
+    
   });
 }
 
+function getAcademicYearLevels(lvlid) {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "GET_ACADEMIC_YEAR_LEVEL",
+      lvl_id: lvlid,
+    },
+    dataType: "json",
+    success: function (result) {
+      var optYearLevel = "";
+      console.log("academicyearlevel", result);
+      if (result.length) {
+        $.each(result, function (key, value) {
+          optYearLevel +=
+            "<option value='" +
+            value.ACAD_YRLVL_ID +
+            "'>" +
+            value.ACAD_YRLVL_NAME +
+            "</option>";
+        });
+      } else {
+        optYearLevel = "<option>No Year Level Found.</option>";
+      }
 
+      $("#academicYearLevel option").remove();
+      $("#academicYearLevel").append(optYearLevel);
+    },
+  });
+}
+function getAcademicPeriods(lvlid) {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "GET_ACADEMIC_PERIOD",
+      lvl_id: lvlid,
+    },
+    dataType: "json",
+    success: function (result) {
+      var optPrd = "";
+      console.log('period',result);
+      if (result.length) {
+        $.each(result, function (key, value) {
+          optPrd +=
+            "<option value='" +
+            value.acad_prd_id +
+            "'>" +
+            value.acad_prd_name +
+            "</option>";
+        });
+      } else {
+        optPrd = "<option>No Period Found.</option>";
+      }
+
+      $("#period option").remove();
+      $("#period").append(optPrd);
+
+      $("#period").trigger("change");
+    },
+  });
+
+  $("#period").on("change", function () {
+    var lvlid = $("#academiclevel").val();
+    var prdid = this.value;
+    console.log(lvlid,prdid);
+    getAcademicYears(lvlid, prdid);
+
+  });
+}
+function getAcademicYears(lvlid, prdid) {
+  $.ajax({
+    type: "GET",
+    url: "controller/index-info.php",
+    data: {
+      type: "GET_ACAD_YEAR",
+      lvl_id: lvlid,
+      prd_id: prdid,
+    },
+    dataType: "json",
+    success: function (result) {
+      console.log("academicyear", result);
+
+      var optYear = "";
+      if (result.length) {
+        $.each(result, function (key, value) {
+          optYear +=
+            "<option value='" +
+            value.YEAR_ID +
+            "'>" +
+            value.YEAR_NAME +
+            "</option>";
+        });
+      } else {
+        optYear = "<option>No Year Found.</option>";
+      }
+      $("#acadyear option").remove();
+      $("#acadyear").append(optYear);
+    },
+    error: function (xhr, status, error) {
+      console.error("Error fetching academic levels:", error);
+    },
+  });
+}
 
 
 function GET_SUBJECTLIST() {

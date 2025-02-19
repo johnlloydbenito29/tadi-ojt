@@ -34,20 +34,13 @@ echo var_dump($_SESSION);
             <div class="row justify-content-center align-items-center g-3">
                 <div class="col-md">
                 <select class="form-select" id="academiclevel" name="academiclevel">
-                        <option selected>Status Level</option>
-                        <!-- <option value="1">Basic Education</option>
-                        <option value="2">Tertiary</option>
-                        <option value="3">Graduate School</option> -->
+                <option selected>Status Level</option>
+                    
                     </select>
                 </div>
                 <div class="col-md">
                     <select class="form-select" id="academicYearLevel" name="academicYearLevel">
                         <option selected>Year Level</option>
-                        <!-- <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option> -->
-
 
                     </select>
                 </div>
@@ -61,10 +54,9 @@ echo var_dump($_SESSION);
                     </select>
                 </div>
                 <div class="col-md">
-                    <select class="form-select" id="academicSchoolYear" name="academicSchoolYear">
-                        <option selected>School Year</option>
-                        <!-- <option value="1">2023-2024</option>
-                        <option value="2">2024-2025</option> -->
+                <select class="form-select" id="acadyear" name="acadyear">
+                <option selected>School Year</option>
+
                     </select>
                 </div>
                 <div class="col-md">
